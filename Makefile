@@ -3,46 +3,44 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mrodenbu <mrodenbu@student.42berlin.d      +#+  +:+       +#+         #
+#    By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/31 13:10:57 by mrodenbu          #+#    #+#              #
-#    Updated: 2024/01/31 13:15:20 by mrodenbu         ###   ########.fr        #
+#    Created: 2024/02/12 14:07:09 by evan-ite          #+#    #+#              #
+#    Updated: 2024/03/05 16:12:33 by evan-ite         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRC =	main.c
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
+RL_FLAGS = -lreadline -lncurses
+
+LIBFT = libft/libft.a
+
+SRC = main.c
 
 OBJ = $(SRC:.c=.o)
 
-CC = cc
+all: libft $(NAME)
 
-CFLAGS = -Wall -Wextra -Werror -g
+$(NAME): libft $(OBJ)
+	$(CC) -o $(NAME) $(OBJ) $(LIBFT) $(RL_FLAGS)
 
-RL_FLAGS = -lreadline -lncurses
-
-LIBS = -Llibft -lft
-
-all:		$(NAME)
-
-$(NAME):	libft $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(RL_FLAGS) $(LIBS)
-
-%.o: %.c 
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 libft:
-	make -C libft
+	$(MAKE) -C libft;
 
 clean:
-	make clean -C libft
-	rm -f *.o
+	rm -f $(OBJ)
+	$(MAKE) -C libft clean
 
-fclean:		clean
-	make fclean -C libft
+fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C libft fclean
 
-re:			fclean all
+re: fclean all
 
-.PHONY:		all clean fclean re
+.PHONY: all clean fclean re libft
