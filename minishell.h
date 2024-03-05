@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrodenbu <mrodenbu@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/03/05 14:41:40 by mrodenbu         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:31:26 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 # define MINISHELL_H
 
 // INCLUDES
-
+# include "executing/executing.h"
+# include "parsing/parsing.h"
+# include "libft/libft.h"
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_node
 {
@@ -25,7 +30,7 @@ typedef struct s_node
     int     append; // 1 is true, 0 is false
     int     pipe_to_next; // as above
     int     pipe_from_prev; // as above
-    t_node  *next;
+    struct s_node  *next;
 }   t_node;
 
 // FUNCTIONS
