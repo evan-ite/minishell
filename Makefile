@@ -6,32 +6,33 @@
 #    By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:07:09 by evan-ite          #+#    #+#              #
-#    Updated: 2024/03/06 11:47:55 by evan-ite         ###   ########.fr        #
+#    Updated: 2024/03/06 14:33:58 by evan-ite         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 RL_FLAGS = -lreadline -lncurses
 
 LIBFT = libft/libft.a
 
 SRC = main.c parsing/parse.c parsing/token.c
 
-OBJ = $(SRC:.c=.o)
+OBJ := $(SRC:.c=.o)
 
 all: libft $(NAME)
 
-$(NAME): libft $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(LIBFT) $(RL_FLAGS)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(RL_FLAGS)
+
+libft:
+	$(MAKE) -C libft;
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-libft:
-	$(MAKE) -C libft;
 
 clean:
 	rm -f $(OBJ)
