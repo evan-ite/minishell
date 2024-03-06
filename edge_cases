@@ -1,0 +1,27 @@
+IMPORTANT EDGE CASES
+
+echo h|ello 123
+
+echo h<ello 123
+
+echo h>ello 123
+
+echo h-ello 123|wc -l
+
+echo $USER
+
+echo $USER$USER
+
+echo $USER $USER
+
+echo $ USER
+
+$234hi
+
+$HELP
+
+> test echo "hello world" | wc
+
+> test echo "hello world"
+
+> test echo "hello world" | grep "hello"
