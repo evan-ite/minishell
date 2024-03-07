@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/06 11:54:34 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:05:07 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(void)
 		}
 		parse(input, &cmnd_list);
 		printf("input is: %s\n", input);
-
 		free(input);
 	}
 	return (0);
