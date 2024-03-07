@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/03/06 11:58:10 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:34:30 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ typedef struct s_token {
 }	t_token;
 
 t_token	*tokenize(char *input);
-void	parse(char *input, t_node **cmnd_lst);
+void	parse(char *input, t_list **cmnd_lst);
+void	print_list(t_list **head);
+t_node	*init_node(char *command);
 
 #endif
 

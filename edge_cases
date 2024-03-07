@@ -25,3 +25,21 @@ $HELP
 > test echo "hello world"
 
 > test echo "hello world" | grep "hello"
+
+echo $'string \n'
+
+echo 'string \n'
+
+echo '''
+
+echo \hello
+
+echo \$
+
+echo \\hello
+
+"ls"
+
+'ls'
+
+\ls

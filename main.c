@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/06 18:05:07 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:00:49 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 int	main(void)
 {
 	char	*input;
-	t_node	*cmnd_list;
+	t_list	*cmnd_list;
 
+	cmnd_list = NULL;
 	while(1)
 	{
 		input = readline("minishell :) ");

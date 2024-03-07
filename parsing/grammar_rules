@@ -1,0 +1,12 @@
+GRAMMAR RULES MINISHELL (recursive descent parser)
+
+quoting_and_escaping -> single_quoted | double_quoted | escaped
+single_quoted -> "'" (string | symbol | command) "'"
+double_quoted -> "\"" (string | symbol | env_variable | command) "\""
+escaped -> "\\" (string | symbol | command)
+command -> string | command argument | command redirection | redirection command | command '|' command
+redirection -> input string | output string | out_append string | in_start string
+argument -> string
+env_variable -> "$"string
+
+symbol -> "\\" | "'" | "\"" | "$" | "|" | "<" | ">" | ">>" | "<<"

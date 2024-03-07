@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/03/06 14:03:01 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:28:14 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ typedef struct s_node
 	int		append; // 1 is true, 0 is false
 	int		pipe_to_next; // as above
 	int		pipe_from_prev; // as above
-	struct s_node	*prev;
-	struct s_node	*next;
 }	t_node;
 
 // FUNCTIONS

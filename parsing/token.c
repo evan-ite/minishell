@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:34 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/06 16:55:42 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:10:02 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	check_symbol(int *i, char *input, int count, t_token *tokens)
 		(tokens)[count].type = PIPE;
 	else if (input[*i] == '$')
 		(tokens)[count].type = DOLLAR;
-	else if (input[*i] == ' ')
+	else if (ft_isspace(input[*i]))
 		(tokens)[count].type = SSPACE;
 	found_redir = check_redirect(i, input, count, tokens);
 	if (found_redir == 1 || ((tokens)[count].type && \
@@ -114,5 +114,7 @@ t_token	*tokenize(char *input)
 			count++;
 		i++;
 	}
+	tokens[count].type = 0;
+	tokens[count].value = NULL;
 	return (tokens);
 }

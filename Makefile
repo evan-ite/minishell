@@ -6,7 +6,7 @@
 #    By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:07:09 by evan-ite          #+#    #+#              #
-#    Updated: 2024/03/06 14:33:58 by evan-ite         ###   ########.fr        #
+#    Updated: 2024/03/07 15:39:55 by evan-ite         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ RL_FLAGS = -lreadline -lncurses
 
 LIBFT = libft/libft.a
 
-SRC = main.c parsing/parse.c parsing/token.c
+SRC = main.c parsing/parse.c parsing/token.c parsing/node.c
 
 OBJ := $(SRC:.c=.o)
 
