@@ -6,7 +6,7 @@
 /*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/08 10:34:13 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/08 10:41:51 by elisevanite      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 int	main(void)
 {
 	char	*input;
-	// t_list	*cmnd_list;
+	t_list	*cmnd_list;
 
-	// cmnd_list = NULL;
+	cmnd_list = NULL;
 	while(1)
 	{
 		input = readline("minishell :) ");
@@ -29,7 +29,7 @@ int	main(void)
 			free(input);
 			break;
 		}
-		// parse(input, &cmnd_list);
+		parse(input, &cmnd_list);
 		printf("input is: %s\n", input);
 		free(input);
 	}
