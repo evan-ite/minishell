@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/07 17:08:58 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/08 10:25:46 by elisevanite      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // 	// function to handle quotes and increase i
 // }
 
-void	parse_command(t_token *tokens, int i, t_list **cmnd_lst)
+int	parse_command(t_token *tokens, int i, t_list **cmnd_lst)
 {
 	t_node *node;
 	t_list *new;
@@ -27,22 +27,25 @@ void	parse_command(t_token *tokens, int i, t_list **cmnd_lst)
 		i++;
 	node = init_node(tokens[i++].value);
 	arg = 1;
-	while (tokens[i].value && tokens[i].type != PIPE)
-	{
-		printf("value %s\n", tokens[i].value);
-		while (tokens[i++].type == SSPACE)
-		if (tokens[i].type == WORD)
-			node->arguments[arg++] = ft_strdup(tokens[i].value);
-	}
+	// while (tokens[i].value && tokens[i].type != PIPE)
+	// {
+	// printf("value %s\n", tokens[i].value);
+	while (tokens[i++].type == SSPACE)
+	if (tokens[i].type == WORD)
+		node->arguments[arg++] = ft_strdup(tokens[i].value);
+	// }
 	new = ft_lstnew(node);
 	ft_lstadd_back(cmnd_lst, new);
+	return (++i);
 }
 
 void	parse_pipes(t_token *tokens, int *i, t_list **cmnd_lst)
 {
-	parse_command(tokens, 0, cmnd_lst);
-	parse_command(tokens, *i + 1, cmnd_lst);
+	int	temp;
 
+	parse_command(tokens, 0, cmnd_lst);
+	temp = parse_command(tokens, *i + 1, cmnd_lst);
+	*i = temp;
 	print_list(cmnd_lst);
 }
 
