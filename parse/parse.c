@@ -6,75 +6,11 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/11 12:47:34 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:11:47 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-void	parse_squotes(t_token *tokens, int *i, t_list **cmnd_lst)
-{
-	int	j;
-
-	j = *i + 1;
-	while (tokens[j].type != SQUOTE && tokens[j].value)
-		j++;
-	if (!tokens[j].value)
-		exit_error(ERR_SYNT, NULL, 1, cmnd_lst);
-	merge_tokens(*i, tokens, SQUOTE);
-	remove_token(tokens, *i);
-	j = *i;
-	while (tokens[j].type != SQUOTE && tokens[j].value)
-		j++;
-	remove_token(tokens, j);
-	*i = j;
-}
-
-void	parse_dquotes(t_token *tokens, int *i, t_list **cmnd_lst)
-{
-	int	j;
-
-	j = *i + 1;
-	while (tokens[j].type != DQUOTE && tokens[j].value)
-		j++;
-	if (!tokens[j].value)
-		exit_error(ERR_SYNT, NULL, 1, cmnd_lst);
-	// HANDLE ENVIRNMENT VARABLES IN DQUOTES
-	merge_tokens(*i, tokens, DQUOTE);
-	remove_token(tokens, *i);
-	j = *i;
-	while (tokens[j].type != DQUOTE)
-		j++;
-	remove_token(tokens, j);
-	*i = j;
-}
-
-void	parse_redir(t_node *node, t_token *tokens, int i)
-{
-	char	*infile;
-	char	*outfile;
-
-	while (tokens[i].value && tokens[i].type != PIPE)
-	{
-		if (tokens[i].type == INPUT)
-		{
-
-		}
-		else if (tokens[i].type == OUTPUT)
-		{
-
-		}
-		else if (tokens[i].type == OUT_APPEND)
-		{
-
-		}
-		else if (tokens[i].type == IN_START)
-		{
-			
-		}
-		i++;
-	}
-}
 
 // Pipe_from_to: 0 is no pipe, 1 is only pipe from prev, 2 is only pipe to next, 3 is both sides.
 int	parse_command(t_token *tokens, int i, t_list **cmnd_lst, int pipe_from_to)
@@ -84,15 +20,12 @@ int	parse_command(t_token *tokens, int i, t_list **cmnd_lst, int pipe_from_to)
 	int		start_i;
 
 	start_i = i;
+	skip_space_redirs(&i, tokens);
+	node = init_node(tokens[i].value);
+	get_args(&i, node, tokens);
+	parse_redir(node, tokens, start_i, cmnd_lst);
 	while (tokens[i].type == SSPACE)
 		i++;
-	node = init_node(tokens[i++].value);
-	parse_redir(node, tokens, start_i);
-	while (tokens[i].type == SSPACE)
-		i++;
-	// ALSO NEED TO CATCH SEVERAL ARGS
-	if (tokens[i].value && tokens[i].type == WORD)
-		node->arguments[1] = ft_strdup(tokens[i].value);
 	if (pipe_from_to == 1 || pipe_from_to == 3)
 		node->pipe_from_prev = 1;
 	else if (pipe_from_to == 2 || pipe_from_to == 3)
@@ -161,5 +94,10 @@ void	parse(char *input, t_list **cmnd_lst)
 		*cmnd_lst = NULL;
 	}
 	parse_input(tokens, cmnd_lst);
-	print_list(cmnd_lst);
+	// int i = 0;
+	// while (tokens[i].value)
+	// {
+	// 	printf("tokentype %i value %s\n", tokens[i].type, tokens[i].value);
+	// 	i++;
+	// }
 }

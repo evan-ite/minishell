@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:23:24 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/11 11:48:11 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:01:47 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,10 @@ t_node	*init_node(char *command)
 	t_node	*node;
 
 	node = (t_node *)malloc(sizeof(t_node));
-	node->arguments = (char **)gnl_calloc(3, sizeof(char *));
+	node->arguments = NULL;
 	if (!node)
 		return (NULL);
 	node->command = ft_strdup(command);
-	node->arguments[0] = ft_strdup(command);
 	node->infile = NULL;
 	node->outfile = NULL;
 	node->append = 0;

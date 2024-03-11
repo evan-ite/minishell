@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/03/08 12:28:58 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/11 18:09:50 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef enum {
 	DQUOTE,
 	INPUT,
 	OUTPUT,
-	IN_START,
+	HEREDOC,
 	OUT_APPEND,
 	PIPE,
 	DOLLAR,
@@ -37,14 +37,20 @@ typedef struct s_token {
 
 // tokenizing and parsing
 t_token	*tokenize(char *input);
+
+// parsing
+void	parse_redir(t_node *node, t_token *tokens, int i, t_list **cmnd_list);
+void	parse_squotes(t_token *tokens, int *i, t_list **cmnd_lst);
+void	parse_dquotes(t_token *tokens, int *i, t_list **cmnd_lst);
 void	parse(char *input, t_list **cmnd_lst);
 
 // utils
-void	remove_token(t_token *tokens, int i);
-void	merge_tokens(int start, t_token *tokens, token_type end);
+void	skip_space_redirs(int *i, t_token *tokens);
+void	get_args(int *i, t_node *node, t_token *tokens);
+
+// printing
 void	print_list(t_list **head);
 t_node	*init_node(char *command);
 void	print_node(t_node *node);
 
 #endif
-

@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:34 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/07 15:10:02 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:55:36 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_redirect(int *i, char *input, int count, t_token *tokens)
 	{
 		if (input[*i + 1] && input[*i + 1] == '<')
 		{
-			(tokens)[count].type = IN_START;
+			(tokens)[count].type = HEREDOC;
 			(tokens)[count].value = ft_substr(input, (*i)++, 2);
 			return (2);
 		}
@@ -66,7 +66,7 @@ int	check_symbol(int *i, char *input, int count, t_token *tokens)
 		(tokens)[count].type = SSPACE;
 	found_redir = check_redirect(i, input, count, tokens);
 	if (found_redir == 1 || ((tokens)[count].type && \
-		(tokens)[count].type != OUT_APPEND && (tokens)[count].type != IN_START))
+		(tokens)[count].type != OUT_APPEND && (tokens)[count].type != HEREDOC))
 	{
 		(tokens)[count].value = ft_substr(input, *i, 1);
 		return (1);

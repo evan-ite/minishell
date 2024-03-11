@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/03/08 11:22:12 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/11 14:33:20 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_node
 	char	*infile; // NULL if not existing
 	char	*outfile; // NULL if not existing
 	int		append; // 1 is true, 0 is false
+	char	*heredoc; // string contains delimiter given to heredoc
 	int		pipe_to_next; // as above
 	int		pipe_from_prev; // as above
 }	t_node;

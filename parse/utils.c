@@ -3,38 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:27:39 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/08 12:25:38 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/11 18:08:29 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	remove_token(t_token *tokens, int i)
+void	skip_space_redirs(int *i, t_token *tokens)
 {
-	free(tokens[i].value);
-	while (tokens[i + 1].value)
+	while (tokens[*i].value && tokens[*i].type == SSPACE)
+		(*i)++;
+	while (tokens[*i].value && (tokens[*i].type == OUT_APPEND || tokens[*i].type == OUTPUT \
+		|| tokens[*i].type == INPUT || tokens[*i].type == HEREDOC))
 	{
-		tokens[i] = tokens[i + 1];
-		i++;
-	}
-	tokens[i].value = NULL;
-}
-
-void	merge_tokens(int start, t_token *tokens, token_type end_token)
-{
-	char	*temp;
-
-	start++;
-	while (tokens[start + 1].type != end_token && tokens[start + 1].value)
-	{
-		temp = ft_strjoin(tokens[start].value, tokens[start + 1].value);
-		free(tokens[start].value);
-		tokens[start].value = ft_strdup(temp);
-		free(temp);
-		remove_token(tokens, start + 1);
+		(*i)++;
+		while (tokens[*i].value && tokens[*i].type == SSPACE)
+			(*i)++;
+		if (tokens[*i].value && tokens[*i].type == WORD)
+			(*i)++;
+		while (tokens[*i].value && tokens[*i].type == SSPACE)
+			(*i)++;
 	}
 }
 
+void	get_args(int *i, t_node *node, t_token *tokens)
+{
+	int	arg_i;
+	int	arg_count;
+	int	temp_i;
+
+	skip_space_redirs(i, tokens);
+	arg_count = 0;
+	temp_i = *i;
+	while (tokens[temp_i].value && tokens[temp_i].type == WORD)
+	{
+		if (tokens[temp_i].type == WORD)
+			arg_count++;
+		temp_i++;
+		skip_space_redirs(&temp_i, tokens);
+	}
+	node->arguments = (char **)gnl_calloc(arg_count + 1, sizeof(char *));
+	arg_i = 0;
+	while (tokens[*i].value && tokens[*i].type == WORD)
+	{
+		node->arguments[arg_i++] = ft_strdup(tokens[*i].value);
+		(*i)++;
+		skip_space_redirs(i, tokens);
+	}
+}

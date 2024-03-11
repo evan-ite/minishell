@@ -44,4 +44,6 @@ echo \\hello
 
 \ls
 
-< test > out cat 
+< test > out cat
+
+echo > outfile hello world how are u
