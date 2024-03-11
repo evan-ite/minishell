@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:23:24 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/08 10:30:13 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/11 11:48:11 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	print_node(t_node *node)
 	printf("infile: %s\n", node->infile);
 	printf("outfile: %s\n", node->outfile);
 	printf("append: %i\n", node->append);
-	printf("pipe to next: %i\n", node->pipe_to_next);
 	printf("pipe from prev: %i\n", node->pipe_from_prev);
+	printf("pipe to next: %i\n", node->pipe_to_next);
 }
 
 void	print_list(t_list **head)
