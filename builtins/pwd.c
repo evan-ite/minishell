@@ -6,11 +6,11 @@
 /*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:50 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/14 10:12:47 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/14 10:18:22 by elisevanite      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	pwd(void)
+int	ft_pwd(void)
 {
 
 }

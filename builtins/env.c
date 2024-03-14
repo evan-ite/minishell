@@ -6,11 +6,11 @@
 /*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:44 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/14 10:12:28 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/14 10:18:04 by elisevanite      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	env(void)
+int	ft_env(void)
 {
 
 }

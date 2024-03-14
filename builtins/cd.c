@@ -6,11 +6,11 @@
 /*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:34 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/14 10:11:16 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/14 10:18:32 by elisevanite      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	cd(char *path)
+int	ft_cd(char *path)
 {
-	
+
 }
