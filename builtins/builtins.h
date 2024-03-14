@@ -6,12 +6,16 @@
 /*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:14:57 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/14 10:17:59 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/14 13:48:54 by elisevanite      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
+
+# include <unistd.h>
+# include <stdlib.h>
+# include "../libft/libft.h"
 
 int	ft_cd(char *path);
 int	ft_pwd(void);

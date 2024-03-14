@@ -6,11 +6,11 @@
 /*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:21 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/14 10:18:09 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/14 13:53:26 by elisevanite      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_exit(void)
 {
-
+	
 }
