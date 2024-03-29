@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/03/11 14:33:20 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:07:50 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_node
 {
 	char	*command; // just the command/builtin - no path
 	char	**arguments; // array for execve
-	char	*infile; // NULL if not existing
-	char	*outfile; // NULL if not existing
+	char	**infile; // NULL if not existing, LAST ONE IS GOOD
+	char	**outfile; // NULL if not existing, LAST ONE IS GOOD
 	int		append; // 1 is true, 0 is false
 	char	*heredoc; // string contains delimiter given to heredoc
 	int		pipe_to_next; // as above

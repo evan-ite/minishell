@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/11 18:11:47 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:37:52 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ void	parse(char *input, t_list **cmnd_lst)
 		*cmnd_lst = NULL;
 	}
 	parse_input(tokens, cmnd_lst);
-	// int i = 0;
-	// while (tokens[i].value)
-	// {
-	// 	printf("tokentype %i value %s\n", tokens[i].type, tokens[i].value);
-	// 	i++;
-	// }
+	int i = 0;
+	while (tokens[i].value)
+	{
+		printf("tokentype %i value %s\n", tokens[i].type, tokens[i].value);
+		i++;
+	}
 }

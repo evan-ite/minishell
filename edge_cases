@@ -48,4 +48,19 @@ echo \\hello
 
 echo > outfile hello world how are u
 
-echo >out >out2 hello
+echo >out >out2 hello  // THINKOF THIS!!
+
+echo $'hello \t $USER'
+
+echo 'hello \t $USER'
+
+echo "hello \t $USER"
+
+cat | cat | ls
+
+exit | cat | cat | ls
+
+cat << >
+
+cat | >
+
