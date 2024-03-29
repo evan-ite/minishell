@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/29 13:26:24 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/29 15:04:47 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	child_process(int i, t_node *node, t_meta *meta)
 {
 	if (node->pipe_to_next)
 	{
+		printf("TEST!!\n");
 		if (pipe(meta->pipe[i + 1]) == -1)
 			exit_error(ERR_PIPE, NULL, 3, meta->cmnd_lst);
 	}
@@ -45,7 +46,7 @@ void	child_process(int i, t_node *node, t_meta *meta)
 		exit_error(ERR_CHILD, NULL, 4, meta->cmnd_lst);
 	else if (meta->pid[i] == 0)
 	{
-		get_path(i, meta->envp, node);
+		get_path(i, meta, node);
 		if (execute_cmnd(i, node, meta) != 0)
 			exit_error(ERR_EXC, node->command, 2, meta->cmnd_lst);
 	}

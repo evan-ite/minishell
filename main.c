@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/29 12:56:14 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/29 14:56:53 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 #include "includes/parsing.h"
 #include "includes/executing.h"
 
-int	main(char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	t_list	*cmnd_lst;
 	t_meta	meta;
 
+	(void)argc;
+	(void)argv;
 	cmnd_lst = NULL;
 	meta.envp = envp;
 	while(1)

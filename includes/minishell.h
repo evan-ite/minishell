@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/03/29 13:07:42 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/29 15:00:43 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_meta
 	int		*pid;
 	int		**pipe;
 	char	**envp;
-	t_node	**cmnd_lst;
+	t_list	**cmnd_lst;
 }	t_meta;
 
 // FUNCTIONS

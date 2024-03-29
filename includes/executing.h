@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:09:02 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/29 13:21:33 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/03/29 15:00:01 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 # include "minishell.h"
 # include <sys/fcntl.h>
+# include <sys/wait.h>
 
 void	execute(t_list **cmnd_lst, t_meta *meta);
 
 void	open_files(t_node *node, t_list **cmnd_lst);
 void	get_path(int i, t_meta *meta, t_node *node);
 void	child_process(int i, t_node *node, t_meta *meta);
+void	ft_close(int fd);
 
 #endif
