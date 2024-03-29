@@ -47,3 +47,5 @@ echo \\hello
 < test > out cat
 
 echo > outfile hello world how are u
+
+echo >out >out2 hello
