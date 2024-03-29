@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   node.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:23:24 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/11 18:01:47 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/29 13:08:14 by elisevanite      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../includes/parsing.h"
 
 void	print_node(t_node *node)
 {
@@ -55,7 +55,9 @@ t_node	*init_node(char *command)
 		return (NULL);
 	node->command = ft_strdup(command);
 	node->infile = NULL;
+	node->fd_in = -1;
 	node->outfile = NULL;
+	node->fd_out = -1;
 	node->append = 0;
 	node->pipe_to_next = 0;
 	node->pipe_from_prev = 0;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+         #
+#    By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:07:09 by evan-ite          #+#    #+#              #
-#    Updated: 2024/03/11 18:10:30 by evan-ite         ###   ########.fr        #
+#    Updated: 2024/03/29 12:34:15 by elisevanite      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ RL_FLAGS = -lreadline -lncurses
 LIBFT = libft/libft.a
 
 SRC = main.c error.c parse/parse.c parse/token.c \
-	parse/node.c parse/utils.c parse/quotes.c \
-	parse/redirection.c
+	parse/node.c parse/parse_utils.c parse/quotes.c \
+	parse/redirection.c executing/execute.c executing/exec_utils.c
 
 OBJ := $(SRC:.c=.o)
 

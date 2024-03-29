@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:05:27 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/11 18:13:21 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/29 12:26:32 by elisevanite      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../includes/parsing.h"
 
 static void	get_file(int *i, char **file, t_token *tokens, t_list **cmnd_lst)
 {
@@ -20,7 +20,7 @@ static void	get_file(int *i, char **file, t_token *tokens, t_list **cmnd_lst)
 	if (tokens[*i].value && tokens[*i].type == WORD)
 		*file = ft_strdup(tokens[*i].value);
 	else
-		exit_error(ERR_SYNT, tokens[*i].value, 1, cmnd_lst);
+		exit_error("Error parsing file\n", tokens[*i].value, 1, cmnd_lst);
 }
 
 void	parse_redir(t_node *node, t_token *tokens, int i, t_list **cmnd_lst)

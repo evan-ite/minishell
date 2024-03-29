@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/11 18:11:47 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/03/29 12:14:21 by elisevanite      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../includes/parsing.h"
 
 // Pipe_from_to: 0 is no pipe, 1 is only pipe from prev, 2 is only pipe to next, 3 is both sides.
 int	parse_command(t_token *tokens, int i, t_list **cmnd_lst, int pipe_from_to)
