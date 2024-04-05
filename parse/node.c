@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:23:24 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/29 13:08:14 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/04/05 16:36:33 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ void	print_node(t_node *node)
 
 	printf("------- node --------\n");
 	printf("command: %s\n", node->command);
+	printf("path: %s\n", node->path);
 	i = 0;
 	while (node->arguments[i])
 		printf("arguments: %s\n", node->arguments[i++]);
 	printf("infile: %s\n", node->infile);
+	printf("fd in: %i\n", node->fd_in);
 	printf("outfile: %s\n", node->outfile);
+	printf("fd out: %i\n", node->fd_out);
 	printf("append: %i\n", node->append);
 	printf("pipe from prev: %i\n", node->pipe_from_prev);
 	printf("pipe to next: %i\n", node->pipe_to_next);
@@ -54,6 +57,7 @@ t_node	*init_node(char *command)
 	if (!node)
 		return (NULL);
 	node->command = ft_strdup(command);
+	node->path = NULL;
 	node->infile = NULL;
 	node->fd_in = -1;
 	node->outfile = NULL;

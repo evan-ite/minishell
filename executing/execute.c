@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/29 14:57:45 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:10:50 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	execute(t_list **cmnd_lst, t_meta *meta)
 		exit_error("Empty command list\n", NULL, -1, cmnd_lst);
 	meta->n_cmnds = ft_lstsize(*cmnd_lst);
 	meta->pid = gnl_calloc(meta->n_cmnds, sizeof(int));
-	meta->pipe = gnl_calloc(meta->n_cmnds, sizeof(int));
-	if (!meta->pid || !meta->pid)
+	meta->pipe = gnl_calloc(meta->n_cmnds, sizeof(int *));
+	if (!meta->pid || !meta->pipe)
 		exit_error(ERR_MEM, NULL, -1, cmnd_lst);
 	i = 0;
 	temp = *cmnd_lst;

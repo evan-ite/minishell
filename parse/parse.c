@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/29 12:14:21 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/04/05 17:08:05 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,16 @@ void	parse_input(t_token *tokens, t_list **cmnd_lst)
 		parse_command(tokens, 0, cmnd_lst, 0);
 }
 
-void	parse(char *input, t_list **cmnd_lst)
+int	parse(char *input, t_list **cmnd_lst)
 {
 	t_token	*tokens;
+	int	i;
 
+	i = 0;
+	while (ft_isspace(input[i]))
+		i++;
+	if (input[i] == '\0')
+		return (0);
 	tokens = tokenize(input);
 	if (*cmnd_lst)
 	{
@@ -94,10 +100,5 @@ void	parse(char *input, t_list **cmnd_lst)
 		*cmnd_lst = NULL;
 	}
 	parse_input(tokens, cmnd_lst);
-	// int i = 0;
-	// while (tokens[i].value)
-	// {
-	// 	printf("tokentype %i value %s\n", tokens[i].type, tokens[i].value);
-	// 	i++;
-	// }
+	return (1);
 }

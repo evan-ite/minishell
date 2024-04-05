@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/29 14:56:53 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:10:10 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,14 @@ int	main(int argc, char **argv, char **envp)
 	meta.envp = envp;
 	while(1)
 	{
-		input = readline("minishell :) ");
-		add_history(input);
-		if (!ft_strncmp("exit", input, 4))
+		input = readline("\x1b[1;35mminishell :) \x1b[0m");
+		if (*input)
 		{
-			printf("exiting\n");
+			add_history(input);
+			if (parse(input, &cmnd_lst))
+				execute(&cmnd_lst, &meta);
 			free(input);
-			break;
 		}
-		parse(input, &cmnd_lst);
-		print_list(&cmnd_lst);
-		execute(&cmnd_lst, &meta);
-		printf("input is: %s\n", input);
-		free(input);
 	}
 	rl_clear_history();
 	return (0);

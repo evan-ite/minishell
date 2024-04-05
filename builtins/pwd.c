@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:50 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/14 13:52:35 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/04/05 18:24:53 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
-#include <sys/syslimits.h>
+#include "../includes/builtins.h"
+#include <linux/limits.h>
 
 int	ft_pwd(void)
 {
@@ -20,9 +20,11 @@ int	ft_pwd(void)
 
 	pwd = getcwd(buffer, sizeof(buffer));
 	if (!pwd)
+	{
+		ft_putstr_fd("Error pwd\n", STDERR_FILENO);
 		return (-1);
+	}
 	ft_putstr_fd(pwd, STDOUT_FILENO);
-	free(buffer);
 	free(pwd);
-	return (EXIT_SUCCESS);
+	return (1);
 }

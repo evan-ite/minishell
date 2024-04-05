@@ -3,19 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:34 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/14 13:47:03 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/04/05 18:23:23 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../includes/builtins.h"
 
-int	ft_cd(char *path)
+int	ft_cd(char **args)
 {
-	if (!chdir(path))
-		return (EXIT_SUCCESS);
-	else
+	char *path;
+
+	if (!*args || !args)
+	{
+		ft_putstr_fd("No args cd\n", STDERR_FILENO);
 		return (-1);
+	}
+	if (args[1])
+	{
+		path = args[1];
+		if (!chdir(path))
+			return (1);
+		else
+		{
+			ft_putstr_fd("Error cd\n", STDERR_FILENO);
+			return (-1);
+		}
+	}
+	else
+	{
+		if (!chdir("/"))
+			return (1);
+		else
+		{
+			ft_putstr_fd("Error cd\n", STDERR_FILENO);
+			return (-1);
+		}
+	}
 }

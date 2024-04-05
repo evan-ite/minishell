@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/03/29 12:15:08 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/04/05 17:08:26 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_token	*tokenize(char *input);
 void	parse_redir(t_node *node, t_token *tokens, int i, t_list **cmnd_list);
 void	parse_squotes(t_token *tokens, int *i, t_list **cmnd_lst);
 void	parse_dquotes(t_token *tokens, int *i, t_list **cmnd_lst);
-void	parse(char *input, t_list **cmnd_lst);
+int		parse(char *input, t_list **cmnd_lst);
 
 // utils
 void	skip_space_redirs(int *i, t_token *tokens);

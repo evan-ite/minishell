@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:48 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/14 10:16:56 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/04/05 18:23:51 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/builtins.h"
+
 int	ft_export(void)
 {
-
+	return (1);
 }

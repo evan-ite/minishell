@@ -49,3 +49,5 @@ echo \\hello
 echo > outfile hello world how are u
 
 echo >out >out2 hello
+
+cat | cat | ls | ps

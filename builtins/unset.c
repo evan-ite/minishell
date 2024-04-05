@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:53 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/14 10:18:18 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/04/05 18:24:03 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/builtins.h"
+
 int	ft_unset(void)
 {
-
+	return (1);
 }
