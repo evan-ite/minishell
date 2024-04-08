@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 10:09:37 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/08 11:20:08 by evan-ite         ###   ########.fr       */
+/*   Created: 2024/04/08 16:43:50 by evan-ite          #+#    #+#             */
+/*   Updated: 2024/04/08 16:45:40 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/builtins.h"
+#include <stddef.h>
 
-
-int	ft_echo(char **args)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
+	size_t			i;
+	unsigned char	c1;
+	unsigned char	c2;
 
-	if (!args || !*args)
+	i = 0;
+	while (s1[i] && s2[i])
 	{
-		ft_putstr_fd("No arguments for echo\n", STDERR_FILENO);
-		return (-1);
-	}
-	i = 1;
-	while (args[i])
-	{
-		ft_putstr_fd(args[i], STDOUT_FILENO);
-		ft_putstr_fd(" ", STDOUT_FILENO);
+		c1 = s1[i];
+		c2 = s2[i];
+		if (c1 != c2 || (!s1[i] || !s2[i]))
+			return (-1);
 		i++;
 	}
-	ft_putstr_fd("\n", STDOUT_FILENO);
-	return (1);
+	if (s1[i] ||  s2[i])
+		return (-1);
+	return (0);
 }

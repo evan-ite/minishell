@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/05 17:08:26 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:35:17 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_token {
 t_token	*tokenize(char *input);
 
 // parsing
+void	check_env_vars(t_token *tokens);
 void	parse_redir(t_node *node, t_token *tokens, int i, t_list **cmnd_list);
 void	parse_squotes(t_token *tokens, int *i, t_list **cmnd_lst);
 void	parse_dquotes(t_token *tokens, int *i, t_list **cmnd_lst);

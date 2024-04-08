@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:27:39 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/03/29 12:14:35 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/04/08 15:51:59 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	get_args(int *i, t_node *node, t_token *tokens)
 		temp_i++;
 		skip_space_redirs(&temp_i, tokens);
 	}
-	node->arguments = (char **)gnl_calloc(arg_count + 1, sizeof(char *));
+	node->args = (char **)gnl_calloc(arg_count + 1, sizeof(char *));
 	arg_i = 0;
 	while (tokens[*i].value && tokens[*i].type == WORD)
 	{
-		node->arguments[arg_i++] = ft_strdup(tokens[*i].value);
+		node->args[arg_i++] = ft_strdup(tokens[*i].value);
 		(*i)++;
 		skip_space_redirs(i, tokens);
 	}

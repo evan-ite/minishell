@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/05 18:04:50 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:21:10 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,34 @@ void	ft_close(int fd)
 	fd = -1;
 }
 
+int	check_parent_builtins(t_node *node, t_meta *meta)
+{
+// EXIT CD UNSET EXPORT need to be in PARENT!!!
+	if (!ft_strcmp(node->command, "exit"))
+	{
+		write(1, "exit\n", 6);
+		exit_error(NULL, NULL, 0, meta->cmnd_lst);
+	}
+	else if (!ft_strcmp(node->command, "cd"))
+		return (ft_cd(node->args));
+	else if (!ft_strcmp(node->command, "export"))
+		return (ft_export(node, meta));
+	else if (!ft_strcmp(node->command, "unset"))
+		return (ft_unset(node, meta));
+	return (-1);
+}
+
 int	check_builtin(t_node *node, t_meta *meta)
 {
-	if (ft_strncmp(node->command, "exit", ft_strlen(node->command)))
+	if (!ft_strncmp(node->command, "exit", ft_strlen(node->command)))
 		exit_error(NULL, NULL, 0, meta->cmnd_lst);
-	else if (ft_strncmp(node->command, "echo", ft_strlen(node->command)))
-		return (ft_echo(node->arguments));
-	else if (ft_strncmp(node->command, "pwd", ft_strlen(node->command)))
+	else if (!ft_strncmp(node->command, "echo", ft_strlen(node->command)))
+		return (ft_echo(node->args));
+	else if (!ft_strncmp(node->command, "pwd", ft_strlen(node->command)))
 		return (ft_pwd());
-	else if (ft_strncmp(node->command, "cd", ft_strlen(node->command)))
-		return (ft_cd(node->arguments));
-	else if (ft_strncmp(node->command, "env", ft_strlen(node->command)))
-		return (ft_env());
-	return (0);
+	else if (!ft_strncmp(node->command, "cd", ft_strlen(node->command)))
+		return (ft_cd(node->args));
+	else if (!ft_strncmp(node->command, "env", ft_strlen(node->command)))
+		return (ft_env(meta));
+	return (-1);
 }

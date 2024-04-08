@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:50 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/05 18:24:53 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:37:35 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	ft_pwd(void)
 		return (-1);
 	}
 	ft_putstr_fd(pwd, STDOUT_FILENO);
-	free(pwd);
+	ft_putstr_fd("\n", STDOUT_FILENO);
 	return (1);
 }

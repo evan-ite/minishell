@@ -6,7 +6,7 @@
 #    By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 16:51:53 by evan-ite          #+#    #+#              #
-#    Updated: 2024/02/22 17:32:14 by evan-ite         ###   ########.fr        #
+#    Updated: 2024/04/08 16:46:03 by evan-ite         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putnbr_base_fd.c \
 	count_digits.c ft_printf.c ft_printf_utils.c get_next_line.c get_next_line_utils.c \
 	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-	ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c free_array.c
+	ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c free_array.c \
+	ft_strcmp.c
 
 OBJ = $(SRC:.c=.o)
 

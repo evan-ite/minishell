@@ -6,7 +6,7 @@
 #    By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:07:09 by evan-ite          #+#    #+#              #
-#    Updated: 2024/04/05 18:24:41 by evan-ite         ###   ########.fr        #
+#    Updated: 2024/04/08 17:35:37 by evan-ite         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT = libft/libft.a
 
 SRC = main.c error.c parse/parse.c parse/token.c \
 	parse/node.c parse/parse_utils.c parse/quotes.c \
-	parse/redirection.c \
+	parse/redirection.c parse/env_vars.c\
 	executing/execute.c executing/exec_utils.c \
 	executing/processes.c executing/path.c \
 	builtins/cd.c builtins/echo.c builtins/env.c builtins/export.c \

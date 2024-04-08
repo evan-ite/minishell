@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/05 17:08:05 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:24:11 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	parse_input(t_token *tokens, t_list **cmnd_lst)
 	int	prev_pipe;
 	int	temp;
 
+	check_env_vars(tokens);
 	i = 0;
 	while (tokens[i].value)
 	{

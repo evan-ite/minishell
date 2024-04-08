@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/03/29 15:00:43 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:51:59 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_node
 {
 	char	*command; // just the command/builtin - no path
 	char	*path; // comand inc path
-	char	**arguments; // array for execve
+	char	**args; // array for execve
 	char	*infile; // NULL if not existing, should be come a list of files
 	int		fd_in;
 	char	*outfile; // NULL if not existing

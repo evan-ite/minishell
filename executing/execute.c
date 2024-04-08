@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/05 16:10:50 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:34:08 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	execute(t_list **cmnd_lst, t_meta *meta)
 		exit_error(ERR_MEM, NULL, -1, cmnd_lst);
 	i = 0;
 	temp = *cmnd_lst;
+	if (ft_lstsize(*cmnd_lst) == 1)
+	{
+		if (check_parent_builtins(temp->content, meta) != -1)
+			temp = NULL;
+	}
 	while (temp)
 	{
 		node = temp->content;

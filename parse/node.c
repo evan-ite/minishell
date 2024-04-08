@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:23:24 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/05 16:36:33 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:51:59 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	print_node(t_node *node)
 	printf("command: %s\n", node->command);
 	printf("path: %s\n", node->path);
 	i = 0;
-	while (node->arguments[i])
-		printf("arguments: %s\n", node->arguments[i++]);
+	while (node->args[i])
+		printf("arguments: %s\n", node->args[i++]);
 	printf("infile: %s\n", node->infile);
 	printf("fd in: %i\n", node->fd_in);
 	printf("outfile: %s\n", node->outfile);
@@ -53,7 +53,7 @@ t_node	*init_node(char *command)
 	t_node	*node;
 
 	node = (t_node *)malloc(sizeof(t_node));
-	node->arguments = NULL;
+	node->args = NULL;
 	if (!node)
 		return (NULL);
 	node->command = ft_strdup(command);

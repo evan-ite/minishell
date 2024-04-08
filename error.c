@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:50:21 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/05 17:19:26 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:51:59 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	clean_node(t_node *node)
 {
 	if (node->command)
 		free(node->command);
-	if (node->arguments)
-		free_array(node->arguments);
+	if (node->args)
+		free_array(node->args);
 	if (node->infile)
 		free(node->infile);
 	if (node->outfile)
@@ -41,6 +41,7 @@ void	free_list(t_list **cmnd_list)
 	}
 	if (*cmnd_list)
 		free(*cmnd_list);
+	return ;
 }
 
 
