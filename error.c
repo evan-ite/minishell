@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:50:21 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/08 15:51:59 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:15:00 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_list(t_list **cmnd_list)
 {
 	t_list	*temp;
 
-	if (!*cmnd_list || !cmnd_list)
+	if (!cmnd_list || !*cmnd_list)
 		return ;
 	while (*cmnd_list)
 	{
@@ -45,7 +45,7 @@ void	free_list(t_list **cmnd_list)
 }
 
 
-int	exit_error(char *err_msg, char *src, int err_code, t_list **cmnd_list)
+int	exit_error(char *err_msg, char *src, int err_code, t_meta *meta)
 {
 	char	*result;
 
@@ -62,6 +62,7 @@ int	exit_error(char *err_msg, char *src, int err_code, t_list **cmnd_list)
 	}
 	else if (err_msg)
 		ft_putendl_fd(err_msg, 2);
-	free_list(cmnd_list);
+	free_list(meta->cmnd_lst);
+	meta->exit_code = err_code;
 	exit(err_code);
 }

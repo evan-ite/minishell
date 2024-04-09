@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:53 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/08 16:46:14 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:34:30 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	ft_unset(t_node *node, t_meta *meta)
 		{
 			if (!ft_strcmp(var[0], node->args[j]))
 			{
-				printf("FOUND MATCH arg = %s, var = %s\n", node->args[j], meta->envp[i]);
 				free(meta->envp[i]);
 				meta->envp[i] = ft_strdup(" ");
 			}

@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/08 17:21:10 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:37:47 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ void	open_files(t_node *node, t_list **cmnd_lst)
 			if (access(node->outfile, W_OK) != 0)
 				exit_error(ERR_FPER, node->outfile, 2, cmnd_lst);
 		}
-		node->fd_out = open(node->outfile, \
+		if (node->append)
+			node->fd_out = open(node->outfile, \
+							O_CREAT | O_APPEND | O_RDWR, 0666);
+		else
+			node->fd_out = open(node->outfile, \
 							O_CREAT | O_TRUNC | O_RDWR, 0666);
 		if (node->fd_out < 0)
 			exit_error(ERR_FILE, node->outfile, 2, cmnd_lst);

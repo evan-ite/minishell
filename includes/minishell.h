@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/08 15:51:59 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:52:06 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../libft/getnextline.h"
 # include "../libft/ft_printf.h"
 # include <stdio.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -51,19 +52,15 @@ typedef struct s_meta
 	int		*pid;
 	int		**pipe;
 	char	**envp;
+	int		exit_code;
 	t_list	**cmnd_lst;
 }	t_meta;
 
-// FUNCTIONS
-// Elise
-
-// Marc
-
 
 // Error handling
-int		exit_error(char *err_msg, char *src, int err_code, t_list **cmnd_list);
+int		exit_error(char *err_msg, char *src, int err_code, t_meta *meta);
 void	free_list(t_list **cmnd_list);
 
 #endif
 
-// check path as part of execution
+
