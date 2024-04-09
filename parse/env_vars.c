@@ -6,26 +6,67 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:24:45 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/08 17:35:03 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:59:39 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
 
+static int	check_squote(t_token *tokens, int i)
+{
+	int		j;
+	int		squote;
+
+	j = 0;
+	squote = 0;
+	while (tokens[j].value)
+	{
+		if (tokens[j].type == SQUOTE)
+		{
+			if (j < i && squote == 0)
+				squote = 1;
+			else if (j < i && squote == 1)
+				squote = 0;
+			else if (j > i && squote == 1)
+				break ;
+		}
+		j++;
+	}
+	return (squote);
+}
+
 static void	handle_var(t_token *tokens, int i)
 {
+	char	*var;
+	int		squote;
 
 	// print previous exit code
 	//if (tokens[i + 1].type == WORD && !ft_strcmp("?", tokens[i + 1].value))
-
-	// else
-		// check if env var is in single or dubble quotes
-		// if dquotes -> expand
-		// if squotes -> don't expand
-
-		// if no quotes -> expand
-	if (tokens[i + 1].type == WORD)
-		getenv(tokens[i + 1].value);
+	squote = check_squote(tokens, i);
+	if (!squote)
+	{
+		if (tokens[i + 1].type == WORD)
+			var = getenv(tokens[i + 1].value);
+		else
+			var = NULL;
+		if (var)
+		{
+			free(tokens[i + 1].value);
+			tokens[i + 1].value = ft_strdup(var);
+			remove_token(tokens, i);
+		}
+		else if (tokens[i + 1].type == WORD)
+		{
+			tokens[i].type = WORD;
+			free(tokens[i].value);
+			tokens[i].value = ft_strjoin("$", tokens[i + 1].value);
+			tokens[i + 1].type = SSPACE;
+			free(tokens[i + 1].value);
+			tokens[i + 1].value = ft_strdup(" ");
+		}
+		else
+			tokens[i].type = WORD;
+	}
 }
 
 void	check_env_vars(t_token *tokens)

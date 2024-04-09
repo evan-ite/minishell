@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/08 17:35:17 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:48:55 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int		parse(char *input, t_list **cmnd_lst);
 // utils
 void	skip_space_redirs(int *i, t_token *tokens);
 void	get_args(int *i, t_node *node, t_token *tokens);
+void	remove_token(t_token *tokens, int i);
+void	merge_tokens(int start, t_token *tokens, token_type end_token);
 
 // printing
 void	print_list(t_list **head);

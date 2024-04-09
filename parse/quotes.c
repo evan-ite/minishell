@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:06:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/29 12:14:24 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/04/09 12:48:44 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
 
-static void	remove_token(t_token *tokens, int i)
+void	remove_token(t_token *tokens, int i)
 {
 	free(tokens[i].value);
 	while (tokens[i + 1].value)
@@ -23,7 +23,7 @@ static void	remove_token(t_token *tokens, int i)
 	tokens[i].value = NULL;
 }
 
-static void	merge_tokens(int start, t_token *tokens, token_type end_token)
+void	merge_tokens(int start, t_token *tokens, token_type end_token)
 {
 	char	*temp;
 
