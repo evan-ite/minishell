@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:27:06 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/02/06 14:27:11 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:45:29 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 # include "libft.h"
 
 int	ft_printf(const char *format, ...);

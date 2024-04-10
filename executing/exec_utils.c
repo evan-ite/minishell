@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/10 14:05:05 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:50:18 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,9 @@ int	check_builtin(t_node *node, t_meta *meta)
 		return (ft_cd(node->args));
 	else if (!ft_strncmp(node->command, "env", ft_strlen(node->command)))
 		return (ft_env(meta));
+	else if (!ft_strcmp(node->command, "export"))
+		return (ft_export(node, meta));
+	else if (!ft_strcmp(node->command, "unset"))
+		return (ft_unset(node, meta));
 	return (-1);
 }

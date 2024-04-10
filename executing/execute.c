@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/10 14:39:33 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:58:39 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,14 @@ void	execute(t_meta *meta)
 		i++;
 		temp = temp->next;
 	}
-	i = 0;
-	while (i < meta->n_cmnds)
+	if (i > 0)
 	{
-		waitpid(meta->pid[i++], &status, 0);
-		meta->exit_code = WEXITSTATUS(status);
+		i = 0;
+		while (i < meta->n_cmnds)
+		{
+			waitpid(meta->pid[i++], &status, 0);
+			meta->exit_code = WEXITSTATUS(status);
+		}
 	}
 	free(meta->pid);
 	free_list(meta->cmnd_lst);

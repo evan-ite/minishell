@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:48 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/10 14:52:10 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:55:23 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,53 @@ static char	**realloc_env(t_node *node, t_meta *meta)
 	return (temp);
 }
 
+static char	**sort_env(t_meta *meta)
+// Bubble sort to sort the environment variables alphabetically
+{
+	char	**sorted;
+	char	*temp;
+	int		i;
+	int		j;
+
+	sorted = meta->envp;
+	i = 0;
+	while (sorted[i])
+	{
+		j = 0;
+		while (sorted[j] && sorted[j + 1])
+		{
+			if (sorted[j][0] > sorted[j + 1][0])
+			{
+				temp = ft_strdup(sorted[j]);
+				sorted[j] = ft_strdup(sorted[j + 1]);
+				sorted[j + 1] = ft_strdup(temp);
+				free(temp);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (sorted);
+}
+
 static void	export_no_args(t_meta *meta)
 {
 	int		i;
 	char	**temp;
+	char	**sorted;
 
+	sorted = sort_env(meta);
 	i = 0;
-	while (meta->envp[i])
+	while (sorted[i])
 	{
-		// printf("TEST %i\n", i);
-		if (ft_strlen(meta->envp[i]) > 1)
+		if (ft_strlen(sorted[i]) > 1)
 		{
-			temp = ft_split(meta->envp[i], '=');
+			temp = ft_split(sorted[i], '=');
 			if (!temp)
 				exit_error(ERR_MEM, NULL, 1, meta);
 			ft_putstr_fd("declare -x ", STDOUT_FILENO);
 			ft_putstr_fd(temp[0], STDOUT_FILENO);
 			ft_putstr_fd("=\"", STDOUT_FILENO);
-			printf("TEST %i\n", i);
 			ft_putstr_fd(temp[1], STDOUT_FILENO); // SEGFAULT
 			ft_putstr_fd("\"\n", STDOUT_FILENO);
 			free(temp);
@@ -85,8 +114,14 @@ int	ft_export(t_node *node, t_meta *meta)
 		i = 1;
 		while (node->args[i])
 		{
-			// HANDLE INVALID VAR NAMES OR SPACES AROUND EQUAL SIGN
-			// OR WHAT IF THERES NO EQUAL SIGN, IT SHOWS IN EXPORT BUT NOT IN ENV
+			if (!ft_isalpha(node->args[i][0]))
+			{
+				ft_putstr_fd("export: '", STDERR_FILENO);
+				ft_putstr_fd(node->args[i], STDERR_FILENO);
+				ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+				meta->exit_code = 1;
+				return (0);
+			}
 			temp[j] = ft_strdup(node->args[i]);
 			if (!temp[j])
 				exit_error(ERR_MEM, NULL, 1, meta);

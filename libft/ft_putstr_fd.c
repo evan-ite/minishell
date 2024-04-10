@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 17:04:41 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/01/10 11:33:23 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:58:39 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int	ft_putstr_fd(char *s, int fd)
 {
+	if (!s || !*s)
+		return (0);
 	while (*s != '\0')
 	{
 		if (write(fd, s, 1) < 0)
-			return (-1);
+			return (1);
 		s++;
 	}
-	return (1);
+	return (0);
 }
