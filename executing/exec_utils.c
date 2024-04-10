@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/10 12:08:02 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:05:05 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_close(int fd)
 	fd = -1;
 }
 
-int	check_parent_builtins(t_node *node, t_meta *meta)
+int	firstcheck_builtin(t_node *node, t_meta *meta)
 {
 // EXIT CD UNSET EXPORT need to be in PARENT!!!
 	if (!ft_strcmp(node->command, "exit"))
