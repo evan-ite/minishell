@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:34 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/08 15:35:01 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:02:05 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_cd(char **args)
 			ft_putstr_fd("Error cd\n", STDERR_FILENO);
 			return (-1);
 		}
-		return (1);
+		return (0);
 	}
 	else
 	{
@@ -38,6 +38,6 @@ int	ft_cd(char **args)
 			ft_putstr_fd("Error cd\n", STDERR_FILENO);
 			return (-1);
 		}
-		return (1);
+		return (0);
 	}
 }

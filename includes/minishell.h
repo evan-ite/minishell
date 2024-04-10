@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/09 17:52:06 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:00:11 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define ERR_PIPE "Error creating pipe"
 # define ERR_CHILD "Error creating child"
 # define ERR_MEM "Error allocating memory"
-# define ERR_EXC ": Error executing command"
 # define ERR_FILE ": No such file in directory"
 # define ERR_FPER ": Permission denied"
 # define ERR_SYNT "Syntax error"

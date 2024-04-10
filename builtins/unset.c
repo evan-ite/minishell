@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:53 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/09 14:34:30 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:05:22 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,21 @@ int	ft_unset(t_node *node, t_meta *meta)
 	while (meta->envp[i])
 	{
 		var = ft_split(meta->envp[i], '=');
-		j = 1;
-		while (node->args[j])
+		if (!var)
+			exit_error(ERR_MEM, NULL, 1, meta);
+		j = 0;
+		while (node->args[++j])
 		{
 			if (!ft_strcmp(var[0], node->args[j]))
 			{
 				free(meta->envp[i]);
 				meta->envp[i] = ft_strdup(" ");
+				if (!meta->envp[i])
+					exit_error(ERR_MEM, NULL, 1, meta);
 			}
-			j++;
 		}
 		free(var);
 		i++;
 	}
-	return (1);
+	return (0);
 }

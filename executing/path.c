@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:05:36 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/05 16:06:18 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:09:20 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static char	*get_options(t_meta *meta)
 		{
 			path = ft_substr(meta->envp[i], 5, ft_strlen(meta->envp[i]));
 			if (!path)
-				exit_error(ERR_MEM, NULL, 5, meta->cmnd_lst);
+				exit_error(ERR_MEM, NULL, 1, meta);
 			break ;
 		}
 		i++;
 	}
 	if (!path)
-		exit_error("Could not find PATH", NULL, 3, meta->cmnd_lst);
+		exit_error("Could not find PATH", NULL, 1, meta);
 	return (path);
 }
 
@@ -42,11 +42,11 @@ static char	*create_full_path(char *path, char *cmnd, t_meta *meta)
 
 	temp = ft_strjoin("/", cmnd);
 	if (!temp)
-		exit_error(ERR_MEM, NULL, 5, meta->cmnd_lst);
+		exit_error(ERR_MEM, NULL, 1, meta);
 	result = ft_strjoin(path, temp);
 	free(temp);
 	if (!result)
-		exit_error(ERR_MEM, NULL, 5, meta->cmnd_lst);
+		exit_error(ERR_MEM, NULL, 1, meta);
 	return (result);
 }
 
@@ -57,7 +57,7 @@ static void	find_path(char *path, t_node *node, t_meta *meta)
 
 	path_options = ft_split(path, ':');
 	if (!path_options)
-		exit_error(ERR_MEM, NULL, 5, meta->cmnd_lst);
+		exit_error(ERR_MEM, NULL, 1, meta);
 	i = 0;
 	while (path_options[i])
 	{
@@ -80,7 +80,7 @@ void	get_path(int i, t_meta *meta, t_node *node)
 	{
 		node->path = ft_strdup(node->command);
 		if (!node->path)
-			exit_error(ERR_MEM, NULL, 5, meta->cmnd_lst);
+			exit_error(ERR_MEM, NULL, 1, meta);
 	}
 	paths = get_options(meta);
 	if (!node->path)
@@ -90,7 +90,7 @@ void	get_path(int i, t_meta *meta, t_node *node)
 		free(paths);
 		ft_close(meta->pipe[i + 1][0]);
 		ft_close(meta->pipe[i + 1][1]);
-		exit_error(ERR_CMND, node->command, 2, meta->cmnd_lst);
+		exit_error(ERR_CMND, node->command, 1, meta);
 	}
 	free(paths);
 	return ;

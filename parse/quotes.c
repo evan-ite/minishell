@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:06:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/09 12:48:44 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:54:09 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,39 +38,39 @@ void	merge_tokens(int start, t_token *tokens, token_type end_token)
 	}
 }
 
-void	parse_squotes(t_token *tokens, int *i, t_list **cmnd_lst)
+void	parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta)
 {
 	int	j;
 
 	j = *i + 1;
-	while (tokens[j].type != SQUOTE && tokens[j].value)
+	while (tokens[j].type != quote && tokens[j].value)
 		j++;
 	if (!tokens[j].value)
-		exit_error(ERR_SYNT, NULL, 1, cmnd_lst);
-	merge_tokens(*i, tokens, SQUOTE);
+		exit_error(ERR_SYNT, NULL, 1, meta);
+	merge_tokens(*i, tokens, quote);
 	remove_token(tokens, *i);
 	j = *i;
-	while (tokens[j].type != SQUOTE && tokens[j].value)
+	while (tokens[j].type != quote && tokens[j].value)
 		j++;
 	remove_token(tokens, j);
 	*i = j;
 }
 
-void	parse_dquotes(t_token *tokens, int *i, t_list **cmnd_lst)
-{
-	int	j;
+// void	parse_dquotes(t_token *tokens, int *i, t_meta *meta)
+// {
+// 	int	j;
 
-	j = *i + 1;
-	while (tokens[j].type != DQUOTE && tokens[j].value)
-		j++;
-	if (!tokens[j].value)
-		exit_error(ERR_SYNT, NULL, 1, cmnd_lst);
-	// HANDLE ENVIRNMENT VARABLES IN DQUOTES
-	merge_tokens(*i, tokens, DQUOTE);
-	remove_token(tokens, *i);
-	j = *i;
-	while (tokens[j].type != DQUOTE)
-		j++;
-	remove_token(tokens, j);
-	*i = j;
-}
+// 	j = *i + 1;
+// 	while (tokens[j].type != DQUOTE && tokens[j].value)
+// 		j++;
+// 	if (!tokens[j].value)
+// 		exit_error(ERR_SYNT, NULL, 1, meta);
+// 	// HANDLE ENVIRNMENT VARABLES IN DQUOTES
+// 	merge_tokens(*i, tokens, DQUOTE);
+// 	remove_token(tokens, *i);
+// 	j = *i;
+// 	while (tokens[j].type != DQUOTE)
+// 		j++;
+// 	remove_token(tokens, j);
+// 	*i = j;
+// }

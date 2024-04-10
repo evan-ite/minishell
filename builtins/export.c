@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:48 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/08 17:22:01 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:03:23 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	ft_export(t_node *node, t_meta *meta)
 	while (meta->envp[j])
 	{
 		temp[j] = ft_strdup(meta->envp[j]);
+		if (!temp[j])
+			exit_error(ERR_MEM, NULL, 1, meta);
 		j++;
 	}
 	i = 1;
@@ -50,9 +52,11 @@ int	ft_export(t_node *node, t_meta *meta)
 		// HANDLE INVALID VAR NAMES OR SPACES AROUND EQUAL SIGN
 		// OR WHAT IF THERES NO EQUAL SIGN, IT SHOWS IN EXPORT BUT NOT IN ENV
 		temp[j] = ft_strdup(node->args[i]);
+		if (!temp[j])
+			exit_error(ERR_MEM, NULL, 1, meta);
 		j++;
 		i++;
 	}
 	meta->envp = temp;
-	return (1);
+	return (0);
 }

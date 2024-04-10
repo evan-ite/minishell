@@ -6,30 +6,30 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/09 14:37:47 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:08:02 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/executing.h"
 
-void	open_files(t_node *node, t_list **cmnd_lst)
+void	open_files(t_node *node, t_meta *meta)
 {
 	if (node->infile)
 	{
 		if (access(node->infile, F_OK) != 0)
-			exit_error(ERR_FILE, node->infile, 2, cmnd_lst);
+			exit_error(ERR_FILE, node->infile, 1, meta);
 		if (access(node->infile, R_OK) != 0)
-			exit_error(ERR_FPER, node->infile, 2, cmnd_lst);
+			exit_error(ERR_FPER, node->infile, 1, meta);
 		node->fd_in = open(node->infile, O_RDONLY);
 		if (node->fd_in < 0)
-			exit_error(ERR_FILE, node->infile, 2, cmnd_lst);
+			exit_error(ERR_FILE, node->infile, 1, meta);
 	}
 	if (node->outfile)
 	{
 		if (access(node->outfile, F_OK) == 0)
 		{
 			if (access(node->outfile, W_OK) != 0)
-				exit_error(ERR_FPER, node->outfile, 2, cmnd_lst);
+				exit_error(ERR_FPER, node->outfile, 1, meta);
 		}
 		if (node->append)
 			node->fd_out = open(node->outfile, \
@@ -38,7 +38,7 @@ void	open_files(t_node *node, t_list **cmnd_lst)
 			node->fd_out = open(node->outfile, \
 							O_CREAT | O_TRUNC | O_RDWR, 0666);
 		if (node->fd_out < 0)
-			exit_error(ERR_FILE, node->outfile, 2, cmnd_lst);
+			exit_error(ERR_FILE, node->outfile, 1, meta);
 	}
 }
 
@@ -54,7 +54,7 @@ int	check_parent_builtins(t_node *node, t_meta *meta)
 	if (!ft_strcmp(node->command, "exit"))
 	{
 		write(1, "exit\n", 6);
-		exit_error(NULL, NULL, 0, meta->cmnd_lst);
+		exit_error(NULL, NULL, 0, meta);
 	}
 	else if (!ft_strcmp(node->command, "cd"))
 		return (ft_cd(node->args));
@@ -68,7 +68,7 @@ int	check_parent_builtins(t_node *node, t_meta *meta)
 int	check_builtin(t_node *node, t_meta *meta)
 {
 	if (!ft_strncmp(node->command, "exit", ft_strlen(node->command)))
-		exit_error(NULL, NULL, 0, meta->cmnd_lst);
+		exit_error(NULL, NULL, 0, meta);
 	else if (!ft_strncmp(node->command, "echo", ft_strlen(node->command)))
 		return (ft_echo(node->args));
 	else if (!ft_strncmp(node->command, "pwd", ft_strlen(node->command)))

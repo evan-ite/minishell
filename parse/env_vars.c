@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:24:45 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/09 12:59:39 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:37:41 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,19 @@ static int	check_squote(t_token *tokens, int i)
 	return (squote);
 }
 
-static void	handle_var(t_token *tokens, int i)
+static void	handle_var(t_token *tokens, int i, t_meta *meta)
 {
 	char	*var;
 	int		squote;
 
 	// print previous exit code
-	//if (tokens[i + 1].type == WORD && !ft_strcmp("?", tokens[i + 1].value))
+	if (tokens[i + 1].type == WORD && !ft_strcmp("?", tokens[i + 1].value))
+	{
+		free(tokens[i + 1].value);
+		tokens[i + 1].value = ft_itoa(meta->exit_code);
+		remove_token(tokens, i);
+		return ;
+	}
 	squote = check_squote(tokens, i);
 	if (!squote)
 	{
@@ -69,7 +75,7 @@ static void	handle_var(t_token *tokens, int i)
 	}
 }
 
-void	check_env_vars(t_token *tokens)
+void	check_env_vars(t_token *tokens, t_meta *meta)
 {
 	int	i;
 
@@ -77,7 +83,7 @@ void	check_env_vars(t_token *tokens)
 	while (tokens[i].value)
 	{
 		if (tokens[i].type == DOLLAR)
-			handle_var(tokens, i);
+			handle_var(tokens, i, meta);
 		i++;
 	}
 }

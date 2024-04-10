@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/08 15:34:08 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:42:03 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	execute(t_list **cmnd_lst, t_meta *meta)
 	int		i;
 
 	if (!*cmnd_lst)
-		exit_error("Empty command list\n", NULL, -1, cmnd_lst);
+		exit_error("Empty command list\n", NULL, 1, meta);
 	meta->n_cmnds = ft_lstsize(*cmnd_lst);
 	meta->pid = gnl_calloc(meta->n_cmnds, sizeof(int));
 	meta->pipe = gnl_calloc(meta->n_cmnds, sizeof(int *));
 	if (!meta->pid || !meta->pipe)
-		exit_error(ERR_MEM, NULL, -1, cmnd_lst);
+		exit_error(ERR_MEM, NULL, 1, meta);
 	i = 0;
 	temp = *cmnd_lst;
 	if (ft_lstsize(*cmnd_lst) == 1)
@@ -35,15 +35,13 @@ void	execute(t_list **cmnd_lst, t_meta *meta)
 	while (temp)
 	{
 		node = temp->content;
-		if (node->infile || node->outfile)
-			open_files(node, cmnd_lst);
 		child_process(i, node, meta);
 		i++;
 		temp = temp->next;
 	}
 	i = 0;
 	while (i < meta->n_cmnds)
-		waitpid(meta->pid[i++], NULL, 0);
+		waitpid(meta->pid[i++], &(meta->exit_code), 0);
 	free(meta->pid);
 	free_list(cmnd_lst);
 }

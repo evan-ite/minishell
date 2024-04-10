@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/09 18:16:18 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:38:02 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 		if (input && *input)
 		{
 			add_history(input);
-			if (parse(input, &cmnd_lst))
+			if (parse(input, &meta))
 			{
 				meta.cmnd_lst = &cmnd_lst;
 				execute(&cmnd_lst, &meta);

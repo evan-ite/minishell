@@ -1,5 +1,5 @@
 - Ctrl C
 - export with no argument
-- no export if var starts with a digit
+- no export if $var starts with a digit
 - heredoc
-- $? exit code --> where to save it?
+- $? exit code --> happening in child so not saved in parent
