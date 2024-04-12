@@ -6,15 +6,28 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/10 12:39:08 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/12 13:25:54 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/executing.h"
 
-static int	execute_cmnd(int i, t_node *node, t_meta *meta)
+static int	check_heredoc(t_node *node, t_meta *meta)
+/* Returns 1 if the node contains a heredoc and arranges all input and output.
+If there's no heredoc the function returns 0. */
 {
-	int	builtin;
+	if (!node->heredoc)
+		return (0);
+	if (pipe(node->hd_pipe) == -1)
+			exit_error(ERR_PIPE, NULL, 1, meta);
+	dup2(node->hd_pipe[1], STDIN_FILENO);
+	dup2(node->hd_pipe[0], STDOUT_FILENO);
+	return (1);
+}
+
+static void	setup_pipes(int i, t_node *node, t_meta *meta)
+/* Set up all the pipes dependent on infile, outfile and pipes in the command.*/
+{
 	if (node->infile)
 		dup2(node->fd_in, STDIN_FILENO);
 	else if (node->pipe_from_prev)
@@ -29,6 +42,19 @@ static int	execute_cmnd(int i, t_node *node, t_meta *meta)
 		dup2(meta->pipe[i + 1][1], STDOUT_FILENO);
 		ft_close(meta->pipe[i + 1][0]);
 	}
+}
+
+static int	execute_cmnd(int i, t_node *node, t_meta *meta)
+/* Sets up the pipes, checks for buitlins
+and executes command. Returns 0 if builtin was correctly executed,
+or exits with 127 if the command was not correctly executed. */
+{
+	int	builtin;
+	int	heredoc;
+
+	heredoc = check_heredoc(node, meta);
+	if (!heredoc)
+		setup_pipes(i, node, meta);
 	builtin = check_builtin(node, meta);
 	if (builtin == -1)
 	{
@@ -42,6 +68,8 @@ static int	execute_cmnd(int i, t_node *node, t_meta *meta)
 }
 
 void	child_process(int i, t_node *node, t_meta *meta)
+/* Creates a pipe to the next command if necessary, forks to create a child process,
+checks and opens the files, executes the command and finally closes the pipes in the parent.*/
 {
 	if (node->pipe_to_next)
 	{

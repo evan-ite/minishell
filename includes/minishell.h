@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/10 12:00:11 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:19:32 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_node
 	int		fd_out;
 	int		append; // 1 is true, 0 is false
 	char	*heredoc; // string contains delimiter given to heredoc
+	int		hd_pipe[2];
 	int		pipe_to_next; // as above
 	int		pipe_from_prev; // as above
 }	t_node;

@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisevaniterson <elisevaniterson@studen    +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:34 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/03/29 12:14:31 by elisevanite      ###   ########.fr       */
+/*   Updated: 2024/04/12 13:15:04 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
 
 int	is_special(char c)
+/*
+char c:	character that needs to be checked.
+
+Checks if a character is a special character.
+Returns 1 if a special character is found, 0 if none is found.*/
 {
 	if (c == '<' || c == '>' || c == '|' || c == '$')
 		return (1);
@@ -22,6 +27,15 @@ int	is_special(char c)
 }
 
 int	check_redirect(int *i, char *input, int count, t_token *tokens)
+/*
+int *i:				integer pointing to the index in the input string.
+char *input:		raw input from the user, string of characters
+int count:			index in the token-array
+t_token *tokens:	array of tokens
+
+Checks for redirections and creates a token if one is found.
+Returns 1 if > or < is found, returns 2 if >> or << is found,
+and returns 0 nothing was found.*/
 {
 	if (input[*i] == '<')
 	{
@@ -51,6 +65,14 @@ int	check_redirect(int *i, char *input, int count, t_token *tokens)
 }
 
 int	check_symbol(int *i, char *input, int count, t_token *tokens)
+/*
+int *i:				integer pointing to the index in the input string.
+char *input:		raw input from the user, string of characters
+int count:			index in the token-array
+t_token *tokens:	array of tokens
+
+Checks if a character is a special character, if a special character is found
+a new token is created. Returns 1 on succes, 0 on failure. */
 {
 	int	found_redir;
 
@@ -77,6 +99,15 @@ int	check_symbol(int *i, char *input, int count, t_token *tokens)
 }
 
 int	check_word(int *i, char *input, int count, t_token *tokens)
+/*
+int *i:				integer pointing to the index in the input string.
+char *input:		raw input from the user, string of characters
+int count:			index in the token-array
+t_token *tokens:	array of tokens
+
+Checks if a combination of characters is a word, a word cannot contain
+spaces or special characters. If a word is found, a new WORD token is created.
+Returns 1 on succes, 0 on failure. */
 {
 	int	len;
 
@@ -98,6 +129,11 @@ int	check_word(int *i, char *input, int count, t_token *tokens)
 }
 
 t_token	*tokenize(char *input)
+/*
+char *input:	raw input from the user, string of characters
+
+Create an array of tokens, loop over raw user input and assign
+tokens to characters. Returns the array of tokens. */
 {
 	t_token	*tokens;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:23:24 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/08 15:51:59 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:20:49 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ t_node	*init_node(char *command)
 	node->outfile = NULL;
 	node->fd_out = -1;
 	node->append = 0;
+	node->heredoc = NULL;
+	node->hd_pipe[0] = -1;
+	node->hd_pipe[1] = -1;
 	node->pipe_to_next = 0;
 	node->pipe_from_prev = 0;
 	return (node);

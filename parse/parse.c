@@ -6,14 +6,24 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/10 14:49:49 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/12 13:21:15 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
 
-// Pipe_from_to: 0 is no pipe, 1 is only pipe from prev, 2 is only pipe to next, 3 is both sides.
 int	parse_command(t_token *tokens, int i, t_meta *meta, int pipe_from_to)
+/*
+int i:				integer to keep track of the index in the token-array
+int pipe_from_to:	0 is no pipe, 1 is only pipe from previous, 2 is only pipe
+					to next, 3 is both sides.
+t_token *tokens:	array of t_token structs, containing token value
+					and the corresponding string (char *)
+t_meta *meta:		meta struct
+
+Creates a node to add to the back of cmnd_lst, all arguments and redirections
+are retrieved and the information is saved in the node. Returns the index in the token array
+wherre the parser should continue. */
 {
 	t_node	*node;
 	t_list	*new;
@@ -36,6 +46,17 @@ int	parse_command(t_token *tokens, int i, t_meta *meta, int pipe_from_to)
 }
 
 void	parse_pipes(t_token *tokens, int *i, t_meta *meta, int prev_pipe)
+/*
+int i:				integer to keep track of the index in the token-array
+int prev_pipe:		boolean to indicate the index of the previous pipe
+t_token *tokens:	array of t_token structs, containing token value
+					and the corresponding string (char *)
+t_meta *meta:		meta struct
+
+Handles pipes in the tokenized input, if there's no previous pipe the two commands
+left and right of the pipe can be created. Otherwise, the left command already exists in the
+cmnd_lst and just the right command needs to be created. The index in the token array is
+updated through *i. */
 {
 	int		temp_i;
 	t_node	*temp_node;
@@ -51,13 +72,17 @@ void	parse_pipes(t_token *tokens, int *i, t_meta *meta, int prev_pipe)
 	*i = temp_i;
 }
 
-void	parse_input(t_token *tokens, t_meta *meta)
+static void	check_quotes(t_token *tokens, t_meta *meta)
+/*
+t_token *tokens:	array of t_token structs, containing token value
+					and the corresponding string (char *)
+t_meta *meta:		meta struct
+
+Checks if there are quotes in the token-array, if so handle the quotes
+with the function parse_quotes. */
 {
 	int	i;
-	int	prev_pipe;
-	int	temp;
 
-	check_env_vars(tokens, meta);
 	i = 0;
 	while (tokens[i].value)
 	{
@@ -67,6 +92,24 @@ void	parse_input(t_token *tokens, t_meta *meta)
 			parse_quotes(DQUOTE, tokens, &i, meta);
 		i++;
 	}
+}
+
+static void	parse_input(t_token *tokens, t_meta *meta)
+/*
+t_token *tokens:	array of t_token structs, containing token value
+					and the corresponding string (char *)
+t_meta *meta:		meta struct
+
+Checks the token-array for environment variables, quotes, and pipes.
+If one of those is found they are handled by seperate functions, if none are found
+the input is handled as a single command. */
+{
+	int	i;
+	int	prev_pipe;
+	int	temp;
+
+	check_env_vars(tokens, meta);
+	check_quotes(tokens, meta);
 	i = 0;
 	prev_pipe = 0;
 	while (tokens[i].value)
@@ -85,6 +128,13 @@ void	parse_input(t_token *tokens, t_meta *meta)
 }
 
 int	parse(char *input, t_meta *meta)
+/*
+char *input:	raw input from the user, string of characters
+t_meta *meta:	empty meta struct
+
+Parsing the input by creating a token-array and then interpreting the tokens.
+The parsed input is saved in meta->cmnd_lst: a linked list where each node contains
+all the information for one command. Returns 1 on succes, 0 on failure.*/
 {
 	t_token	*tokens;
 	t_list **lst;
@@ -103,5 +153,6 @@ int	parse(char *input, t_meta *meta)
 		*lst = NULL;
 	}
 	parse_input(tokens, meta);
+	// Need to free token struct
 	return (1);
 }

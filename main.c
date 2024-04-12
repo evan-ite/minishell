@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/10 14:49:54 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/12 13:03:56 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void sigquit_handler(int sig) {
 }
 
 void	init_meta(char **envp, t_meta *meta)
+/*
+char **envp:	array of strings with all the environment variables
+t_meta *meta:	empty meta struct
+
+Initialize the meta struct. */
 {
 	meta->envp = envp;
 	meta->exit_code = 0;
@@ -34,6 +39,13 @@ void	init_meta(char **envp, t_meta *meta)
 }
 
 int	main(int argc, char **argv, char **envp)
+/*
+int argc:		number of arguments user put at start of the program
+char **argv:	array of strings with the input the user put at start of the program
+char **envp:	array of strings with all the environment variables
+
+Starts Minishell by creating an infinite while loop,
+keeps prompting the user for input until user exits the program. */
 {
 	char	*input;
 	t_list	*cmnd_lst;
@@ -56,7 +68,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(input);
 			if (parse(input, &meta))
 			{
-				meta.cmnd_lst = &cmnd_lst;
+				// meta.cmnd_lst = &cmnd_lst;
 				execute(&meta);
 			}
 			free(input);

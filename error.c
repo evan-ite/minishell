@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:50:21 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/09 18:15:00 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:22:12 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	clean_node(t_node *node)
 		free(node->infile);
 	if (node->outfile)
 		free(node->outfile);
+	if (node->heredoc)
+		free(node->heredoc);
 	if (node)
 		free(node);
 }
@@ -63,6 +65,7 @@ int	exit_error(char *err_msg, char *src, int err_code, t_meta *meta)
 	else if (err_msg)
 		ft_putendl_fd(err_msg, 2);
 	free_list(meta->cmnd_lst);
+	// free meta struct
 	meta->exit_code = err_code;
 	exit(err_code);
 }
