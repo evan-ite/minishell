@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/12 12:19:32 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:01:52 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ typedef struct s_node
 	char	*command; // just the command/builtin - no path
 	char	*path; // comand inc path
 	char	**args; // array for execve
-	char	*infile; // NULL if not existing, should be come a list of files
-	int		fd_in;
-	char	*outfile; // NULL if not existing
-	int		fd_out;
-	int		append; // 1 is true, 0 is false
-	char	*heredoc; // string contains delimiter given to heredoc
-	int		hd_pipe[2];
+	char	**infile; // NULL if not existing, should be come a list of files
+	char	**outfile; // NULL if not existing
+	char	**heredoc; // string contains delimiter given to heredoc
+	int		*append; // 1 is true, 0 is false
+	int		*fd_in;
+	int		*fd_out;
+	int		**hd_pipe;
+	int		n_input;
+	int		n_output;
 	int		pipe_to_next; // as above
 	int		pipe_from_prev; // as above
 }	t_node;

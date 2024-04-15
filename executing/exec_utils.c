@@ -6,46 +6,66 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/15 11:17:44 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:30:43 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/executing.h"
 
-void	open_files(t_node *node, t_meta *meta)
+static void	open_infiles(t_node *node, t_meta *meta)
 {
-	if (node->infile)
+	int	i;
+
+	i = 0;
+	while (i < node->n_input)
 	{
-		if (access(node->infile, F_OK) != 0)
-			exit_error(ERR_FILE, node->infile, 1, meta);
-		if (access(node->infile, R_OK) != 0)
-			exit_error(ERR_FPER, node->infile, 1, meta);
-		node->fd_in = open(node->infile, O_RDONLY);
-		if (node->fd_in < 0)
-			exit_error(ERR_FILE, node->infile, 1, meta);
-	}
-	if (node->outfile)
-	{
-		if (access(node->outfile, F_OK) == 0)
+		if (node->infile[i])
 		{
-			if (access(node->outfile, W_OK) != 0)
-				exit_error(ERR_FPER, node->outfile, 1, meta);
+			printf("checking infile %s \n", node->infile[i]);
+			if (access(node->infile[i], F_OK) != 0)
+				exit_error(ERR_FILE, node->infile[i], 1, meta);
+			if (access(node->infile[i], R_OK) != 0)
+				exit_error(ERR_FPER, node->infile[i], 1, meta);
+			node->fd_in[i] = open(node->infile[i], O_RDONLY);
+			if (node->fd_in[i] < 0)
+				exit_error(ERR_FILE, node->infile[i], 1, meta);
 		}
-		if (node->append)
-			node->fd_out = open(node->outfile, \
-							O_CREAT | O_APPEND | O_RDWR, 0666);
-		else
-			node->fd_out = open(node->outfile, \
-							O_CREAT | O_TRUNC | O_RDWR, 0666);
-		if (node->fd_out < 0)
-			exit_error(ERR_FILE, node->outfile, 1, meta);
+		i++;
 	}
 }
 
-void	ft_close(int fd)
+static void	open_outfiles(t_node *node, t_meta *meta)
 {
-	close(fd);
-	fd = -1;
+	int	i;
+
+	i = 0;
+	while (i < node->n_output)
+	{
+		if (node->outfile[i])
+		{
+			printf("checking outfile %s \n", node->outfile[i]);
+			if (access(node->outfile[i], F_OK) == 0)
+			{
+				if (access(node->outfile[i], W_OK) != 0)
+					exit_error(ERR_FPER, node->outfile[i], 1, meta);
+			}
+			if (node->append[i])
+				node->fd_out[i] = open(node->outfile[i], \
+								O_CREAT | O_APPEND | O_RDWR, 0666);
+			else
+				node->fd_out[i] = open(node->outfile[i], \
+								O_CREAT | O_TRUNC | O_RDWR, 0666);
+			if (node->fd_out[i] < 0)
+				exit_error(ERR_FILE, node->outfile[i], 1, meta);
+		}
+		i++;
+	}
+}
+
+void	open_files(t_node *node, t_meta *meta)
+{
+	open_infiles(node, meta);
+	open_outfiles(node, meta);
 }
 
 char	*remove_nl(char *line)
