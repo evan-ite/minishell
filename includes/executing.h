@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:09:02 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/10 14:38:44 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:16:30 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	child_process(int i, t_node *node, t_meta *meta);
 int		check_builtin(t_node *node, t_meta *meta);
 int		firstcheck_builtin(t_node *node, t_meta *meta);
 void	ft_close(int fd);
+char	*remove_nl(char *line);
 void	copy_env(char **temp, int *j, t_meta *meta);
 
 #endif

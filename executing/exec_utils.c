@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/10 16:50:18 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:17:44 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,18 @@ void	ft_close(int fd)
 {
 	close(fd);
 	fd = -1;
+}
+
+char	*remove_nl(char *line)
+{
+	int	len;
+	char *temp;
+
+	len = ft_strlen(line);
+	temp = NULL;
+	if (line[len - 1] == '\n')
+		temp = ft_substr(line, 0, len - 1);
+	return (temp);
 }
 
 int	firstcheck_builtin(t_node *node, t_meta *meta)

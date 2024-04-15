@@ -1,2 +1,17 @@
-hello 
-lekker world 
+builtins
+edge_cases
+error.c
+error.o
+executing
+includes
+libft
+LICENSE
+main.c
+main.o
+Makefile
+minishell
+out
+parse
+README.md
+test.txt
+TODO
