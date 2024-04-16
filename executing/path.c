@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:05:36 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/10 12:09:20 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:55:51 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ static void	find_path(char *path, t_node *node, t_meta *meta)
 		node->path = NULL;
 		i++;
 	}
-	free_array(path_options);
+	free_array((void **)path_options, -1);
 	return ;
 }
 
-void	get_path(int i, t_meta *meta, t_node *node)
+void	get_path(t_meta *meta, t_node *node)
 {
 	char	*paths;
 
@@ -88,9 +88,7 @@ void	get_path(int i, t_meta *meta, t_node *node)
 	if (!node->path)
 	{
 		free(paths);
-		ft_close(meta->pipe[i + 1][0]);
-		ft_close(meta->pipe[i + 1][1]);
-		exit_error(ERR_CMND, node->command, 1, meta);
+		return ;
 	}
 	free(paths);
 	return ;

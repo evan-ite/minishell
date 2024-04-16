@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/15 15:53:30 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:51:51 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ If there's no heredoc the function returns 0. */
 
 	if (!node->heredoc)
 		return (0);
-	node->hd_pipe = gnl_calloc(node->n_input, sizeof(int[2]));
+	node->hd_pipe = gnl_calloc(node->n_input, sizeof(int *));
 	i = 0;
 	while (i < node->n_input)
 	{
-		printf("yeas %s\n", node->heredoc[i]);
 		if (node->heredoc[i])
 		{
+			node->hd_pipe[i] = gnl_calloc(2, sizeof(int));
 			if (pipe(node->hd_pipe[i]) == -1)
 					exit_error(ERR_PIPE, NULL, 1, meta);
 			while(1)
@@ -63,8 +63,6 @@ If there's no heredoc the function returns 0. */
 static void	setup_pipes(int i, t_node *node, t_meta *meta)
 /* Set up all the pipes dependent on infile, outfile and pipes in the command.*/
 {
-	print_node(node);
-	fprintf(stderr, "outfile %s and fd %i\n", node->outfile[node->n_output - 1], node->fd_out[node->n_output - 1]);
 	if (node->infile && node->infile[node->n_input - 1])
 		dup2(node->fd_in[node->n_input - 1], STDIN_FILENO);
 	else if (node->heredoc && node->heredoc[node->n_input - 1])
@@ -81,7 +79,6 @@ static void	setup_pipes(int i, t_node *node, t_meta *meta)
 		dup2(meta->pipe[i + 1][1], STDOUT_FILENO);
 		ft_close(meta->pipe[i + 1][0]);
 	}
-	printf("TEST\n");
 }
 
 static int	execute_cmnd(int i, t_node *node, t_meta *meta)
@@ -95,7 +92,7 @@ or exits with 127 if the command was not correctly executed. */
 	builtin = check_builtin(node, meta);
 	if (builtin == -1)
 	{
-		get_path(i, meta, node);
+		get_path(meta, node);
 		if (execve(node->path, node->args, meta->envp) == -1)
 			exit_error(ERR_CMND, node->command, 127, meta);
 	}
@@ -120,7 +117,6 @@ checks and opens the files, executes the command and finally closes the pipes in
 		exit_error(ERR_CHILD, NULL, 1, meta);
 	else if (meta->pid[i] == 0)
 	{
-		// print_node(node);
 		if (node->infile || node->outfile)
 			open_files(node, meta);
 		if (execute_cmnd(i, node, meta) != 0)

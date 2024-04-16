@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/15 15:30:43 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 13:13:09 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	open_infiles(t_node *node, t_meta *meta)
 	{
 		if (node->infile[i])
 		{
-			printf("checking infile %s \n", node->infile[i]);
 			if (access(node->infile[i], F_OK) != 0)
 				exit_error(ERR_FILE, node->infile[i], 1, meta);
 			if (access(node->infile[i], R_OK) != 0)
@@ -43,7 +42,6 @@ static void	open_outfiles(t_node *node, t_meta *meta)
 	{
 		if (node->outfile[i])
 		{
-			printf("checking outfile %s \n", node->outfile[i]);
 			if (access(node->outfile[i], F_OK) == 0)
 			{
 				if (access(node->outfile[i], W_OK) != 0)
@@ -82,11 +80,10 @@ char	*remove_nl(char *line)
 
 int	firstcheck_builtin(t_node *node, t_meta *meta)
 {
-// EXIT CD UNSET EXPORT need to be in PARENT!!!
 	if (!ft_strcmp(node->command, "exit"))
 	{
 		write(1, "exit\n", 6);
-		exit_error(NULL, NULL, 0, meta);
+		exit_error(NULL, NULL, meta->exit_code, meta);
 	}
 	else if (!ft_strcmp(node->command, "cd"))
 		return (ft_cd(node->args));
@@ -100,7 +97,7 @@ int	firstcheck_builtin(t_node *node, t_meta *meta)
 int	check_builtin(t_node *node, t_meta *meta)
 {
 	if (!ft_strncmp(node->command, "exit", ft_strlen(node->command)))
-		exit_error(NULL, NULL, 0, meta);
+		exit_error(NULL, NULL, meta->exit_code, meta);
 	else if (!ft_strncmp(node->command, "echo", ft_strlen(node->command)))
 		return (ft_echo(node->args));
 	else if (!ft_strncmp(node->command, "pwd", ft_strlen(node->command)))

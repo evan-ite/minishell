@@ -1,2 +1,5 @@
-- Ctrl C (in heredoc??)
+- Ctrl C, D, \ (in heredoc??)
 - multiple redirections
+- remove all printfs
+- memory leaks
+- commenting

@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/12 13:21:15 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 13:19:08 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,13 +146,13 @@ all the information for one command. Returns 1 on succes, 0 on failure.*/
 		i++;
 	if (input[i] == '\0')
 		return (0);
-	tokens = tokenize(input);
+	tokens = tokenize(input, meta);
 	if (*lst)
 	{
 		free_list(lst);
 		*lst = NULL;
 	}
 	parse_input(tokens, meta);
-	// Need to free token struct
+	free_tokens(tokens);
 	return (1);
 }

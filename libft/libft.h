@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:40:30 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/08 16:45:55 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 11:12:16 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_putnbr_base_fd(int fd, unsigned long nb, char *base);
 int		count_digits(int n);
-void	free_array(char **array);
+void	free_array(void **array, int len);
 
 #endif
