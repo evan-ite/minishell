@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:48 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/10 16:55:23 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:31:07 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,36 @@ void	copy_env(char **temp, int *j, t_meta *meta)
 	}
 }
 
+static int	check_identifiers(int i, t_node *node, t_meta *meta)
+{
+	int	j;
+
+	if (!ft_isalpha(node->args[i][0]))
+	{
+		ft_putstr_fd("export: '", STDERR_FILENO);
+		ft_putstr_fd(node->args[i], STDERR_FILENO);
+		ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+		meta->exit_code = 1;
+		return (1);
+	}
+	j = 0;
+	while (node->args[i][j])
+	{
+		if (node->args[i][j] == '=')
+			break ;
+		if (!ft_isalnum(node->args[i][j]))
+		{
+			ft_putstr_fd("export: '", STDERR_FILENO);
+			ft_putstr_fd(node->args[i], STDERR_FILENO);
+			ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+			meta->exit_code = 1;
+			return (1);
+		}
+		j++;
+	}
+	return (0);
+}
+
 int	ft_export(t_node *node, t_meta *meta)
 {
 	char	**temp;
@@ -114,14 +144,7 @@ int	ft_export(t_node *node, t_meta *meta)
 		i = 1;
 		while (node->args[i])
 		{
-			if (!ft_isalpha(node->args[i][0]))
-			{
-				ft_putstr_fd("export: '", STDERR_FILENO);
-				ft_putstr_fd(node->args[i], STDERR_FILENO);
-				ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
-				meta->exit_code = 1;
-				return (0);
-			}
+			check_identifiers(i, node, meta);
 			temp[j] = ft_strdup(node->args[i]);
 			if (!temp[j])
 				exit_error(ERR_MEM, NULL, 1, meta);

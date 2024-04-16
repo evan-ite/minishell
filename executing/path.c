@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:05:36 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/16 12:55:51 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:26:14 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	get_path(t_meta *meta, t_node *node)
 	if (!node->path)
 	{
 		free(paths);
-		return ;
+		exit_error(ERR_CMND, node->command, 127, meta);
 	}
 	free(paths);
 	return ;

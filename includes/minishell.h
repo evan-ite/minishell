@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/15 15:01:52 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:59:08 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@
 # define ERR_MEM "Error allocating memory"
 # define ERR_FILE ": No such file in directory"
 # define ERR_FPER ": Permission denied"
-# define ERR_SYNT "Syntax error"
+# define ERR_SYNT "Syntax error\n"
+# define ERR_ARGS "too many arguments"
+# define ERR_NUM ": numeric argument required"
 
 typedef struct s_node
 {
@@ -62,6 +64,7 @@ typedef struct s_meta
 // Error handling
 int		exit_error(char *err_msg, char *src, int err_code, t_meta *meta);
 void	free_list(t_list **cmnd_list);
+void	free_meta(t_meta *meta);
 
 #endif
 

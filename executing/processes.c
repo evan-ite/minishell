@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/16 12:51:51 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:32:39 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ or exits with 127 if the command was not correctly executed. */
 			exit_error(ERR_CMND, node->command, 127, meta);
 	}
 	else
-		exit(builtin);
+	{
+		meta->exit_code = builtin;
+		exit_error(NULL, NULL, meta->exit_code, meta);
+	}
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:14:57 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/08 16:22:58 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:48:08 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	ft_export(t_node *node, t_meta *meta);
 int	ft_unset(t_node *node, t_meta *meta);
 int	ft_echo(char **args);
 int	ft_env(t_meta *meta);
+int	ft_exit(t_node *node, t_meta *meta);
 
 #endif

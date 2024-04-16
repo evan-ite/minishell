@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/16 13:13:09 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:51:52 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,7 @@ char	*remove_nl(char *line)
 int	firstcheck_builtin(t_node *node, t_meta *meta)
 {
 	if (!ft_strcmp(node->command, "exit"))
-	{
-		write(1, "exit\n", 6);
-		exit_error(NULL, NULL, meta->exit_code, meta);
-	}
+		ft_exit(node, meta);
 	else if (!ft_strcmp(node->command, "cd"))
 		return (ft_cd(node->args));
 	else if (!ft_strcmp(node->command, "export"))
@@ -97,7 +94,7 @@ int	firstcheck_builtin(t_node *node, t_meta *meta)
 int	check_builtin(t_node *node, t_meta *meta)
 {
 	if (!ft_strncmp(node->command, "exit", ft_strlen(node->command)))
-		exit_error(NULL, NULL, meta->exit_code, meta);
+		ft_exit(node, meta);
 	else if (!ft_strncmp(node->command, "echo", ft_strlen(node->command)))
 		return (ft_echo(node->args));
 	else if (!ft_strncmp(node->command, "pwd", ft_strlen(node->command)))

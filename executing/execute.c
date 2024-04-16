@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/16 13:13:40 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:58:24 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,18 @@ static void	malloc_meta(t_meta *meta)
 
 static t_list	*parent_builtins(t_meta *meta)
 {
-	t_list *temp;
+	t_list	*temp;
+	int		builtin;
 
 	temp = *(meta->cmnd_lst);
 	if (ft_lstsize(temp) == 1)
 	{
-		if (firstcheck_builtin(temp->content, meta) != -1)
+		builtin = firstcheck_builtin(temp->content, meta);
+		if ( builtin != -1)
+		{
 			temp = NULL;
+			meta->exit_code = builtin;
+		}
 	}
 	return (temp);
 }
@@ -50,6 +55,7 @@ void	execute(t_meta *meta)
 	while (temp)
 	{
 		node = temp->content;
+		// print_node(node);
 		child_process(i, node, meta);
 		i++;
 		temp = temp->next;
@@ -63,6 +69,6 @@ void	execute(t_meta *meta)
 			meta->exit_code = WEXITSTATUS(status);
 		}
 	}
-	free(meta->pid);
+	free_meta(meta);
 	free_list(meta->cmnd_lst);
 }

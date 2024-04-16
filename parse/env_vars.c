@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:24:45 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/16 13:13:00 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:10:36 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,21 @@ static void	handle_var(t_token *tokens, int i, t_meta *meta)
 	char	*var;
 	int		squote;
 
-	if (!tokens[i + 1].value)
-	{
-		tokens[i].type = WORD;
-		return ;
-	}
-	if (tokens[i + 1].type == WORD && !ft_strcmp("?", tokens[i + 1].value))
-	{
-		free(tokens[i + 1].value);
-		tokens[i + 1].value = ft_itoa(meta->exit_code);
-		remove_token(tokens, i);
-		return ;
-	}
 	squote = check_squote(tokens, i);
 	if (!squote)
 	{
+		if (!tokens[i + 1].value)
+		{
+			tokens[i].type = WORD;
+			return ;
+		}
+		if (tokens[i + 1].type == WORD && !ft_strcmp("?", tokens[i + 1].value))
+		{
+			free(tokens[i + 1].value);
+			tokens[i + 1].value = ft_itoa(meta->exit_code);
+			remove_token(tokens, i);
+			return ;
+		}
 		if (tokens[i + 1].type == WORD)
 			var = getenv(tokens[i + 1].value);
 		else
@@ -77,6 +77,8 @@ static void	handle_var(t_token *tokens, int i, t_meta *meta)
 		else
 			tokens[i].type = WORD;
 	}
+	else
+		tokens[i].type = WORD;
 }
 
 void	check_env_vars(t_token *tokens, t_meta *meta)

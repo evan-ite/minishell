@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:34 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/16 13:21:27 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:21:22 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ tokens to characters. Returns the array of tokens. */
 	int		i;
 	int		count;
 
-	tokens = gnl_calloc(ft_strlen(input), sizeof(t_token));
+	tokens = gnl_calloc(ft_strlen(input) + 1, sizeof(t_token));
 	if (!tokens)
 		exit_error(ERR_MEM, NULL, 1, meta);
 	i = 0;
@@ -154,7 +154,7 @@ tokens to characters. Returns the array of tokens. */
 	}
 	tokens[count].type = 0;
 	tokens[count].value = NULL;
-	for (int i = 0; i < ft_strlen(input); i++)
-		printf("token %i, value %s, type %i\n", i, tokens[i].value, tokens[i].type);
+	// for (int i = 0; i < (int)ft_strlen(input); i++)
+	// 	printf("token[%i], value '%s', type %i\n", i, tokens[i].value, tokens[i].type);
 	return (tokens);
 }

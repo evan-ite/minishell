@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:06:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/10 11:54:09 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:54:36 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	merge_tokens(int start, t_token *tokens, token_type end_token)
 	char	*temp;
 
 	start++;
+	if (tokens[start].type == end_token)
+	{
+		remove_token(tokens, start);
+		return ;
+	}
 	while (tokens[start + 1].type != end_token && tokens[start + 1].value)
 	{
 		temp = ft_strjoin(tokens[start].value, tokens[start + 1].value);
@@ -38,15 +43,38 @@ void	merge_tokens(int start, t_token *tokens, token_type end_token)
 	}
 }
 
-void	parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta)
+static void	merge_words(int start, t_token *tokens)
+{
+	char	*temp;
+
+	start--;
+	if (tokens[start].type != WORD)
+		start++;
+	while (tokens[start + 1].value && tokens[start + 1].type == WORD)
+	{
+		temp = ft_strjoin(tokens[start].value, tokens[start + 1].value);
+		free(tokens[start].value);
+		tokens[start].value = ft_strdup(temp);
+		free(temp);
+		remove_token(tokens, start + 1);
+	}
+}
+
+int	parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta)
 {
 	int	j;
+	int	start;
 
+	start = *i;
 	j = *i + 1;
 	while (tokens[j].type != quote && tokens[j].value)
 		j++;
 	if (!tokens[j].value)
-		exit_error(ERR_SYNT, NULL, 1, meta);
+	{
+		write(STDOUT_FILENO, ERR_SYNT, 13);
+		meta->exit_code = EXIT_FAILURE;
+		return (EXIT_FAILURE);
+	}
 	merge_tokens(*i, tokens, quote);
 	remove_token(tokens, *i);
 	j = *i;
@@ -54,23 +82,6 @@ void	parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta)
 		j++;
 	remove_token(tokens, j);
 	*i = j;
+	merge_words(start, tokens);
+	return (EXIT_SUCCESS);
 }
-
-// void	parse_dquotes(t_token *tokens, int *i, t_meta *meta)
-// {
-// 	int	j;
-
-// 	j = *i + 1;
-// 	while (tokens[j].type != DQUOTE && tokens[j].value)
-// 		j++;
-// 	if (!tokens[j].value)
-// 		exit_error(ERR_SYNT, NULL, 1, meta);
-// 	// HANDLE ENVIRNMENT VARABLES IN DQUOTES
-// 	merge_tokens(*i, tokens, DQUOTE);
-// 	remove_token(tokens, *i);
-// 	j = *i;
-// 	while (tokens[j].type != DQUOTE)
-// 		j++;
-// 	remove_token(tokens, j);
-// 	*i = j;
-// }

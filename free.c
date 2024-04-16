@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:56:26 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/16 13:21:48 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:14:27 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	free_tokens(t_token	*tokens)
 	i = 0;
 	while (tokens[i].value)
 	{
-		printf("i = %i\n", i);
+		//if ((int)ft_strlen(tokens[i].value) > 1)
 		free(tokens[i].value);
 		i++;
 	}

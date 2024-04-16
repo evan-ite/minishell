@@ -6,13 +6,13 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/16 13:19:08 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:55:31 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
 
-int	parse_command(t_token *tokens, int i, t_meta *meta, int pipe_from_to)
+static int	parse_command(t_token *tokens, int i, t_meta *meta, int pipe_from_to)
 /*
 int i:				integer to keep track of the index in the token-array
 int pipe_from_to:	0 is no pipe, 1 is only pipe from previous, 2 is only pipe
@@ -34,7 +34,7 @@ wherre the parser should continue. */
 	node = init_node(tokens[i].value);
 	get_args(&i, node, tokens);
 	parse_redir(node, tokens, start_i, meta);
-	while (tokens[i].type == SSPACE)
+	while (tokens[i].value && tokens[i].type == SSPACE)
 		i++;
 	if (pipe_from_to == 1 || pipe_from_to == 3)
 		node->pipe_from_prev = 1;
@@ -45,7 +45,7 @@ wherre the parser should continue. */
 	return (i);
 }
 
-void	parse_pipes(t_token *tokens, int *i, t_meta *meta, int prev_pipe)
+static int	parse_pipes(t_token *tokens, int *i, t_meta *meta, int prev_pipe)
 /*
 int i:				integer to keep track of the index in the token-array
 int prev_pipe:		boolean to indicate the index of the previous pipe
@@ -61,6 +61,15 @@ updated through *i. */
 	int		temp_i;
 	t_node	*temp_node;
 
+	temp_i = *i + 1;
+	while (tokens[temp_i].value && tokens[temp_i].type == SSPACE)
+		temp_i++;
+	if (!tokens[temp_i].value)
+	{
+		write(STDOUT_FILENO, ERR_SYNT, 13);
+		meta->exit_code = EXIT_FAILURE;
+		return (EXIT_FAILURE);
+	}
 	if (prev_pipe == 0)
 		parse_command(tokens, 0, meta, 2);
 	else
@@ -70,16 +79,18 @@ updated through *i. */
 	}
 	temp_i = parse_command(tokens, *i + 1, meta, 1);
 	*i = temp_i;
+	return (EXIT_SUCCESS);
 }
 
-static void	check_quotes(t_token *tokens, t_meta *meta)
+static int	check_quotes(t_token *tokens, t_meta *meta)
 /*
 t_token *tokens:	array of t_token structs, containing token value
 					and the corresponding string (char *)
 t_meta *meta:		meta struct
 
 Checks if there are quotes in the token-array, if so handle the quotes
-with the function parse_quotes. */
+with the function parse_quotes. If there's a syntax error, function will return
+EXIT_FAILURE (= 1). */
 {
 	int	i;
 
@@ -87,14 +98,21 @@ with the function parse_quotes. */
 	while (tokens[i].value)
 	{
 		if (tokens[i].type == SQUOTE)
-			parse_quotes(SQUOTE, tokens, &i, meta);
+		{
+			if (parse_quotes(SQUOTE, tokens, &i, meta) == 1)
+				return (EXIT_FAILURE);
+		}
 		if (tokens[i].type == DQUOTE)
-			parse_quotes(DQUOTE, tokens, &i, meta);
+		{
+			if (parse_quotes(DQUOTE, tokens, &i, meta) == 1)
+				return (EXIT_FAILURE);
+		}
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
 
-static void	parse_input(t_token *tokens, t_meta *meta)
+static int	parse_input(t_token *tokens, t_meta *meta)
 /*
 t_token *tokens:	array of t_token structs, containing token value
 					and the corresponding string (char *)
@@ -109,7 +127,8 @@ the input is handled as a single command. */
 	int	temp;
 
 	check_env_vars(tokens, meta);
-	check_quotes(tokens, meta);
+	if (check_quotes(tokens, meta) == 1)
+		return (EXIT_FAILURE);
 	i = 0;
 	prev_pipe = 0;
 	while (tokens[i].value)
@@ -117,7 +136,8 @@ the input is handled as a single command. */
 		if (tokens[i].type == PIPE)
 		{
 			temp = i;
-			parse_pipes(tokens, &i, meta, prev_pipe);
+			if (parse_pipes(tokens, &i, meta, prev_pipe) == 1)
+				return (EXIT_FAILURE);
 			prev_pipe = temp;
 		}
 		else
@@ -125,6 +145,7 @@ the input is handled as a single command. */
 	}
 	if (prev_pipe == 0)
 		parse_command(tokens, 0, meta, 0);
+	return (EXIT_SUCCESS);
 }
 
 int	parse(char *input, t_meta *meta)
@@ -134,7 +155,7 @@ t_meta *meta:	empty meta struct
 
 Parsing the input by creating a token-array and then interpreting the tokens.
 The parsed input is saved in meta->cmnd_lst: a linked list where each node contains
-all the information for one command. Returns 1 on succes, 0 on failure.*/
+all the information for one command. Returns 0 on succes, 1 on failure.*/
 {
 	t_token	*tokens;
 	t_list **lst;
@@ -145,14 +166,20 @@ all the information for one command. Returns 1 on succes, 0 on failure.*/
 	while (ft_isspace(input[i]))
 		i++;
 	if (input[i] == '\0')
-		return (0);
+		return (EXIT_FAILURE);
 	tokens = tokenize(input, meta);
 	if (*lst)
 	{
 		free_list(lst);
 		*lst = NULL;
 	}
-	parse_input(tokens, meta);
+	if (parse_input(tokens, meta) == 1)
+	{
+		free_tokens(tokens);
+		return (EXIT_FAILURE);
+	}
+	// for (int i = 0; i < (int)ft_strlen(input); i++)
+	// 	printf("token[%i], value '%s', type %i\n", i, tokens[i].value, tokens[i].type);
 	free_tokens(tokens);
-	return (1);
+	return (EXIT_SUCCESS);
 }

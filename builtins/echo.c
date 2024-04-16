@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:37 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/15 12:21:45 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:30:12 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	ft_echo(char **args)
 	while (args[i])
 	{
 		ft_putstr_fd(args[i], STDOUT_FILENO);
-		ft_putstr_fd(" ", STDOUT_FILENO);
+		if (args[i + 1])
+			ft_putstr_fd(" ", STDOUT_FILENO);
 		i++;
 	}
 	ft_putstr_fd("\n", STDOUT_FILENO);

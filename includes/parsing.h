@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/16 13:19:22 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:30:58 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_token	*tokenize(char *input, t_meta *meta);
 // parsing
 void	check_env_vars(t_token *tokens, t_meta *meta);
 void	parse_redir(t_node *node, t_token *tokens, int i, t_meta *meta);
-void	parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta);
+int		parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta);
 int		parse(char *input, t_meta *meta);
 
 // utils
