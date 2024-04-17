@@ -6,11 +6,11 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/16 17:51:52 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:32:38 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/executing.h"
+#include "../../includes/executing.h"
 
 static void	open_infiles(t_node *node, t_meta *meta)
 {

@@ -6,14 +6,14 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/17 15:51:50 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:31:01 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "../libft/libft.h"
+# include "../src/libft/libft.h"
 # include "minishell.h"
 # include <stdio.h>
 

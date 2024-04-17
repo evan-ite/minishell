@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 10:09:37 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/16 14:30:12 by evan-ite         ###   ########.fr       */
+/*   Created: 2024/03/14 10:09:50 by elisevanite       #+#    #+#             */
+/*   Updated: 2024/04/17 17:34:21 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/builtins.h"
+#include "../../includes/builtins.h"
+#include <linux/limits.h>
 
-
-int	ft_echo(char **args)
+int	ft_pwd(void)
 {
-	int	i;
+	char	*pwd;
+	char	buffer[PATH_MAX];
 
-	if (!args || !*args)
+	pwd = getcwd(buffer, sizeof(buffer));
+	if (!pwd)
 	{
-		ft_putstr_fd("No arguments for echo\n", STDERR_FILENO);
+		ft_putstr_fd("Error pwd\n", STDERR_FILENO);
 		return (-1);
 	}
-	i = 1;
-	while (args[i])
-	{
-		ft_putstr_fd(args[i], STDOUT_FILENO);
-		if (args[i + 1])
-			ft_putstr_fd(" ", STDOUT_FILENO);
-		i++;
-	}
+	ft_putstr_fd(pwd, STDOUT_FILENO);
 	ft_putstr_fd("\n", STDOUT_FILENO);
 	return (0);
 }

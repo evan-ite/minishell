@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 10:09:50 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/10 12:03:41 by evan-ite         ###   ########.fr       */
+/*   Created: 2024/03/14 10:09:44 by elisevanite       #+#    #+#             */
+/*   Updated: 2024/04/17 17:34:09 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/builtins.h"
-#include <linux/limits.h>
+#include "../../includes/builtins.h"
 
-int	ft_pwd(void)
+int	ft_env(t_meta *meta)
 {
-	char	*pwd;
-	char	buffer[PATH_MAX];
+	int			i;
 
-	pwd = getcwd(buffer, sizeof(buffer));
-	if (!pwd)
+	if (!meta->envp || !*(meta->envp))
 	{
-		ft_putstr_fd("Error pwd\n", STDERR_FILENO);
+		ft_putstr_fd("Error args env\n", STDERR_FILENO);
 		return (-1);
 	}
-	ft_putstr_fd(pwd, STDOUT_FILENO);
-	ft_putstr_fd("\n", STDOUT_FILENO);
+	i = 0;
+	while (meta->envp[i])
+	{
+		if (ft_strlen(meta->envp[i]) > 1)
+		{
+			ft_putstr_fd(meta->envp[i], STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
+		}
+		i++;
+	}
 	return (0);
 }

@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 10:09:44 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/10 12:02:26 by evan-ite         ###   ########.fr       */
+/*   Created: 2024/03/14 10:09:37 by elisevanite       #+#    #+#             */
+/*   Updated: 2024/04/17 17:34:06 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/builtins.h"
+#include "../../includes/builtins.h"
 
-int	ft_env(t_meta *meta)
+
+int	ft_echo(char **args)
 {
-	int			i;
+	int	i;
 
-	if (!meta->envp || !*(meta->envp))
+	if (!args || !*args)
 	{
-		ft_putstr_fd("Error args env\n", STDERR_FILENO);
+		ft_putstr_fd("No arguments for echo\n", STDERR_FILENO);
 		return (-1);
 	}
-	i = 0;
-	while (meta->envp[i])
+	i = 1;
+	while (args[i])
 	{
-		if (ft_strlen(meta->envp[i]) > 1)
-		{
-			ft_putstr_fd(meta->envp[i], STDOUT_FILENO);
-			ft_putstr_fd("\n", STDOUT_FILENO);
-		}
+		ft_putstr_fd(args[i], STDOUT_FILENO);
+		if (args[i + 1])
+			ft_putstr_fd(" ", STDOUT_FILENO);
 		i++;
 	}
+	ft_putstr_fd("\n", STDOUT_FILENO);
 	return (0);
 }

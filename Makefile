@@ -6,7 +6,7 @@
 #    By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:07:09 by evan-ite          #+#    #+#              #
-#    Updated: 2024/04/17 17:12:16 by evan-ite         ###   ########.fr        #
+#    Updated: 2024/04/17 17:28:48 by evan-ite         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,15 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 RL_FLAGS = -lreadline -lncurses
 
-LIBFT = libft/libft.a
+LIBFT = src/libft/libft.a
 
-SRC = main.c error.c free.c parse/parse.c parse/token.c \
-	parse/node.c parse/parse_utils.c parse/quotes.c \
-	parse/redirection.c parse/env_vars.c parse/check_syntax.c \
-	executing/execute.c executing/exec_utils.c \
-	executing/processes.c executing/path.c \
-	builtins/cd.c builtins/echo.c builtins/env.c builtins/export.c \
-	builtins/pwd.c builtins/unset.c builtins/exit.c
+SRC = src/main.c src/error.c src/free.c src/parse/parse.c src/parse/token.c \
+	src/parse/node.c src/parse/parse_utils.c src/parse/quotes.c \
+	src/parse/redirection.c src/parse/env_vars.c src/parse/check_syntax.c \
+	src/executing/execute.c src/executing/exec_utils.c \
+	src/executing/processes.c src/executing/path.c \
+	src/builtins/cd.c src/builtins/echo.c src/builtins/env.c src/builtins/export.c \
+	src/builtins/pwd.c src/builtins/unset.c src/builtins/exit.c
 
 OBJ := $(SRC:.c=.o)
 
@@ -34,7 +34,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(RL_FLAGS)
 
 libft:
-	$(MAKE) -C libft;
+	$(MAKE) -C src/libft;
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -42,11 +42,11 @@ libft:
 
 clean:
 	rm -f $(OBJ)
-	$(MAKE) -C libft clean
+	$(MAKE) -C src/libft clean
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C libft fclean
+	$(MAKE) -C src/libft fclean
 
 re: fclean all
 

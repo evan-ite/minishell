@@ -6,11 +6,11 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/17 16:29:37 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:33:49 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/executing.h"
+#include "../../includes/executing.h"
 
 static int	check_heredoc(t_node *node, t_meta *meta)
 /* Returns 1 if the node contains a heredoc and arranges all input and output.

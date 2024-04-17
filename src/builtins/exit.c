@@ -6,11 +6,11 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:38:43 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/17 16:31:06 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:34:15 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/builtins.h"
+#include "../../includes/builtins.h"
 
 static int	count_args(t_node *node)
 {

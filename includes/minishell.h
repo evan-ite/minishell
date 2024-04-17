@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/16 17:59:08 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:30:41 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define MINISHELL_H
 
 // INCLUDES
-# include "../libft/libft.h"
-# include "../libft/getnextline.h"
-# include "../libft/ft_printf.h"
+# include "../src/libft/libft.h"
+# include "../src/libft/getnextline.h"
+# include "../src/libft/ft_printf.h"
 # include <stdio.h>
 # include <signal.h>
 # include <readline/readline.h>

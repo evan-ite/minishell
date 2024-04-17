@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:14:57 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/16 17:48:08 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:31:13 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include "../libft/libft.h"
+# include "../src/libft/libft.h"
 # include "minishell.h"
 
 int	ft_cd(char **args);

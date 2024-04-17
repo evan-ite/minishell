@@ -6,13 +6,13 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/17 11:36:38 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:36:08 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
-#include "includes/parsing.h"
-#include "includes/executing.h"
+#include "../includes/minishell.h"
+#include "../includes/parsing.h"
+#include "../includes/executing.h"
 
 void sigint_handler(int sig) {
 	// Print a message indicating that Ctrl+C was pressed
