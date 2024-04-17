@@ -60,5 +60,4 @@ Run the game by executing the following command:
 ---
 
 **Acknowledgements**
-- Marc Rodenbush
 - Elise van Iterson, e.vaniterson98@gmail.com
