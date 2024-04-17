@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/16 15:35:35 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:36:38 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ keeps prompting the user for input until user exits the program. */
 		if (input && *input)
 		{
 			add_history(input);
-			if (!parse(input, &meta))
+			if (parse(input, &meta) == 0)
 				execute(&meta);
 			free(input);
 		}

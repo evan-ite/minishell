@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:06:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/16 16:54:36 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:58:53 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	merge_tokens(int start, t_token *tokens, token_type end_token)
 		tokens[start].value = ft_strdup(temp);
 		free(temp);
 		remove_token(tokens, start + 1);
+		tokens[start].type = WORD;
 	}
 }
 
@@ -60,21 +61,12 @@ static void	merge_words(int start, t_token *tokens)
 	}
 }
 
-int	parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta)
+int	parse_quotes(token_type quote, t_token *tokens, int *i)
 {
 	int	j;
 	int	start;
 
 	start = *i;
-	j = *i + 1;
-	while (tokens[j].type != quote && tokens[j].value)
-		j++;
-	if (!tokens[j].value)
-	{
-		write(STDOUT_FILENO, ERR_SYNT, 13);
-		meta->exit_code = EXIT_FAILURE;
-		return (EXIT_FAILURE);
-	}
 	merge_tokens(*i, tokens, quote);
 	remove_token(tokens, *i);
 	j = *i;

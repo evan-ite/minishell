@@ -1,5 +1,3 @@
 - Ctrl C, D, \ (in heredoc??)
-- multiple redirections
-- remove all printfs
-- memory leaks
 - commenting
+- check eval sheet cases

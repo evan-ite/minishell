@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:50:21 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/16 13:11:42 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:17:49 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,25 @@ static void	clean_node(t_node *node)
 	if (node->path)
 		free(node->path);
 	if (node->args)
+	{
 		free_array((void **)node->args, -1);
+		node->args = NULL;
+	}
 	if (node->infile)
+	{
 		free_array((void **)node->infile, node->n_input);
+		node->infile = NULL;
+	}
 	if (node->outfile)
+	{
 		free_array((void **)node->outfile, node->n_output);
+		node->outfile  = NULL;
+	}
 	if (node->heredoc)
+	{
 		free_array((void **)node->heredoc, node->n_input);
+		node->heredoc = NULL;
+	}
 	if (node->append)
 		free(node->append);
 	if (node->fd_in)
@@ -39,7 +51,10 @@ static void	clean_node(t_node *node)
 	if (node->fd_out)
 		free(node->fd_out);
 	if (node->hd_pipe)
+	{
 		free_array((void **)node->hd_pipe, node->n_input);
+		node->hd_pipe = NULL;
+	}
 	if (node)
 		free(node);
 }
@@ -65,9 +80,15 @@ void	free_list(t_list **cmnd_list)
 void	free_meta(t_meta *meta)
 {
 	if (meta->pid)
+	{
 		free(meta->pid);
+		meta->pid = NULL;
+	}
 	if (meta->pipe)
-		free_array((void **)meta->pipe, -1);
+	{
+		free_array((void **)meta->pipe, meta->n_cmnds + 1);
+		meta->pipe = NULL;
+	}
 }
 
 int	exit_error(char *err_msg, char *src, int err_code, t_meta *meta)

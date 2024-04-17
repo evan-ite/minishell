@@ -6,13 +6,13 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:05:27 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/15 15:29:22 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:32:27 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
 
-static void	get_file(int *i, char **file, t_token *tokens, t_meta *meta)
+static int	get_file(int *i, char **file, t_token *tokens, t_meta *meta)
 {
 	(*i)++;
 	while (tokens[*i].value && tokens[*i].type == SSPACE)
@@ -22,9 +22,14 @@ static void	get_file(int *i, char **file, t_token *tokens, t_meta *meta)
 		*file = ft_strdup(tokens[*i].value);
 		if (!*file)
 			exit_error(ERR_MEM, NULL, 1, meta);
+		return (EXIT_SUCCESS);
 	}
 	else
-		exit_error(": Error parsing file\n", tokens[*i].value, 1, meta);
+	{
+		write(STDOUT_FILENO, ERR_SYNT, 13);
+		meta->exit_code = EXIT_FAILURE;
+		return (EXIT_FAILURE);
+	}
 }
 
 static void	count_redirs(t_node *node, t_token *tokens, t_meta *meta)
@@ -60,10 +65,11 @@ static void	count_redirs(t_node *node, t_token *tokens, t_meta *meta)
 	}
 }
 
-void	parse_redir(t_node *node, t_token *tokens, int i, t_meta *meta)
+int	parse_redir(t_node *node, t_token *tokens, int i, t_meta *meta)
 {
 	int	in_count;
 	int	out_count;
+	int	syntax_check;
 
 	count_redirs(node, tokens, meta);
 	in_count = 0;
@@ -71,15 +77,18 @@ void	parse_redir(t_node *node, t_token *tokens, int i, t_meta *meta)
 	while (tokens[i].value && tokens[i].type != PIPE)
 	{
 		if (tokens[i].type == INPUT)
-			get_file(&i, &node->infile[in_count++], tokens, meta);
+			syntax_check = get_file(&i, &node->infile[in_count++], tokens, meta);
 		else if (tokens[i].type == OUTPUT || tokens[i].type == OUT_APPEND)
 		{
 			if (tokens[i].type == OUT_APPEND)
 				node->append[out_count] = 1;
-			get_file(&i, &node->outfile[out_count++], tokens, meta);
+			syntax_check = get_file(&i, &node->outfile[out_count++], tokens, meta);
 		}
 		else if (tokens[i].type == HEREDOC)
-			get_file(&i, &node->heredoc[in_count++], tokens, meta);
+			syntax_check = get_file(&i, &node->heredoc[in_count++], tokens, meta);
+		if (syntax_check == 1)
+			return (EXIT_FAILURE);
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:46:22 by evan-ite          #+#    #+#             */
-/*   Updated: 2023/11/22 18:09:21 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:16:04 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strdup(const char *s)
 	int		i;
 	char	*dup;
 
+	if (!s || !*s)
+		return (NULL);
 	size = ft_strlen(s);
 	dup = (char *)malloc(size * sizeof(char) + 1);
 	if (!dup)

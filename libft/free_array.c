@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_array.c                                       :+:      :+:    :+:   */
+/*   free_*array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:30:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/16 11:28:31 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:03:45 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void	free_array(void **array, int len)
 /*
-char **array:	the allocated array that should be freed
-int len:		an optional integer with the length of the array
-				that should be freed. If len < 0 array will be
+char ***array:	the allocated *array that should be freed
+int len:		an optional integer with the length of the *array
+				that should be freed. If len < 0 *array will be
 				freed until NULL pointer */
 {
 	int	i;
@@ -39,8 +39,10 @@ int len:		an optional integer with the length of the array
 		while (i < len)
 		{
 			if (array[i])
+			{
 				free(array[i]);
-			array[i] = NULL;
+				array[i] = NULL;
+			}
 			i++;
 		}
 	}

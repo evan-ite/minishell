@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/16 16:55:31 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:17:34 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,6 @@ updated through *i. */
 	int		temp_i;
 	t_node	*temp_node;
 
-	temp_i = *i + 1;
-	while (tokens[temp_i].value && tokens[temp_i].type == SSPACE)
-		temp_i++;
-	if (!tokens[temp_i].value)
-	{
-		write(STDOUT_FILENO, ERR_SYNT, 13);
-		meta->exit_code = EXIT_FAILURE;
-		return (EXIT_FAILURE);
-	}
 	if (prev_pipe == 0)
 		parse_command(tokens, 0, meta, 2);
 	else
@@ -94,19 +85,14 @@ EXIT_FAILURE (= 1). */
 {
 	int	i;
 
+	(void)meta;
 	i = 0;
 	while (tokens[i].value)
 	{
 		if (tokens[i].type == SQUOTE)
-		{
-			if (parse_quotes(SQUOTE, tokens, &i, meta) == 1)
-				return (EXIT_FAILURE);
-		}
+			parse_quotes(SQUOTE, tokens, &i);
 		if (tokens[i].type == DQUOTE)
-		{
-			if (parse_quotes(DQUOTE, tokens, &i, meta) == 1)
-				return (EXIT_FAILURE);
-		}
+			parse_quotes(DQUOTE, tokens, &i);
 		i++;
 	}
 	return (EXIT_SUCCESS);
@@ -127,8 +113,7 @@ the input is handled as a single command. */
 	int	temp;
 
 	check_env_vars(tokens, meta);
-	if (check_quotes(tokens, meta) == 1)
-		return (EXIT_FAILURE);
+	check_quotes(tokens, meta);
 	i = 0;
 	prev_pipe = 0;
 	while (tokens[i].value)
@@ -136,8 +121,7 @@ the input is handled as a single command. */
 		if (tokens[i].type == PIPE)
 		{
 			temp = i;
-			if (parse_pipes(tokens, &i, meta, prev_pipe) == 1)
-				return (EXIT_FAILURE);
+			parse_pipes(tokens, &i, meta, prev_pipe);
 			prev_pipe = temp;
 		}
 		else
@@ -168,18 +152,20 @@ all the information for one command. Returns 0 on succes, 1 on failure.*/
 	if (input[i] == '\0')
 		return (EXIT_FAILURE);
 	tokens = tokenize(input, meta);
+	if (check_syntax(tokens) == 1)
+	{
+		write(STDOUT_FILENO, ERR_SYNT, 13);
+		meta->exit_code = EXIT_FAILURE;
+		return (EXIT_FAILURE);
+	}
 	if (*lst)
 	{
 		free_list(lst);
 		*lst = NULL;
 	}
-	if (parse_input(tokens, meta) == 1)
-	{
-		free_tokens(tokens);
-		return (EXIT_FAILURE);
-	}
 	// for (int i = 0; i < (int)ft_strlen(input); i++)
 	// 	printf("token[%i], value '%s', type %i\n", i, tokens[i].value, tokens[i].type);
+	parse_input(tokens, meta);
 	free_tokens(tokens);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/16 16:58:24 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:54:56 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	malloc_meta(t_meta *meta)
 	meta->n_cmnds = ft_lstsize(*(meta->cmnd_lst));
 	meta->pid = gnl_calloc(meta->n_cmnds, sizeof(int));
 	if (meta->n_cmnds > 1)
-		meta->pipe = gnl_calloc(meta->n_cmnds, sizeof(int *));
+		meta->pipe = gnl_calloc(meta->n_cmnds + 2, sizeof(int *));
 	if (!meta->pid || (!meta->pipe && meta->n_cmnds > 1))
 		exit_error(ERR_MEM, NULL, 1, meta);
 }
