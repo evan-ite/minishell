@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:34 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/17 17:32:23 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:57:36 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
+
+static int	tokencount(char *input);
 
 int	is_special(char c)
 /*
@@ -139,7 +141,7 @@ tokens to characters. Returns the array of tokens. */
 	int		i;
 	int		count;
 
-	tokens = gnl_calloc(ft_strlen(input) + 1, sizeof(t_token));
+	tokens = gnl_calloc(tokencount(input) + 1, sizeof(t_token));
 	if (!tokens)
 		exit_error(ERR_MEM, NULL, 1, meta);
 	i = 0;
@@ -154,7 +156,32 @@ tokens to characters. Returns the array of tokens. */
 	}
 	tokens[count].type = 0;
 	tokens[count].value = NULL;
-	// for (int i = 0; i < (int)ft_strlen(input); i++)
+	// for (int i = 0; i < tokencount(input) + 1; i++)
 	// 	printf("token[%i], value '%s', type %i\n", i, tokens[i].value, tokens[i].type);
 	return (tokens);
+}
+
+static int	tokencount(char *input)
+{
+	int	i;
+	int	count;
+	int	wlen;
+
+	i = -1;
+	count = 0;
+	while (input[++i])
+	{
+		if (is_special(input[i]))
+			++count;
+		else if (ft_isprint(input[i]))
+		{
+			wlen = 0;
+			while ((ft_isprint(input[i + wlen]) == 1)
+				&& (!is_special(input[i + wlen])))
+				++wlen;
+			i += --wlen;
+			++count;
+		}
+	}
+	return (count);
 }

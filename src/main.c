@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/17 17:36:08 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:30:30 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/parsing.h"
 #include "../includes/executing.h"
+
+static char	**cpy_matrix(char **matrix);
 
 void sigint_handler(int sig) {
 	// Print a message indicating that Ctrl+C was pressed
@@ -31,7 +33,7 @@ t_meta *meta:	empty meta struct
 
 Initialize the meta struct. */
 {
-	meta->envp = envp;
+	meta->envp = cpy_matrix(envp);
 	meta->exit_code = 0;
 	meta->n_cmnds = 0;
 	meta->pid = NULL;
@@ -60,7 +62,7 @@ keeps prompting the user for input until user exits the program. */
 	cmnd_lst = NULL;
 	meta.cmnd_lst = &cmnd_lst;
 	init_meta(envp, &meta);
-	while(1)
+	while (1)
 	{
 		input = readline("\x1b[1;35mminishell :) \x1b[0m");
 		if (input && *input)
@@ -75,4 +77,31 @@ keeps prompting the user for input until user exits the program. */
 	}
 	rl_clear_history();
 	return (0);
+}
+
+static char	**cpy_matrix(char **matrix)
+{
+	char	**ret;
+	int		i;
+
+	i = -1;
+	while (matrix[++i])
+		;
+	ret = ft_calloc(sizeof(char *) + 1, i);
+	if (!ret)
+		return (NULL);
+	i = -1;
+	while (matrix[++i])
+	{
+		ret[i] = ft_strdup(matrix[i]);
+		if (!ret[i])
+		{
+			i = -1;
+			while (ret[i])
+				free(ret[i]);
+			free(ret);
+			return (NULL);
+		}
+	}
+	return (ret);
 }
