@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/19 13:30:30 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/19 14:49:10 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 static char	**cpy_matrix(char **matrix);
 
-void sigint_handler(int sig) {
-	// Print a message indicating that Ctrl+C was pressed
-	printf("\nCtrl+C pressed. Enter a new command:\n");
-	sig = 1;
-}
-
-void sigquit_handler(int sig) {
+// Handles Ctrl+C signal
+void	sigint_handler(int sig)
+{
+	ft_printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 	sig = 1;
 }
 
@@ -55,7 +55,7 @@ keeps prompting the user for input until user exits the program. */
 
 	// Register the signal handlers for SIGINT (Ctrl+C), EOF (Ctrl+D), and SIGQUIT (Ctrl+\)
 	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigquit_handler);
+	signal(SIGQUIT, SIG_IGN);
 
 	(void)argc;
 	(void)argv;
