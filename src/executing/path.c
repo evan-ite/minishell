@@ -6,11 +6,34 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:05:36 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/19 12:48:57 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/19 12:47:39 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executing.h"
+
+static char	*get_options(t_meta *meta)
+{
+	char	*path;
+	int		i;
+
+	path = NULL;
+	i = 0;
+	while (meta->envp[i])
+	{
+		if (!ft_strncmp(meta->envp[i], "PATH=", 5))
+		{
+			path = ft_substr(meta->envp[i], 5, ft_strlen(meta->envp[i]));
+			if (!path)
+				exit_error(ERR_MEM, NULL, 1, meta);
+			break ;
+		}
+		i++;
+	}
+	if (!path)
+		exit_error("Could not find PATH", NULL, 1, meta);
+	return (path);
+}
 
 static char	*create_full_path(char *path, char *cmnd, t_meta *meta)
 {
@@ -59,7 +82,7 @@ void	get_path(t_meta *meta, t_node *node)
 		if (!node->path)
 			exit_error(ERR_MEM, NULL, 1, meta);
 	}
-	paths = ft_strdup(getenv("PATH"));
+	paths = get_options(meta);
 	if (!node->path)
 		find_path(paths, node, meta);
 	if (!node->path)
