@@ -16,6 +16,10 @@ echo $USER $USER
 
 echo $ USER
 
+echo "'$USER"
+
+echo "'$USER"'
+
 $234hi
 
 $HELP

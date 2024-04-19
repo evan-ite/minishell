@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:34 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/17 17:33:58 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:46:43 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
 
-int	ft_cd(char **args)
+static int	get_home(t_meta *meta);
+
+int	ft_cd(char **args, t_meta *meta)
 {
-	char *path;
+	char	*path;
 
 	if (!*args || !args)
 	{
@@ -33,11 +35,26 @@ int	ft_cd(char **args)
 	}
 	else
 	{
-		if (chdir("/") != 0)
+		if (chdir(meta->envp[get_home(meta)] + 5) != 0)
 		{
 			ft_putstr_fd("Error cd\n", STDERR_FILENO);
 			return (-1);
 		}
 		return (0);
 	}
+}
+
+static int	get_home(t_meta *meta)
+{
+	int	i;
+
+	i = 0;
+	while (meta->envp[i])
+	{
+		if (!ft_strncmp(meta->envp[i], "HOME", 4))
+			return (i);
+		i++;
+	}
+	exit_error("HOME isn't set", NULL, 1, meta);
+	return (-1);
 }

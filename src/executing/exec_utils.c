@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/17 17:32:38 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:43:36 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	firstcheck_builtin(t_node *node, t_meta *meta)
 	if (!ft_strcmp(node->command, "exit"))
 		ft_exit(node, meta);
 	else if (!ft_strcmp(node->command, "cd"))
-		return (ft_cd(node->args));
+		return (ft_cd(node->args, meta));
 	else if (!ft_strcmp(node->command, "export"))
 		return (ft_export(node, meta));
 	else if (!ft_strcmp(node->command, "unset"))
@@ -100,7 +100,7 @@ int	check_builtin(t_node *node, t_meta *meta)
 	else if (!ft_strncmp(node->command, "pwd", ft_strlen(node->command)))
 		return (ft_pwd());
 	else if (!ft_strncmp(node->command, "cd", ft_strlen(node->command)))
-		return (ft_cd(node->args));
+		return (ft_cd(node->args, meta));
 	else if (!ft_strncmp(node->command, "env", ft_strlen(node->command)))
 		return (ft_env(meta));
 	else if (!ft_strcmp(node->command, "export"))
