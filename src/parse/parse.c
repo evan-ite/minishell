@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/24 16:13:42 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/24 20:18:57 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static int	parse_command(t_token *tokens, int i, t_meta *meta, int pipe_from_to)
 	return (i);
 }
 
-static int	parse_pipes(t_token *tokens, int *i, t_meta *meta, int prev_pipe)
 /*
 int i:				integer to keep track of the index in the token-array
 int prev_pipe:		boolean to indicate the index of the previous pipe
@@ -57,6 +56,7 @@ Handles pipes in the tokenized input, if there's no previous pipe the two
 commands left and right of the pipe can be created. Otherwise, the left command
 already exists in the cmnd_lst and just the right command needs to be created.
 The index in the token array is updated through *i. */
+static int	parse_pipes(t_token *tokens, int *i, t_meta *meta, int prev_pipe)
 {
 	int		temp_i;
 	t_node	*temp_node;
@@ -73,7 +73,6 @@ The index in the token array is updated through *i. */
 	return (EXIT_SUCCESS);
 }
 
-static int	check_quotes(t_token *tokens, t_meta *meta)
 /*
 t_token *tokens:	array of t_token structs, containing token value
 					and the corresponding string (char *)
@@ -82,6 +81,7 @@ t_meta *meta:		meta struct
 Checks if there are quotes in the token-array, if so handle the quotes
 with the function parse_quotes. If there's a syntax error, function will return
 EXIT_FAILURE (= 1). */
+static int	check_quotes(t_token *tokens, t_meta *meta)
 {
 	int	i;
 
@@ -98,7 +98,6 @@ EXIT_FAILURE (= 1). */
 	return (EXIT_SUCCESS);
 }
 
-static int	parse_input(t_token *tokens, t_meta *meta)
 /*
 t_token *tokens:	array of t_token structs, containing token value
 					and the corresponding string (char *)
@@ -107,6 +106,7 @@ t_meta *meta:		meta struct
 Checks the token-array for environment variables, quotes, and pipes.
 If one of those is found they are handled by seperate functions, if none are
 found the input is handled as a single command. */
+static int	parse_input(t_token *tokens, t_meta *meta)
 {
 	int	i;
 	int	prev_pipe;
@@ -164,8 +164,6 @@ int	parse(char *input, t_meta *meta)
 		free_list(lst);
 		*lst = NULL;
 	}
-	// for (int i = 0; i < (int)ft_strlen(input); i++)
-	// 	printf("token[%i], value '%s', type %i\n", i, tokens[i].value, tokens[i].type);
 	parse_input(tokens, meta);
 	free_tokens(tokens);
 	return (EXIT_SUCCESS);

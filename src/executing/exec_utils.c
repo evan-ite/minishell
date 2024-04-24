@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/19 15:43:36 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/24 20:09:46 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,23 @@ char	*remove_nl(char *line)
 
 int	firstcheck_builtin(t_node *node, t_meta *meta)
 {
-	if (!ft_strcmp(node->command, "exit"))
+	if (!node->command)
+		return (EXIT_FAILURE);
+	if (!ft_strncmp(node->command, "exit", ft_strlen(node->command)))
 		ft_exit(node, meta);
-	else if (!ft_strcmp(node->command, "cd"))
+	else if (!ft_strncmp(node->command, "cd", ft_strlen(node->command)))
 		return (ft_cd(node->args, meta));
-	else if (!ft_strcmp(node->command, "export"))
+	else if (!ft_strncmp(node->command, "export", ft_strlen(node->command)))
 		return (ft_export(node, meta));
-	else if (!ft_strcmp(node->command, "unset"))
+	else if (!ft_strncmp(node->command, "unset", ft_strlen(node->command)))
 		return (ft_unset(node, meta));
 	return (-1);
 }
 
 int	check_builtin(t_node *node, t_meta *meta)
 {
+	if (!node->command)
+		return (EXIT_FAILURE);
 	if (!ft_strncmp(node->command, "exit", ft_strlen(node->command)))
 		ft_exit(node, meta);
 	else if (!ft_strncmp(node->command, "echo", ft_strlen(node->command)))
@@ -103,9 +107,9 @@ int	check_builtin(t_node *node, t_meta *meta)
 		return (ft_cd(node->args, meta));
 	else if (!ft_strncmp(node->command, "env", ft_strlen(node->command)))
 		return (ft_env(meta));
-	else if (!ft_strcmp(node->command, "export"))
+	else if (!ft_strncmp(node->command, "export", ft_strlen(node->command)))
 		return (ft_export(node, meta));
-	else if (!ft_strcmp(node->command, "unset"))
+	else if (!ft_strncmp(node->command, "unset", ft_strlen(node->command)))
 		return (ft_unset(node, meta));
 	return (-1);
 }

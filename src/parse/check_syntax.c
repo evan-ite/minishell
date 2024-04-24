@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:58:11 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/17 17:31:44 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/24 20:28:23 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ static int	check_redir(int i, t_token *tokens)
 	return (EXIT_SUCCESS);
 }
 
-int	check_syntax(t_token *tokens)
 /*
 t_token *tokens:	array of tokens
 
 Function that loops over tokens to check if there are any double pipes,
 redirs or unclosed quotes. */
+int	check_syntax(t_token *tokens)
 {
 	int	i;
 	int	squote;

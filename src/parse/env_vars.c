@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:24:45 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/24 16:50:31 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/24 20:26:22 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,15 @@ void	check_env_vars(t_token *tokens, t_meta *meta)
 	}
 }
 
+/*
+attempts to find tofind in the envvars. Search is Case sensitive.
+If found, returns a pointer the to value, otherwise returns NULL*/
 char	*get_envar(t_meta *meta, char *tofind)
 {
 	int	i;
 
 	i = 0;
-	if (!tofind)
+	if (!tofind || !meta || !meta->envp)
 		return (NULL);
 	while (meta->envp[i])
 	{

@@ -8,45 +8,45 @@ echo h>ello 123
 
 echo h-ello 123|wc -l
 
-echo $USER
+echo $USER					works
 
-echo $USER$USER
+echo $USER$USER				odd space between expansion
 
-echo $USER $USER
+echo $USER $USER			works
 
-echo $ USER
+echo $ USER					works
 
-echo "'$USER"
+echo "'$USER"				still syntax error
 
-echo "'$USER"'
+echo "'$USER"'				expands correctly
 
-$234hi
+$234hi						doesn't crash anymore
 
-$HELP
+$HELP						seems correct
 
-> test echo "hello world" | wc
+> test echo "hello world" | wc				not correct
 
 > test echo "hello world"
 
 > test echo "hello world" | grep "hello"
 
-echo $'string \n'
+echo $'string \n'							not correct
 
 echo 'string \n'
 
 echo '''
 
-echo \hello
+echo \hello					we're not supposed to handle escape characters
 
 echo \$
 
 echo \\hello
 
-"ls"
+"ls"						works
 
-'ls'
+'ls'						works
 
-\ls
+\ls							we're not supposed to handle escape characters
 
 < test > out cat
 
@@ -54,4 +54,4 @@ echo > outfile hello world how are u
 
 echo >out >out2 hello
 
-cat | cat | ls | ps
+cat | cat | ls | ps			works

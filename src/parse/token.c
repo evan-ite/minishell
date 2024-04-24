@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:34 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/24 15:08:09 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/24 21:01:48 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,9 @@ t_token	*tokenize(char *input, t_meta *meta)
 	}
 	tokens[count].type = 0;
 	tokens[count].value = NULL;
+	i = -1;
+	// while (tokens[++i].value)
+	// 	printf("%s\n", tokens[i].value);
 	return (tokens);
 }
 
@@ -182,6 +185,8 @@ static int	tokencount(char *input)
 			i += --wlen;
 			++count;
 		}
+		else
+			++count;
 	}
 	return (count);
 }

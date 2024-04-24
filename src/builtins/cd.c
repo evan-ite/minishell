@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:34 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/24 16:07:06 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:15:04 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 static int	go_home(t_meta *meta);
 
+/*
+builtin function that changes the directory to the specified location.
+If no argument is given, then cd will automatically go to the HOME directory,
+as determined by the envars. If no home directory is set, an error will be given
+*/
 int	ft_cd(char **args, t_meta *meta)
 {
 	char	*path;
@@ -37,6 +42,9 @@ int	ft_cd(char **args, t_meta *meta)
 	return (go_home(meta));
 }
 
+/*
+This function extracts the HOME path from envars and sets the working directory
+to there*/
 static int	go_home(t_meta *meta)
 {
 	char	*home;
