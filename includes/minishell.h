@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/17 17:30:41 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:04:51 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_meta
 int		exit_error(char *err_msg, char *src, int err_code, t_meta *meta);
 void	free_list(t_list **cmnd_list);
 void	free_meta(t_meta *meta);
+void	free_matrix(char **matrix);
 
 #endif
 

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/17 17:31:36 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:13:42 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 
-static int	parse_command(t_token *tokens, int i, t_meta *meta, int pipe_from_to)
 /*
 int i:				integer to keep track of the index in the token-array
 int pipe_from_to:	0 is no pipe, 1 is only pipe from previous, 2 is only pipe
@@ -22,8 +21,9 @@ t_token *tokens:	array of t_token structs, containing token value
 t_meta *meta:		meta struct
 
 Creates a node to add to the back of cmnd_lst, all arguments and redirections
-are retrieved and the information is saved in the node. Returns the index in the token array
-wherre the parser should continue. */
+are retrieved and the information is saved in the node. Returns the index in
+the token array where the parser should continue. */
+static int	parse_command(t_token *tokens, int i, t_meta *meta, int pipe_from_to)
 {
 	t_node	*node;
 	t_list	*new;
@@ -53,10 +53,10 @@ t_token *tokens:	array of t_token structs, containing token value
 					and the corresponding string (char *)
 t_meta *meta:		meta struct
 
-Handles pipes in the tokenized input, if there's no previous pipe the two commands
-left and right of the pipe can be created. Otherwise, the left command already exists in the
-cmnd_lst and just the right command needs to be created. The index in the token array is
-updated through *i. */
+Handles pipes in the tokenized input, if there's no previous pipe the two
+commands left and right of the pipe can be created. Otherwise, the left command
+already exists in the cmnd_lst and just the right command needs to be created.
+The index in the token array is updated through *i. */
 {
 	int		temp_i;
 	t_node	*temp_node;
@@ -90,9 +90,9 @@ EXIT_FAILURE (= 1). */
 	while (tokens[i].value)
 	{
 		if (tokens[i].type == SQUOTE)
-			parse_quotes(SQUOTE, tokens, &i);
+			parse_quotes(SQUOTE, tokens, &i, meta);
 		if (tokens[i].type == DQUOTE)
-			parse_quotes(DQUOTE, tokens, &i);
+			parse_quotes(DQUOTE, tokens, &i, meta);
 		i++;
 	}
 	return (EXIT_SUCCESS);
@@ -105,15 +105,15 @@ t_token *tokens:	array of t_token structs, containing token value
 t_meta *meta:		meta struct
 
 Checks the token-array for environment variables, quotes, and pipes.
-If one of those is found they are handled by seperate functions, if none are found
-the input is handled as a single command. */
+If one of those is found they are handled by seperate functions, if none are
+found the input is handled as a single command. */
 {
 	int	i;
 	int	prev_pipe;
 	int	temp;
 
-	check_env_vars(tokens, meta);
 	check_quotes(tokens, meta);
+	check_env_vars(tokens, meta);
 	i = 0;
 	prev_pipe = 0;
 	while (tokens[i].value)
@@ -132,18 +132,19 @@ the input is handled as a single command. */
 	return (EXIT_SUCCESS);
 }
 
-int	parse(char *input, t_meta *meta)
 /*
 char *input:	raw input from the user, string of characters
 t_meta *meta:	empty meta struct
 
 Parsing the input by creating a token-array and then interpreting the tokens.
-The parsed input is saved in meta->cmnd_lst: a linked list where each node contains
-all the information for one command. Returns 0 on succes, 1 on failure.*/
+The parsed input is saved in meta->cmnd_lst: a linked list where each node
+contains all the information for one command. Returns 0 on succes, 1 on failure.
+*/
+int	parse(char *input, t_meta *meta)
 {
 	t_token	*tokens;
-	t_list **lst;
-	int	i;
+	t_list	**lst;
+	int		i;
 
 	lst = meta->cmnd_lst;
 	i = 0;

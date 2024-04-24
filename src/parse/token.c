@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:34 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/19 12:57:36 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/24 15:08:09 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static int	tokencount(char *input);
 
-int	is_special(char c)
 /*
 char c:	character that needs to be checked.
 
 Checks if a character is a special character.
 Returns 1 if a special character is found, 0 if none is found.*/
+int	is_special(char c)
 {
 	if (c == '<' || c == '>' || c == '|' || c == '$')
 		return (1);
@@ -28,7 +28,6 @@ Returns 1 if a special character is found, 0 if none is found.*/
 	return (0);
 }
 
-int	check_redirect(int *i, char *input, int count, t_token *tokens)
 /*
 int *i:				integer pointing to the index in the input string.
 char *input:		raw input from the user, string of characters
@@ -38,6 +37,7 @@ t_token *tokens:	array of tokens
 Checks for redirections and creates a token if one is found.
 Returns 1 if > or < is found, returns 2 if >> or << is found,
 and returns 0 nothing was found.*/
+int	check_redirect(int *i, char *input, int count, t_token *tokens)
 {
 	if (input[*i] == '<')
 	{
@@ -66,7 +66,6 @@ and returns 0 nothing was found.*/
 	return (0);
 }
 
-int	check_symbol(int *i, char *input, int count, t_token *tokens)
 /*
 int *i:				integer pointing to the index in the input string.
 char *input:		raw input from the user, string of characters
@@ -75,6 +74,7 @@ t_token *tokens:	array of tokens
 
 Checks if a character is a special character, if a special character is found
 a new token is created. Returns 1 on succes, 0 on failure. */
+int	check_symbol(int *i, char *input, int count, t_token *tokens)
 {
 	int	found_redir;
 
@@ -100,7 +100,6 @@ a new token is created. Returns 1 on succes, 0 on failure. */
 	return (0);
 }
 
-int	check_word(int *i, char *input, int count, t_token *tokens)
 /*
 int *i:				integer pointing to the index in the input string.
 char *input:		raw input from the user, string of characters
@@ -110,6 +109,7 @@ t_token *tokens:	array of tokens
 Checks if a combination of characters is a word, a word cannot contain
 spaces or special characters. If a word is found, a new WORD token is created.
 Returns 1 on succes, 0 on failure. */
+int	check_word(int *i, char *input, int count, t_token *tokens)
 {
 	int	len;
 
@@ -130,12 +130,12 @@ Returns 1 on succes, 0 on failure. */
 	return (0);
 }
 
-t_token	*tokenize(char *input, t_meta *meta)
 /*
 char *input:	raw input from the user, string of characters
 
 Create an array of tokens, loop over raw user input and assign
 tokens to characters. Returns the array of tokens. */
+t_token	*tokenize(char *input, t_meta *meta)
 {
 	t_token	*tokens;
 	int		i;
@@ -156,11 +156,11 @@ tokens to characters. Returns the array of tokens. */
 	}
 	tokens[count].type = 0;
 	tokens[count].value = NULL;
-	// for (int i = 0; i < tokencount(input) + 1; i++)
-	// 	printf("token[%i], value '%s', type %i\n", i, tokens[i].value, tokens[i].type);
 	return (tokens);
 }
 
+/*
+Counts how many initial tokens will be required to allocate*/
 static int	tokencount(char *input)
 {
 	int	i;

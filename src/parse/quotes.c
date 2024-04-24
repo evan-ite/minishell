@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:06:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/17 17:32:06 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:16:52 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,23 @@ static void	merge_words(int start, t_token *tokens)
 	}
 }
 
-int	parse_quotes(token_type quote, t_token *tokens, int *i)
+int	parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta)
 {
 	int	j;
 	int	start;
 
 	start = *i;
-	merge_tokens(*i, tokens, quote);
 	remove_token(tokens, *i);
 	j = *i;
-	while (tokens[j].type != quote && tokens[j].value)
+	while (tokens[j].value && tokens[j].type != quote)
+	{
+		if (tokens[j].type == DOLLAR && quote == DQUOTE)
+			handle_var(tokens, j, meta);
+		tokens[j].type = WORD;
 		j++;
+	}
+	if (tokens[j].value == NULL)
+		j--;
 	remove_token(tokens, j);
 	*i = j;
 	merge_words(start, tokens);

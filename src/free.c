@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:56:26 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/17 17:29:18 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:17:40 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,21 @@ void	free_tokens(t_token	*tokens)
 	i = 0;
 	while (tokens[i].value)
 	{
-		//if ((int)ft_strlen(tokens[i].value) > 1)
 		free(tokens[i].value);
 		i++;
 	}
 	if (tokens)
 		free(tokens);
+}
+
+void	free_matrix(char **matrix)
+{
+	int	i;
+
+	i = -1;
+	if (!matrix)
+		return ;
+	while (matrix[++i])
+		free (matrix[i]);
+	free (matrix);
 }
