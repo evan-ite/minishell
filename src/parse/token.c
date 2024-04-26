@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:34 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/24 21:01:48 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/26 18:44:18 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,9 @@ int	check_word(int *i, char *input, int count, t_token *tokens)
 	int	len;
 
 	len = 0;
-	while (input[*i + len] && ft_isprint(input[*i + len]))
-	{
-		if (is_special(input[*i + len]))
-			break ;
+	while (input[*i + len] && ft_isprint(input[*i + len])
+		&& !is_special(input[*i + len]))
 		len++;
-	}
 	if (len > 0)
 	{
 		(tokens)[count].type = WORD;

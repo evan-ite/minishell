@@ -6,11 +6,13 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:24:45 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/24 20:26:22 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/26 19:49:34 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
+
+void	handle_exit_codes(t_token *tokens, t_meta *meta, int i);
 
 void	handle_var(t_token *tokens, int i, t_meta *meta)
 {
@@ -21,11 +23,9 @@ void	handle_var(t_token *tokens, int i, t_meta *meta)
 		tokens[i].type = WORD;
 		return ;
 	}
-	if (tokens[i + 1].type == WORD && !ft_strcmp("?", tokens[i + 1].value))
+	if (tokens[i + 1].type == WORD && !ft_strncmp("?", tokens[i + 1].value, 1))
 	{
-		free(tokens[i + 1].value);
-		tokens[i + 1].value = ft_itoa(meta->exit_code);
-		remove_token(tokens, i);
+		handle_exit_codes(tokens, meta, i);
 		return ;
 	}
 	if (tokens[i + 1].type == WORD)
@@ -47,6 +47,8 @@ void	handle_var(t_token *tokens, int i, t_meta *meta)
 		tokens[i].type = WORD;
 }
 
+/*
+Iterates through the input to find environment variables to expand*/
 void	check_env_vars(t_token *tokens, t_meta *meta)
 {
 	int	i;
@@ -80,4 +82,29 @@ char	*get_envar(t_meta *meta, char *tofind)
 		i++;
 	}
 	return (NULL);
+}
+
+void	handle_exit_codes(t_token *tokens, t_meta *meta, int i)
+{
+	char	*temp;
+	char	*exit_code;
+
+	if (ft_strlen(tokens[i + 1].value) == 1)
+	{
+		free(tokens[i + 1].value);
+		tokens[i + 1].value = ft_itoa(meta->exit_code);
+		remove_token(tokens, i);
+		return ;
+	}
+	exit_code = ft_itoa(meta->exit_code);
+	if (!exit_code)
+		exit_error(NULL, NULL, meta->exit_code, meta);
+	temp = ft_strdup(tokens[i + 1].value + 1);
+	if (!temp)
+		exit_error(NULL, NULL, meta->exit_code, meta);
+	free(tokens[i + 1].value);
+	tokens[i + 1].value = ft_strjoin(exit_code, temp);
+	free(exit_code);
+	free(temp);
+	remove_token(tokens, i);
 }
