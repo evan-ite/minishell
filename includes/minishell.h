@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/24 15:04:51 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/29 20:59:13 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_node
 	char	*command; // just the command/builtin - no path
 	char	*path; // comand inc path
 	char	**args; // array for execve
-	char	**infile; // NULL if not existing, should be come a list of files
+	char	**infile; // NULL if not existing, should become a list of files
 	char	**outfile; // NULL if not existing
 	char	**heredoc; // string contains delimiter given to heredoc
 	int		*append; // 1 is true, 0 is false
@@ -66,6 +66,7 @@ int		exit_error(char *err_msg, char *src, int err_code, t_meta *meta);
 void	free_list(t_list **cmnd_list);
 void	free_meta(t_meta *meta);
 void	free_matrix(char **matrix);
+void	sigint_handler(int sig);
 
 #endif
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:05:27 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/17 17:32:17 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/29 19:46:23 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static void	count_redirs(t_node *node, t_token *tokens, t_meta *meta)
 	}
 	if (node->n_input > 0)
 	{
-		node->infile = gnl_calloc(node->n_input, sizeof(char *));
-		node->heredoc = gnl_calloc(node->n_input, sizeof(char *));
-		node->fd_in = gnl_calloc(node->n_input, sizeof(int));
+		node->infile = gnl_calloc(node->n_input + 1, sizeof(char *));
+		node->heredoc = gnl_calloc(node->n_input + 1, sizeof(char *));
+		node->fd_in = gnl_calloc(node->n_input + 1, sizeof(int));
 		if (!node->infile || !node->heredoc || !node->fd_in)
 			exit_error(ERR_MEM, NULL, 1, meta);
 	}

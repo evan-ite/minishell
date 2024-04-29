@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/24 20:09:46 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/29 19:56:06 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,15 @@ void	open_files(t_node *node, t_meta *meta)
 
 char	*remove_nl(char *line)
 {
-	int	len;
-	char *temp;
+	int		len;
+	char	*temp;
 
 	len = ft_strlen(line);
 	temp = NULL;
 	if (line[len - 1] == '\n')
 		temp = ft_substr(line, 0, len - 1);
+	else
+		temp = line;
 	return (temp);
 }
 
