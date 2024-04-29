@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/24 20:18:57 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/29 17:19:22 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ int	parse(char *input, t_meta *meta)
 	{
 		write(STDOUT_FILENO, ERR_SYNT, 13);
 		meta->exit_code = EXIT_FAILURE;
+		free_tokens(tokens);
 		return (EXIT_FAILURE);
 	}
 	if (*lst)

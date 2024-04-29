@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:06:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/24 20:58:50 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/04/29 15:32:02 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta)
 	if (tokens[j].value == NULL)
 		j--;
 	remove_token(tokens, j);
-	if (start < j)
+	if (start > j)
 		start = j;
 	*i = j;
 	merge_words(start, tokens);
