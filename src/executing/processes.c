@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/29 20:59:38 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/01 16:08:12 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	check_heredoc(t_node *node, t_meta *meta)
 			node->hd_pipe[i] = gnl_calloc(2, sizeof(int));
 			if (pipe(node->hd_pipe[i]) == -1)
 				exit_error(ERR_PIPE, NULL, 1, meta);
-			while (1)
+			while (1 && g_sig == 0)
 			{
 				ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 				line = get_next_line(STDIN_FILENO);
@@ -78,10 +78,10 @@ static void	setup_pipes(int i, t_node *node, t_meta *meta)
 	}
 }
 
-static int	execute_cmnd(int i, t_node *node, t_meta *meta)
 /* Sets up the pipes, checks for buitlins
 and executes command. Returns 0 if builtin was correctly executed,
 or exits with 127 if the command was not correctly executed. */
+static int	execute_cmnd(int i, t_node *node, t_meta *meta)
 {
 	int	builtin;
 
@@ -113,6 +113,12 @@ void	child_process(int i, t_node *node, t_meta *meta)
 			exit_error(ERR_PIPE, NULL, 1, meta);
 	}
 	check_heredoc(node, meta);
+	if (g_sig != 0)
+	{
+		free_array((void **)meta->pipe, meta->n_cmnds + 1);
+		meta->pipe = NULL;
+		return ;
+	}
 	meta->pid[i] = fork();
 	if (meta->pid[i] < 0)
 		exit_error(ERR_CHILD, NULL, 1, meta);

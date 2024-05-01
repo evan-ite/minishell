@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:06:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/29 15:32:02 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/01 15:16:01 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	merge_words(int start, t_token *tokens)
 {
 	char	*temp;
 
-	start--;
 	if (!tokens || !tokens[start].value || !tokens[start + 1].value)
 		return ;
 	if (tokens[start].type != WORD)
@@ -78,9 +77,9 @@ int	parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta)
 		tokens[j].type = WORD;
 		j++;
 	}
+	remove_token(tokens, j);
 	if (tokens[j].value == NULL)
 		j--;
-	remove_token(tokens, j);
 	if (start > j)
 		start = j;
 	*i = j;

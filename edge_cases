@@ -16,31 +16,31 @@ echo $USER $USER			works
 
 echo $ USER					works
 
-echo "'$USER"				still syntax error
+echo "'$USER"				works
 
-echo "'$USER"'				expands correctly
+echo "'$USER"'				correct syntax error
 
-$234hi						doesn't crash anymore
+$234hi						works
 
 $HELP						seems correct
 
 > test echo "hello world" | wc				not correct
 
-> test echo "hello world"
+> test echo "hello world"					seems correct
 
-> test echo "hello world" | grep "hello"
+> test echo "hello world" | grep "hello"	seems correct
 
 echo $'string \n'							not correct
 
-echo 'string \n'
+echo 'string \n'							correct
 
-echo '''
+echo '''									correct
 
-echo \hello					we're not supposed to handle escape characters
+echo \hello									we're not supposed to handle escape characters
 
-echo \$
+echo \$										we're not supposed to handle escape characters
 
-echo \\hello
+echo \\hello								we're not supposed to handle escape characters
 
 "ls"						works
 

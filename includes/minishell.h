@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/29 20:59:13 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/01 16:09:38 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define ERR_SYNT "Syntax error\n"
 # define ERR_ARGS "too many arguments"
 # define ERR_NUM ": numeric argument required"
+
+extern int g_sig;
 
 typedef struct s_node
 {
@@ -59,7 +61,6 @@ typedef struct s_meta
 	int		exit_code;
 	t_list	**cmnd_lst;
 }	t_meta;
-
 
 // Error handling
 int		exit_error(char *err_msg, char *src, int err_code, t_meta *meta);

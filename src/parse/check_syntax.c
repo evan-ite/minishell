@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:58:11 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/29 17:33:23 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/01 16:11:43 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,6 @@ static int	is_redir(t_token token)
 	else
 		return (0);
 }
-
-// static int	quote_closed(int start, t_token *tokens, token_type quote)
-// {
-// 	int	i;
-
-// 	i = start + 1;
-// 	while (tokens[i].value && tokens[i].type != quote)
-// 		i++;
-// 	if (!tokens[i].value)
-// 		return (0);
-// 	else
-// 		return (1);
-// }
 
 static int	syntax_quotes(t_token *tokens)
 {
@@ -67,23 +54,6 @@ static void	skip_spaces(int *i, t_token *tokens)
 	while (tokens[*i].value && tokens[*i].type == SSPACE)
 		(*i)++;
 }
-
-// static int	find_quotes(int *squote, int *dquote, int i, t_token *tokens)
-// {
-// 	if (tokens[i].type == SQUOTE)
-// 	{
-// 		(*squote)++;
-// 		if (*squote % 2 && quote_closed(i, tokens, tokens[i].type) == 0)
-// 			return (EXIT_FAILURE);
-// 	}
-// 	else if (tokens[i].type == DQUOTE)
-// 	{
-// 		(*dquote)++;
-// 		if (*dquote % 2 && quote_closed(i, tokens, tokens[i].type) == 0)
-// 			return (EXIT_FAILURE);
-// 	}
-// 	return (EXIT_SUCCESS);
-// }
 
 static int	check_pipes(int i, t_token *tokens)
 {
@@ -121,18 +91,12 @@ redirs or unclosed quotes. */
 int	check_syntax(t_token *tokens)
 {
 	int	i;
-	int	squote;
-	int	dquote;
 
 	i = 0;
-	squote = 0;
-	dquote = 0;
 	if (syntax_quotes(tokens) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	while (tokens[i].value)
 	{
-		// if (find_quotes(&squote, &dquote, i, tokens) == 1)
-		// 	return (EXIT_FAILURE);
 		if (check_pipes(i, tokens) == 1)
 			return (EXIT_FAILURE);
 		if (check_redir(i, tokens) == 1)
