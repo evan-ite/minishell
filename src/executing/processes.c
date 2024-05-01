@@ -6,7 +6,7 @@
 /*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/01 16:08:12 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/01 17:57:18 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,9 @@ void	child_process(int i, t_node *node, t_meta *meta)
 		if (execute_cmnd(i, node, meta) != 0)
 			exit_error(ERR_CMND, node->command, 127, meta);
 	}
-	else
+	else if (i > 0)
 	{
-		if (i > 0)
-		{
-			ft_close(meta->pipe[i][0]);
-			ft_close(meta->pipe[i][1]);
-		}
+		ft_close(meta->pipe[i][0]);
+		ft_close(meta->pipe[i][1]);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:34 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/26 18:44:18 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/01 18:06:47 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ Checks if a character is a special character.
 Returns 1 if a special character is found, 0 if none is found.*/
 int	is_special(char c)
 {
-	if (c == '<' || c == '>' || c == '|' || c == '$')
-		return (1);
-	else if (c == '\'' || c == '\"' || c == ' ')
+	if (c == '<' || c == '>' || c == '|' || c == '$' || c == '\'' || c == '\"' 
+		|| c == ' ')
 		return (1);
 	return (0);
 }

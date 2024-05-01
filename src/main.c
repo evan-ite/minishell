@@ -6,7 +6,7 @@
 /*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/01 16:10:32 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/01 18:18:31 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static char	**cpy_matrix(char **matrix)
 		ret[i] = ft_strdup(matrix[i]);
 		if (!ret[i])
 		{
-			free_matrix(matrix);
+			free_array((void **)matrix, -1);
 			return (NULL);
 		}
 	}

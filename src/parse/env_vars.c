@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_vars.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:24:45 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/26 19:49:34 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/01 18:01:50 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	handle_var(t_token *tokens, int i, t_meta *meta)
 {
 	char	*var;
 
+	var = NULL;
 	if (!tokens[i + 1].value)
 	{
 		tokens[i].type = WORD;
@@ -30,8 +31,6 @@ void	handle_var(t_token *tokens, int i, t_meta *meta)
 	}
 	if (tokens[i + 1].type == WORD)
 		var = get_envar(meta, tokens[i + 1].value);
-	else
-		var = NULL;
 	if (var)
 	{
 		free(tokens[i + 1].value);
@@ -46,6 +45,8 @@ void	handle_var(t_token *tokens, int i, t_meta *meta)
 	else
 		tokens[i].type = WORD;
 }
+
+
 
 /*
 Iterates through the input to find environment variables to expand*/

@@ -6,7 +6,7 @@
 /*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/05/01 16:09:38 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/01 18:17:04 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_meta
 int		exit_error(char *err_msg, char *src, int err_code, t_meta *meta);
 void	free_list(t_list **cmnd_list);
 void	free_meta(t_meta *meta);
-void	free_matrix(char **matrix);
 void	sigint_handler(int sig);
 
 #endif

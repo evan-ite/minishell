@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:48 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/17 17:34:18 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/01 18:41:20 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ int	ft_export(t_node *node, t_meta *meta)
 			i++;
 		}
 		temp[j] = NULL;
+		free_array((void **)meta->envp, -1);
 		meta->envp = temp;
 	}
 	return (0);
