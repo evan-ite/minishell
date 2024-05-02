@@ -1,34 +1,34 @@
 IMPORTANT EDGE CASES
 
-echo h|ello 123
+echo h|ello 123								works
 
-echo h<ello 123
+echo h<ello 123								works
 
-echo h>ello 123
+echo h>ello 123								works
 
-echo h-ello 123|wc -l
+echo h-ello 123|wc -l						works
 
-echo $USER					works
+echo $USER									works
 
-echo $USER$USER				odd space between expansion
+echo $USER$USER								odd space between expansion
 
-echo $USER $USER			works
+echo $USER $USER							works
 
-echo $ USER					works
+echo $ USER									works
 
-echo "'$USER"				works
+echo "'$USER"								works
 
-echo "'$USER"'				correct syntax error
+echo "'$USER"'								works
 
-$234hi						works
+$234hi										works
 
-$HELP						seems correct
+$HELP										works
 
-> test echo "hello world" | wc				not correct
+> test echo "hello world" | wc				works
 
-> test echo "hello world"					seems correct
+> test echo "hello world"					works
 
-> test echo "hello world" | grep "hello"	seems correct
+> test echo "hello world" | grep "hello"	works
 
 echo $'string \n'							not correct
 
@@ -36,22 +36,23 @@ echo 'string \n'							correct
 
 echo '''									correct
 
-echo \hello									we're not supposed to handle escape characters
+"ls"										works
 
-echo \$										we're not supposed to handle escape characters
+'ls'										works
 
-echo \\hello								we're not supposed to handle escape characters
+< test > out cat							works
 
-"ls"						works
+echo > outfile hello world how are u		works
 
-'ls'						works
+echo >out >out2 hello						works
 
-\ls							we're not supposed to handle escape characters
+cat | cat | ls | ps							works: but ls is zombie process and idk why?
 
-< test > out cat
+export hello = CUTE 						creates two env vars: hello and CUTE
 
-echo > outfile hello world how are u
+unset PATH
+env | grep PATH								not giving the correct error message
 
-echo >out >out2 hello
+export USER=newuser							does not replace but adds a new var with same name
 
-cat | cat | ls | ps			works
+cd nonexisting								does not throw correct error message

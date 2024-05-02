@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:37 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/02 14:06:53 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:28:23 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_echo(char **args)
 	}
 	newline = 1;
 	i = 1;
-	if (!ft_strcmp(args[i], "-n"))
+	if (args[i] && !ft_strcmp(args[i], "-n"))
 	{
 		newline = 0;
 		i++;
