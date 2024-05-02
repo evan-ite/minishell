@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:34 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/24 18:15:04 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/02 17:11:50 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int	ft_cd(char **args, t_meta *meta)
 		path = args[1];
 		if (chdir(path) != 0)
 		{
-			ft_putstr_fd("Error cd\n", STDERR_FILENO);
-			return (-1);
+			ft_putstr_fd(args[1], STDERR_FILENO);
+			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+			meta->exit_code = 1;
 		}
 		return (0);
 	}

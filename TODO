@@ -1,9 +1,5 @@
 - Ctrl C, D, \ (in heredoc??)
 - check eval sheet cases
 - zombie processes
-- cd no directory
 - export valgrind gives error
-- after export value -> echo $value doesnt work
-- unset PATH --> env needs to be duplicated
-- 'echo' hi --> segfaults?
 - cat << EOF1 | grep "pattern" << EOF2 | wc -l -> weird stuff happening
