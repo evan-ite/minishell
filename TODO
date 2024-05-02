@@ -1,8 +1,6 @@
 - Ctrl C, D, \ (in heredoc??)
 - check eval sheet cases
 - zombie processes
-- cd -
-- cd ~
 - cd no directory
 - export valgrind gives error
 - after export value -> echo $value doesnt work
