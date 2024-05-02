@@ -60,4 +60,5 @@ Run the game by executing the following command:
 ---
 
 **Acknowledgements**
-- Elise van Iterson, e.vaniterson98@gmail.com
+- Elise van Iterson
+- Tobias Surma
