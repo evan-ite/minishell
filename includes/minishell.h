@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/17 17:30:41 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/01 18:17:04 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@
 # define ERR_ARGS "too many arguments"
 # define ERR_NUM ": numeric argument required"
 
+extern int g_sig;
+
 typedef struct s_node
 {
 	char	*command; // just the command/builtin - no path
 	char	*path; // comand inc path
 	char	**args; // array for execve
-	char	**infile; // NULL if not existing, should be come a list of files
+	char	**infile; // NULL if not existing, should become a list of files
 	char	**outfile; // NULL if not existing
 	char	**heredoc; // string contains delimiter given to heredoc
 	int		*append; // 1 is true, 0 is false
@@ -60,11 +62,11 @@ typedef struct s_meta
 	t_list	**cmnd_lst;
 }	t_meta;
 
-
 // Error handling
 int		exit_error(char *err_msg, char *src, int err_code, t_meta *meta);
 void	free_list(t_list **cmnd_list);
 void	free_meta(t_meta *meta);
+void	sigint_handler(int sig);
 
 #endif
 

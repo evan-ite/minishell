@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/17 17:33:21 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:44:39 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_list	*parent_builtins(t_meta *meta)
 	if (ft_lstsize(temp) == 1)
 	{
 		builtin = firstcheck_builtin(temp->content, meta);
-		if ( builtin != -1)
+		if (builtin != -1)
 		{
 			temp = NULL;
 			meta->exit_code = builtin;
@@ -44,8 +44,8 @@ static t_list	*parent_builtins(t_meta *meta)
 
 void	execute(t_meta *meta)
 {
-	t_node *node;
-	t_list *temp;
+	t_node	*node;
+	t_list	*temp;
 	int		i;
 	int		status;
 
@@ -55,7 +55,6 @@ void	execute(t_meta *meta)
 	while (temp)
 	{
 		node = temp->content;
-		// print_node(node);
 		child_process(i, node, meta);
 		i++;
 		temp = temp->next;

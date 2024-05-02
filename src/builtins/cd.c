@@ -3,18 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:34 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/17 17:33:58 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:15:04 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
+#include "../../includes/parsing.h"
 
-int	ft_cd(char **args)
+static int	go_home(t_meta *meta);
+
+/*
+builtin function that changes the directory to the specified location.
+If no argument is given, then cd will automatically go to the HOME directory,
+as determined by the envars. If no home directory is set, an error will be given
+*/
+int	ft_cd(char **args, t_meta *meta)
 {
-	char *path;
+	char	*path;
 
 	if (!*args || !args)
 	{
@@ -31,13 +39,26 @@ int	ft_cd(char **args)
 		}
 		return (0);
 	}
-	else
+	return (go_home(meta));
+}
+
+/*
+This function extracts the HOME path from envars and sets the working directory
+to there*/
+static int	go_home(t_meta *meta)
+{
+	char	*home;
+
+	home = get_envar(meta, "HOME");
+	if (!home)
 	{
-		if (chdir("/") != 0)
-		{
-			ft_putstr_fd("Error cd\n", STDERR_FILENO);
-			return (-1);
-		}
+		ft_putstr_fd("minishell: cd: Home not set\n", STDERR_FILENO);
 		return (0);
 	}
+	if (chdir(home) != 0)
+	{
+		ft_putstr_fd("Error cd\n", STDERR_FILENO);
+		return (0);
+	}
+	return (EXIT_SUCCESS);
 }

@@ -1,53 +1,62 @@
 IMPORTANT EDGE CASES
 
-echo h|ello 123
+echo h|ello 123								works
 
-echo h<ello 123
+echo h<ello 123								works
 
-echo h>ello 123
+echo h>ello 123								works
 
-echo h-ello 123|wc -l
+echo h-ello 123|wc -l						works
 
-echo $USER
+echo $USER									works
 
-echo $USER$USER
+echo $USER$USER								odd space between expansion
 
-echo $USER $USER
+echo $USER $USER							works
 
-echo $ USER
+echo $ USER									works
 
-$234hi
+echo "'$USER"								works
 
-$HELP
+echo "'$USER"'								works
 
-> test echo "hello world" | wc
+$234hi										works
 
-> test echo "hello world"
+$HELP										works
 
-> test echo "hello world" | grep "hello"
+> test echo "hello world" | wc				works
 
-echo $'string \n'
+> test echo "hello world"					works
 
-echo 'string \n'
+> test echo "hello world" | grep "hello"	works
 
-echo '''
+echo $'string \n'							not correct
 
-echo \hello
+echo 'string \n'							correct
 
-echo \$
+echo '''									correct
 
-echo \\hello
+"ls"										works
 
-"ls"
+'ls'										works
 
-'ls'
+< test > out cat							works
 
-\ls
+echo > outfile hello world how are u		works
 
-< test > out cat
+echo >out >out2 hello						works
 
-echo > outfile hello world how are u
+cat | cat | ls | ps							works: but ls is zombie process and idk why?
 
-echo >out >out2 hello
+export hello = CUTE 						creates two env vars: hello and CUTE
 
-cat | cat | ls | ps
+unset PATH
+env | grep PATH								not giving the correct error message
+
+export USER=newuser							does not replace but adds a new var with same name
+
+cd nonexisting								does not throw correct error message
+
+echo hello""world							prints a space that shouldn't be printed
+
+echo hello'world'							prints a space that shoudltn be printed

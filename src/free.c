@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:56:26 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/17 17:29:18 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/01 18:42:37 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	free_tokens(t_token	*tokens)
 	i = 0;
 	while (tokens[i].value)
 	{
-		//if ((int)ft_strlen(tokens[i].value) > 1)
 		free(tokens[i].value);
 		i++;
 	}
