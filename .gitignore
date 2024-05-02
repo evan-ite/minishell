@@ -1,5 +1,6 @@
 .vscode
 minishell
+minishell_tester
 
 # Object files
 *.o

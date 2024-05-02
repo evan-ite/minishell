@@ -56,3 +56,7 @@ env | grep PATH								not giving the correct error message
 export USER=newuser							does not replace but adds a new var with same name
 
 cd nonexisting								does not throw correct error message
+
+echo hello""world							prints a space that shouldn't be printed
+
+echo hello'world'							prints a space that shoudltn be printed
