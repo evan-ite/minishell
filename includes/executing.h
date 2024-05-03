@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:09:02 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 16:53:04 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:16:40 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "minishell.h"
 # include "parsing.h"
 # include "builtins.h"
+# include <sys/ioctl.h>
 # include <sys/fcntl.h>
 # include <sys/wait.h>
 

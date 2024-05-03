@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 16:47:55 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:16:45 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	sigint_handler_heredoc(int sig)
 	if (sig == SIGINT)
 	{
 		g_sig = sig;
-		ft_printf("\n");
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	}
 }
 
@@ -45,8 +45,8 @@ static int	check_heredoc(t_node *node, t_meta *meta)
 				line = get_next_line(STDIN_FILENO);
 				if (line == NULL)
 				{
-					ft_putstr_fd("warning: here-document delimited\
-					by end-of-file\n", STDERR_FILENO);
+					ft_putstr_fd("warning: here-document delimited by end-of-"
+						"file\n", STDERR_FILENO);
 					break ;
 				}
 				if (!ft_strncmp(line, node->heredoc[i], ft_strlen(line) - 1))

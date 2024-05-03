@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/03 14:08:50 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/03 18:11:37 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ int	main(void)
 	t_meta	meta;
 
 	g_sig = 0;
-	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	cmnd_lst = NULL;
 	meta.cmnd_lst = &cmnd_lst;
 	init_meta(&meta);
 	while (1)
 	{
+		signal(SIGINT, sigint_handler);
 		input = readline("\x1b[1;35mminishell :) \x1b[0m");
 		g_sig = 0;
 		if (input && *input)
