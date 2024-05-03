@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/02 16:44:39 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:56:27 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	execute(t_meta *meta)
 		i++;
 		temp = temp->next;
 	}
-	if (i > 0)
+	if (i > 0 && !g_sig)
 	{
 		i = 0;
 		while (i < meta->n_cmnds)
@@ -68,6 +68,7 @@ void	execute(t_meta *meta)
 			meta->exit_code = WEXITSTATUS(status);
 		}
 	}
+	g_sig = 0;
 	free_meta(meta);
 	free_list(meta->cmnd_lst);
 }

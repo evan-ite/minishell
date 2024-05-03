@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/01 18:18:31 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/03 14:08:50 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 #include "../includes/executing.h"
 #include "../includes/parsing.h"
 
-static char **cpy_matrix(char **matrix);
+static char	**cpy_matrix(char **matrix);
 
 int	g_sig = 0;
 
 /*
 Executes when the ctrl+c signal is send.
 writes a new line and reinitialises it to display the prompt*/
-void sigint_handler(int sig)
+void	sigint_handler(int sig)
 {
-	g_sig = sig;
-	ft_printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (sig == SIGINT)
+	{
+		g_sig = sig;
+		ft_printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 /*
@@ -35,7 +38,7 @@ char **envp:	An editable copy of the environment variables.
 t_meta *meta:	empty meta struct
 
 Initialize the meta struct. */
-void init_meta(t_meta *meta)
+void	init_meta(t_meta *meta)
 {
 	meta->envp = cpy_matrix(__environ);
 	meta->exit_code = 0;
@@ -49,12 +52,13 @@ Registers the Signals for SIGINT (ctrl+c) and SIGQUIT (ctrl+d) which is ignored
 and runs by itself. ctrl+/ is not supposed to do anything.
 Starts Minishell by creating an infinite while loop,
 keeps prompting the user for input until user exits the program. */
-int main(void)
+int	main(void)
 {
 	char	*input;
 	t_list	*cmnd_lst;
 	t_meta	meta;
 
+	g_sig = 0;
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	cmnd_lst = NULL;
@@ -62,8 +66,8 @@ int main(void)
 	init_meta(&meta);
 	while (1)
 	{
-		g_sig = 0;
 		input = readline("\x1b[1;35mminishell :) \x1b[0m");
+		g_sig = 0;
 		if (input && *input)
 		{
 			add_history(input);

@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/01 17:57:18 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/03 14:12:42 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executing.h"
+
+static void	sigint_handler_heredoc(int sig)
+{
+	if (sig == SIGINT)
+	{
+		g_sig = sig;
+		ft_printf("\n");
+	}
+}
+
 
 /* Returns 1 if the node contains a heredoc and arranges all input and output.
 If there's no heredoc the function returns 0. */
@@ -30,7 +40,7 @@ static int	check_heredoc(t_node *node, t_meta *meta)
 			node->hd_pipe[i] = gnl_calloc(2, sizeof(int));
 			if (pipe(node->hd_pipe[i]) == -1)
 				exit_error(ERR_PIPE, NULL, 1, meta);
-			while (1 && g_sig == 0)
+			while (1 && !g_sig)
 			{
 				ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 				line = get_next_line(STDIN_FILENO);
@@ -106,6 +116,7 @@ process, checks and opens the files, executes the command and finally closes the
  pipes in the parent.*/
 void	child_process(int i, t_node *node, t_meta *meta)
 {
+	signal(SIGINT, sigint_handler_heredoc);
 	if (node->pipe_to_next)
 	{
 		meta->pipe[i + 1] = gnl_calloc(2, sizeof(int));

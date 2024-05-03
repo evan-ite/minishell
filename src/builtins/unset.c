@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:53 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/17 17:34:26 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:18:24 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_unset(t_node *node, t_meta *meta)
 					exit_error(ERR_MEM, NULL, 1, meta);
 			}
 		}
-		free(var);
+		free_array((void **)var, -1);
 		i++;
 	}
 	return (0);
