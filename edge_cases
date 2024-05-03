@@ -51,7 +51,7 @@ cat | cat | ls | ps							works: but ls is zombie process and idk why?
 export hello = CUTE 						works: creates no vars
 
 unset PATH
-env | grep PATH								not giving the correct error message
+env | grep PATH								works
 
 export USER=newuser							works
 
