@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/04/24 16:10:39 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/03 16:31:17 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta);
 int		parse(char *input, t_meta *meta);
 void	handle_var(t_token *tokens, int i, t_meta *meta);
 
-
 // utils
 void	skip_space_redirs(int *i, t_token *tokens);
 void	get_args(int *i, t_node *node, t_token *tokens);
@@ -59,5 +58,10 @@ char	*get_envar(t_meta *meta, char *tofind);
 void	print_list(t_list **head);
 t_node	*init_node(char *command);
 void	print_node(t_node *node);
+
+// syntax utils
+void	skip_spaces(int *i, t_token *tokens);
+int		is_redir(t_token token);
+void	skip_quotes(t_token *tokens, int *i, token_type quote);
 
 #endif

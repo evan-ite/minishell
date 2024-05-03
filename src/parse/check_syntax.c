@@ -3,26 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:58:11 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/01 16:11:43 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/03 16:44:33 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 
-static int	is_redir(t_token token)
-{
-	if (token.type == INPUT || token.type == HEREDOC)
-		return (1);
-	else if (token.type == OUTPUT || token.type == OUT_APPEND)
-		return (1);
-	else
-		return (0);
-}
-
-static int	syntax_quotes(t_token *tokens)
+static int	syntax_quotes(t_token *tokens, int *start_q, int *end_q)
 {
 	int	i;
 
@@ -31,28 +21,24 @@ static int	syntax_quotes(t_token *tokens)
 	{
 		if (tokens[i].type == SQUOTE)
 		{
+			*start_q = i;
 			while (tokens[++i].value && tokens[i].type != SQUOTE)
 				;
 			if (tokens[i].value == NULL)
 				return (EXIT_FAILURE);
+			*end_q = i;
 		}
 		if (tokens[i].type == DQUOTE)
 		{
+			*start_q = i;
 			while (tokens[++i].value && tokens[i].type != DQUOTE)
 				;
 			if (tokens[i].value == NULL)
 				return (EXIT_FAILURE);
+			*end_q = i;
 		}
 	}
 	return (EXIT_SUCCESS);
-}
-
-
-static void	skip_spaces(int *i, t_token *tokens)
-{
-	(*i)++;
-	while (tokens[*i].value && tokens[*i].type == SSPACE)
-		(*i)++;
 }
 
 static int	check_pipes(int i, t_token *tokens)
@@ -91,16 +77,23 @@ redirs or unclosed quotes. */
 int	check_syntax(t_token *tokens)
 {
 	int	i;
+	int	start_q;
+	int	end_q;
 
 	i = 0;
-	if (syntax_quotes(tokens) == EXIT_FAILURE)
+	start_q = 0;
+	end_q = 0;
+	if (syntax_quotes(tokens, &start_q, &end_q) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	while (tokens[i].value)
 	{
-		if (check_pipes(i, tokens) == 1)
-			return (EXIT_FAILURE);
-		if (check_redir(i, tokens) == 1)
-			return (EXIT_FAILURE);
+		if (i < start_q || i > end_q)
+		{
+			if (check_pipes(i, tokens) == 1)
+				return (EXIT_FAILURE);
+			if (check_redir(i, tokens) == 1)
+				return (EXIT_FAILURE);
+		}
 		i++;
 	}
 	return (EXIT_SUCCESS);
