@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+         #
+#    By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:07:09 by evan-ite          #+#    #+#              #
-#    Updated: 2024/04/26 18:18:23 by tsurma           ###   ########.fr        #
+#    Updated: 2024/05/03 14:48:32 by evan-ite         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC = src/main.c src/error.c src/free.c src/parse/parse.c src/parse/token.c \
 	src/executing/execute.c src/executing/exec_utils.c \
 	src/executing/processes.c src/executing/path.c \
 	src/builtins/cd.c src/builtins/echo.c src/builtins/env.c src/builtins/export.c \
-	src/builtins/pwd.c src/builtins/unset.c src/builtins/exit.c
+	src/builtins/pwd.c src/builtins/unset.c src/builtins/exit.c \
+	src/builtins/export_utils.c
 
 OBJ := $(SRC:.c=.o)
 

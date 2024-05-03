@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:05:36 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/19 12:47:39 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/03 15:32:49 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static char	*get_options(t_meta *meta)
 		}
 		i++;
 	}
-	if (!path)
-		exit_error("Could not find PATH", NULL, 1, meta);
 	return (path);
 }
 
@@ -55,6 +53,11 @@ static void	find_path(char *path, t_node *node, t_meta *meta)
 	int		i;
 	char	**path_options;
 
+	if (!path)
+	{
+		node->path = NULL;
+		return ;
+	}
 	path_options = ft_split(path, ':');
 	if (!path_options)
 		exit_error(ERR_MEM, NULL, 1, meta);
