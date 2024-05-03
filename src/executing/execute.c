@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 12:56:27 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/03 15:38:05 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ static t_list	*parent_builtins(t_meta *meta)
 	{
 		builtin = firstcheck_builtin(temp->content, meta);
 		if (builtin != -1)
-		{
 			temp = NULL;
-			meta->exit_code = builtin;
-		}
 	}
 	return (temp);
 }

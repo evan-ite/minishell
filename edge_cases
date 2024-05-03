@@ -55,7 +55,7 @@ env | grep PATH								works
 
 export USER=newuser							works
 
-cd nonexisting								works but wrong exitcode
+cd nonexisting								works
 
 echo hello""world							prints a space that shouldn't be printed
 
