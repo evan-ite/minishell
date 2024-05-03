@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 15:38:05 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:49:27 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ void	execute(t_meta *meta)
 	while (temp)
 	{
 		node = temp->content;
-		child_process(i, node, meta);
-		i++;
+		child_process(i++, node, meta);
 		temp = temp->next;
 	}
 	if (i > 0 && !g_sig)

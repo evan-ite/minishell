@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:38:43 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/17 17:34:15 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:47:41 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_numeric(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (!ft_isdigit(str[i]) && (str[i] != '-' && str[i] != '+'))
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/05/03 16:31:17 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:46:17 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ void	print_node(t_node *node);
 // syntax utils
 void	skip_spaces(int *i, t_token *tokens);
 int		is_redir(t_token token);
-void	skip_quotes(t_token *tokens, int *i, token_type quote);
 
 #endif

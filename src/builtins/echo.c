@@ -6,12 +6,11 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:37 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/02 14:28:23 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:47:20 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
-
 
 int	ft_echo(char **args)
 {

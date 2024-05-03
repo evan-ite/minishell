@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:36:03 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/03 15:25:02 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:47:02 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**realloc_env(t_node *node, t_meta *meta)
 	i = 1;
 	while (node->args[i])
 		i++;
-	temp = gnl_calloc(j + i + 1, sizeof(char*));
+	temp = gnl_calloc(j + i + 1, sizeof(char *));
 	if (!temp)
 		return (NULL);
 	return (temp);
@@ -44,8 +44,8 @@ char	**sort_env(t_meta *meta)
 	i = 0;
 	while (sorted[i])
 	{
-		j = 0;
-		while (sorted[j] && sorted[j + 1])
+		j = -1;
+		while (sorted[++j] && sorted[j + 1])
 		{
 			if (sorted[j][0] > sorted[j + 1][0])
 			{
@@ -56,7 +56,6 @@ char	**sort_env(t_meta *meta)
 				sorted[j + 1] = ft_strdup(temp);
 				free(temp);
 			}
-			j++;
 		}
 		i++;
 	}
@@ -84,7 +83,7 @@ int	replace_var(int i, char **temp, t_node *node)
 	int	equal_i;
 
 	equal_i = 0;
-	while (node->args[i][equal_i] && node->args[i][equal_i]!= '=')
+	while (node->args[i][equal_i] && node->args[i][equal_i] != '=')
 		equal_i++;
 	if (!node->args[i][equal_i])
 		return (1);

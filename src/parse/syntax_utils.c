@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 16:24:00 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/03 16:34:30 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:46:15 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,3 @@ int	is_redir(t_token token)
 	else
 		return (0);
 }
-
-// void	skip_quotes(t_token *tokens, int *i, token_type quote)
-// {
-// 	int	target;
-
-// 	target = *i;
-// 	while (tokens[target].type != quote)
-// 		(*i)++;
-// }

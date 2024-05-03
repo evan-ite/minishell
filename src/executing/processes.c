@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 14:12:42 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/03 16:47:55 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	sigint_handler_heredoc(int sig)
 		ft_printf("\n");
 	}
 }
-
 
 /* Returns 1 if the node contains a heredoc and arranges all input and output.
 If there's no heredoc the function returns 0. */
