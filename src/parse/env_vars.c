@@ -6,7 +6,7 @@
 /*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:24:45 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/01 18:01:50 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/03 23:35:58 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	handle_var(t_token *tokens, int i, t_meta *meta)
 	else
 		tokens[i].type = WORD;
 }
-
 
 
 /*

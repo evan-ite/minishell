@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 18:16:45 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/04 00:29:12 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executing.h"
+
+static int	here_doc(t_node *node, char *line, int i);
 
 static void	sigint_handler_heredoc(int sig)
 {
@@ -28,6 +30,7 @@ static int	check_heredoc(t_node *node, t_meta *meta)
 	char	*line;
 	int		i;
 
+	line = 0;
 	if (!node->heredoc)
 		return (0);
 	node->hd_pipe = gnl_calloc(node->n_input, sizeof(int *));
@@ -39,24 +42,7 @@ static int	check_heredoc(t_node *node, t_meta *meta)
 			node->hd_pipe[i] = gnl_calloc(2, sizeof(int));
 			if (pipe(node->hd_pipe[i]) == -1)
 				exit_error(ERR_PIPE, NULL, 1, meta);
-			while (1 && !g_sig)
-			{
-				ft_putstr_fd("heredoc> ", STDOUT_FILENO);
-				line = get_next_line(STDIN_FILENO);
-				if (line == NULL)
-				{
-					ft_putstr_fd("warning: here-document delimited by end-of-"
-						"file\n", STDERR_FILENO);
-					break ;
-				}
-				if (!ft_strncmp(line, node->heredoc[i], ft_strlen(line) - 1))
-				{
-					free(line);
-					break ;
-				}
-				ft_putstr_fd(line, node->hd_pipe[i][1]);
-				free(line);
-			}
+			here_doc(node, line, i);
 			ft_close(node->hd_pipe[i][1]);
 		}
 		i++;
@@ -66,8 +52,36 @@ static int	check_heredoc(t_node *node, t_meta *meta)
 	return (1);
 }
 
-static void	setup_pipes(int i, t_node *node, t_meta *meta)
+static int	here_doc(t_node *node, char *line, int i)
+{
+	int	linelength;
+
+	while (1 && !g_sig)
+	{
+		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
+		line = get_next_line(STDIN_FILENO);
+		if (line == NULL)
+		{
+			ft_putstr_fd("warning: here-document delimited by end-of-"
+				"file\n", STDERR_FILENO);
+			return (1);
+		}
+		linelength = ft_strlen(line);
+		if (linelength > 1)
+			linelength--;
+		if (!ft_strncmp(line, node->heredoc[i], linelength))
+		{
+			free(line);
+			return (1);
+		}
+		ft_putstr_fd(line, node->hd_pipe[i][1]);
+		free(line);
+	}
+	return (0);
+}
+
 /* Set up all the pipes dependent on infile, outfile and pipes in the command.*/
+static void	setup_pipes(int i, t_node *node, t_meta *meta)
 {
 	if (node->infile && node->infile[node->n_input - 1])
 		dup2(node->fd_in[node->n_input - 1], STDIN_FILENO);

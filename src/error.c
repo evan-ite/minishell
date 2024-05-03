@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:50:21 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/17 17:29:24 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 23:22:45 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	clean_node(t_node *node)
 	if (node->outfile)
 	{
 		free_array((void **)node->outfile, node->n_output);
-		node->outfile  = NULL;
+		node->outfile = NULL;
 	}
 	if (node->heredoc)
 	{

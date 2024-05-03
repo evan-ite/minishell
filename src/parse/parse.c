@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/29 17:19:22 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/03 23:39:39 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
+
+static int	syntax_error(t_meta *meta, t_token *tokens);
 
 /*
 int i:				integer to keep track of the index in the token-array
@@ -154,12 +156,7 @@ int	parse(char *input, t_meta *meta)
 		return (EXIT_FAILURE);
 	tokens = tokenize(input, meta);
 	if (check_syntax(tokens) == 1)
-	{
-		write(STDOUT_FILENO, ERR_SYNT, 13);
-		meta->exit_code = EXIT_FAILURE;
-		free_tokens(tokens);
-		return (EXIT_FAILURE);
-	}
+		return (syntax_error(meta, tokens));
 	if (*lst)
 	{
 		free_list(lst);
@@ -168,4 +165,12 @@ int	parse(char *input, t_meta *meta)
 	parse_input(tokens, meta);
 	free_tokens(tokens);
 	return (EXIT_SUCCESS);
+}
+
+static int	syntax_error(t_meta *meta, t_token *tokens)
+{
+	write(STDOUT_FILENO, ERR_SYNT, 13);
+	meta->exit_code = EXIT_FAILURE;
+	free_tokens(tokens);
+	return (EXIT_FAILURE);
 }

@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:44 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/04/17 17:34:09 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 23:17:46 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
 
+/*
+prints all set environment variables out*/
 int	ft_env(t_meta *meta)
 {
-	int			i;
+	int	i;
 
 	if (!meta->envp || !*(meta->envp))
 	{

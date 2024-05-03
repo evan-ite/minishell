@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:05:36 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 15:32:49 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/03 23:35:03 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executing.h"
 
+/*
+Searches the environment variables for "PATH=". If not found, return NULL,
+otherwise return pointer to a copy of the content.*/
 static char	*get_options(t_meta *meta)
 {
 	char	*path;
@@ -33,6 +36,8 @@ static char	*get_options(t_meta *meta)
 	return (path);
 }
 
+/*
+Takes a possible path and appends "/" and a command*/
 static char	*create_full_path(char *path, char *cmnd, t_meta *meta)
 {
 	char	*temp;
@@ -48,6 +53,9 @@ static char	*create_full_path(char *path, char *cmnd, t_meta *meta)
 	return (result);
 }
 
+/*
+splits and appends path to a shell command. Checks if it exists, and
+sets node->path so that path or NULL*/
 static void	find_path(char *path, t_node *node, t_meta *meta)
 {
 	int		i;
@@ -75,6 +83,9 @@ static void	find_path(char *path, t_node *node, t_meta *meta)
 	return ;
 }
 
+/*
+searches for a path to a shell command. Either exits the process 
+or sets the command path*/
 void	get_path(t_meta *meta, t_node *node)
 {
 	char	*paths;
