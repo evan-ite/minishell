@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 16:49:27 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/06 12:35:51 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ static t_list	*parent_builtins(t_meta *meta)
 	return (temp);
 }
 
+static void	final_free(t_meta *meta)
+{
+	g_sig = 0;
+	free_meta(meta);
+	free_list(meta->cmnd_lst);
+}
+
 void	execute(t_meta *meta)
 {
 	t_node	*node;
@@ -64,7 +71,5 @@ void	execute(t_meta *meta)
 			meta->exit_code = WEXITSTATUS(status);
 		}
 	}
-	g_sig = 0;
-	free_meta(meta);
-	free_list(meta->cmnd_lst);
+	final_free(meta);
 }
