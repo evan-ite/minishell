@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/05/01 18:17:04 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/06 17:47:55 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define ERR_MEM "Error allocating memory"
 # define ERR_FILE ": No such file in directory"
 # define ERR_FPER ": Permission denied"
-# define ERR_SYNT "Syntax error\n"
+# define ERR_SYNT "Syntax error"
 # define ERR_ARGS "too many arguments"
 # define ERR_NUM ": numeric argument required"
 

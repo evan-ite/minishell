@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:38:43 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/03 16:47:41 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:50:21 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_exit(t_node *node, t_meta *meta)
 	if (args > 2)
 	{
 		meta->exit_code = EXIT_FAILURE;
-		write(1, "exit\n", 6);
+		write(1, "exit\n", 5);
 		exit_error(ERR_ARGS, NULL, meta->exit_code, meta);
 	}
 	else if (args == 2)
@@ -54,12 +54,12 @@ int	ft_exit(t_node *node, t_meta *meta)
 		if (!check_numeric(node->args[1]))
 		{
 			meta->exit_code = 2;
-			write(1, "exit\n", 6);
+			write(1, "exit\n", 5);
 			exit_error(ERR_NUM, node->args[1], meta->exit_code, meta);
 		}
 		meta->exit_code = ft_atoi(node->args[1]);
 	}
-	write(1, "exit\n", 6);
+	write(1, "exit\n", 5);
 	exit_error(NULL, NULL, meta->exit_code, meta);
 	return (EXIT_SUCCESS);
 }

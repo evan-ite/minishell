@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:05:27 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/04/29 19:46:23 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/06 15:16:39 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	get_file(int *i, char **file, t_token *tokens, t_meta *meta)
 	}
 	else
 	{
-		write(STDOUT_FILENO, ERR_SYNT, 13);
+		ft_putendl_fd(ERR_SYNT, STDERR_FILENO);
 		meta->exit_code = EXIT_FAILURE;
 		return (EXIT_FAILURE);
 	}

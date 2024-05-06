@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/06 12:43:16 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:23:22 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	child_process(int i, t_node *node, t_meta *meta)
 		if (execute_cmnd(i, node, meta) != 0)
 			exit_error(ERR_CMND, node->command, 127, meta);
 	}
-	else if (i > 0)
+	else if (i > 0 && meta->pipe[i])
 	{
 		ft_close(meta->pipe[i][0]);
 		ft_close(meta->pipe[i][1]);
