@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:09:02 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 18:16:40 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/06 12:41:01 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 // executing
 void	execute(t_meta *meta);
 void	child_process(int i, t_node *node, t_meta *meta);
+
+// heredoc
+int		check_heredoc(t_node *node, t_meta *meta);
+void	sigint_handler_heredoc(int sig);
 
 // files
 void	open_files(t_node *node, t_meta *meta);
