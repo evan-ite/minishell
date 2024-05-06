@@ -6,26 +6,11 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:34 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/06 12:45:37 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/06 12:56:48 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
-
-static int	tokencount(char *input);
-
-/*
-char c:	character that needs to be checked.
-
-Checks if a character is a special character.
-Returns 1 if a special character is found, 0 if none is found.*/
-int	is_special(char c)
-{
-	if (c == '<' || c == '>' || c == '|' || c == '$' || c == '\'' || c == '\"'
-		|| c == ' ')
-		return (1);
-	return (0);
-}
 
 /*
 int *i:				integer pointing to the index in the input string.
@@ -154,33 +139,4 @@ t_token	*tokenize(char *input, t_meta *meta)
 	tokens[count].value = NULL;
 	i = -1;
 	return (tokens);
-}
-
-/*
-Counts how many initial tokens will be required to allocate*/
-static int	tokencount(char *input)
-{
-	int	i;
-	int	count;
-	int	wlen;
-
-	i = -1;
-	count = 0;
-	while (input[++i])
-	{
-		if (is_special(input[i]))
-			++count;
-		else if (ft_isprint(input[i]))
-		{
-			wlen = 0;
-			while ((ft_isprint(input[i + wlen]) == 1)
-				&& (!is_special(input[i + wlen])))
-				++wlen;
-			i += --wlen;
-			++count;
-		}
-		else
-			++count;
-	}
-	return (count);
 }
