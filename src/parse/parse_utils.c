@@ -6,11 +6,19 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:27:39 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/06 12:46:06 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/06 12:59:08 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
+
+int	syntax_error(t_meta *meta, t_token *tokens)
+{
+	write(STDOUT_FILENO, ERR_SYNT, 13);
+	meta->exit_code = EXIT_FAILURE;
+	free_tokens(tokens);
+	return (EXIT_FAILURE);
+}
 
 void	skip_space_redirs(int *i, t_token *tokens)
 {
@@ -54,4 +62,29 @@ void	get_args(int *i, t_node *node, t_token *tokens)
 		(*i)++;
 		skip_space_redirs(i, tokens);
 	}
+}
+
+/*
+t_token *tokens:	array of t_token structs, containing token value
+					and the corresponding string (char *)
+t_meta *meta:		meta struct
+
+Checks if there are quotes in the token-array, if so handle the quotes
+with the function parse_quotes. If there's a syntax error, function will return
+EXIT_FAILURE (= 1). */
+int	check_quotes(t_token *tokens, t_meta *meta)
+{
+	int	i;
+
+	(void)meta;
+	i = 0;
+	while (tokens[i].value)
+	{
+		if (tokens[i].type == SQUOTE)
+			parse_quotes(SQUOTE, tokens, &i, meta);
+		if (tokens[i].type == DQUOTE)
+			parse_quotes(DQUOTE, tokens, &i, meta);
+		i++;
+	}
+	return (EXIT_SUCCESS);
 }

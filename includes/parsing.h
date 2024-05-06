@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/05/06 12:55:45 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/06 12:59:33 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	remove_token(t_token *tokens, int i);
 void	merge_tokens(int start, t_token *tokens, token_type end_token);
 void	free_tokens(t_token	*tokens);
 char	*get_envar(t_meta *meta, char *tofind);
+int		check_quotes(t_token *tokens, t_meta *meta);
+int		syntax_error(t_meta *meta, t_token *tokens);
 
 // tokenize utils
 int		tokencount(char *input);

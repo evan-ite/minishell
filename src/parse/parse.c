@@ -6,13 +6,11 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/06 12:47:13 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/06 13:00:07 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
-
-static int	syntax_error(t_meta *meta, t_token *tokens);
 
 /*
 int i:				integer to keep track of the index in the token-array
@@ -72,31 +70,6 @@ static int	parse_pipes(t_token *tokens, int *i, t_meta *meta, int prev_pipe)
 	}
 	temp_i = parse_command(tokens, *i + 1, meta, 1);
 	*i = temp_i;
-	return (EXIT_SUCCESS);
-}
-
-/*
-t_token *tokens:	array of t_token structs, containing token value
-					and the corresponding string (char *)
-t_meta *meta:		meta struct
-
-Checks if there are quotes in the token-array, if so handle the quotes
-with the function parse_quotes. If there's a syntax error, function will return
-EXIT_FAILURE (= 1). */
-static int	check_quotes(t_token *tokens, t_meta *meta)
-{
-	int	i;
-
-	(void)meta;
-	i = 0;
-	while (tokens[i].value)
-	{
-		if (tokens[i].type == SQUOTE)
-			parse_quotes(SQUOTE, tokens, &i, meta);
-		if (tokens[i].type == DQUOTE)
-			parse_quotes(DQUOTE, tokens, &i, meta);
-		i++;
-	}
 	return (EXIT_SUCCESS);
 }
 
@@ -165,12 +138,4 @@ int	parse(char *input, t_meta *meta)
 	parse_input(tokens, meta);
 	free_tokens(tokens);
 	return (EXIT_SUCCESS);
-}
-
-static int	syntax_error(t_meta *meta, t_token *tokens)
-{
-	write(STDOUT_FILENO, ERR_SYNT, 13);
-	meta->exit_code = EXIT_FAILURE;
-	free_tokens(tokens);
-	return (EXIT_FAILURE);
 }
