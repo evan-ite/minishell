@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:34 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/01 18:06:47 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/06 12:45:37 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Checks if a character is a special character.
 Returns 1 if a special character is found, 0 if none is found.*/
 int	is_special(char c)
 {
-	if (c == '<' || c == '>' || c == '|' || c == '$' || c == '\'' || c == '\"' 
+	if (c == '<' || c == '>' || c == '|' || c == '$' || c == '\'' || c == '\"'
 		|| c == ' ')
 		return (1);
 	return (0);
@@ -153,8 +153,6 @@ t_token	*tokenize(char *input, t_meta *meta)
 	tokens[count].type = 0;
 	tokens[count].value = NULL;
 	i = -1;
-	// while (tokens[++i].value)
-	// 	printf("%s\n", tokens[i].value);
 	return (tokens);
 }
 

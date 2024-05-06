@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:50:21 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 23:22:45 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/06 12:48:03 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,65 +16,6 @@ void	ft_close(int fd)
 {
 	close(fd);
 	fd = -1;
-}
-
-static void	clean_node(t_node *node)
-{
-	if (node->command)
-		free(node->command);
-	if (node->path)
-		free(node->path);
-	if (node->args)
-	{
-		free_array((void **)node->args, -1);
-		node->args = NULL;
-	}
-	if (node->infile)
-	{
-		free_array((void **)node->infile, node->n_input);
-		node->infile = NULL;
-	}
-	if (node->outfile)
-	{
-		free_array((void **)node->outfile, node->n_output);
-		node->outfile = NULL;
-	}
-	if (node->heredoc)
-	{
-		free_array((void **)node->heredoc, node->n_input);
-		node->heredoc = NULL;
-	}
-	if (node->append)
-		free(node->append);
-	if (node->fd_in)
-		free(node->fd_in);
-	if (node->fd_out)
-		free(node->fd_out);
-	if (node->hd_pipe)
-	{
-		free_array((void **)node->hd_pipe, node->n_input);
-		node->hd_pipe = NULL;
-	}
-	if (node)
-		free(node);
-}
-
-void	free_list(t_list **cmnd_list)
-{
-	t_list	*temp;
-
-	if (!cmnd_list || !*cmnd_list)
-		return ;
-	while (*cmnd_list)
-	{
-		temp = (*cmnd_list)->next;
-		clean_node((*cmnd_list)->content);
-		free(*cmnd_list);
-		*cmnd_list = temp;
-	}
-	if (*cmnd_list)
-		free(*cmnd_list);
-	return ;
 }
 
 void	free_meta(t_meta *meta)

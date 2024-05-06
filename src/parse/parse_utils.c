@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:27:39 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/01 18:04:51 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/06 12:46:06 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	skip_space_redirs(int *i, t_token *tokens)
 {
 	while (tokens[*i].value && tokens[*i].type == SSPACE)
 		(*i)++;
-	while (tokens[*i].value && (tokens[*i].type == OUT_APPEND 
-		|| tokens[*i].type == OUTPUT || tokens[*i].type == INPUT 
-		|| tokens[*i].type == HEREDOC))
+	while (tokens[*i].value && (tokens[*i].type == OUT_APPEND
+			|| tokens[*i].type == OUTPUT || tokens[*i].type == INPUT
+			|| tokens[*i].type == HEREDOC))
 	{
 		(*i)++;
 		while (tokens[*i].value && tokens[*i].type == SSPACE)
