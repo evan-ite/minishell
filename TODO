@@ -3,3 +3,7 @@
 - zombie processes
 - export valgrind gives error
 - cat << EOF1 | grep "pattern" << EOF2 | wc -l -> weird stuff happening
+
+- error messages arent always printed to stderr
+- error messages seem to all end with "exit"
+- error codes can't be found by the tester

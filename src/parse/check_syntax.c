@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:58:11 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/03 16:44:33 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/06 14:58:14 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	syntax_quotes(t_token *tokens, int *start_q, int *end_q)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	while (tokens[++i].type)
 	{
 		if (tokens[i].type == SQUOTE)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:50:21 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/06 12:48:03 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/06 14:39:48 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	exit_error(char *err_msg, char *src, int err_code, t_meta *meta)
 		result = ft_strjoin(src, err_msg);
 		if (!result)
 		{
-			ft_putendl_fd(ERR_MEM, 2);
+			ft_putendl_fd(ERR_MEM, STDERR_FILENO);
 			exit(-1);
 		}
-		ft_putendl_fd(result, 2);
+		ft_putendl_fd(result, STDERR_FILENO);
 		free(result);
 	}
 	else if (err_msg)
-		ft_putendl_fd(err_msg, 2);
+		ft_putendl_fd(err_msg, STDERR_FILENO);
 	free_list(meta->cmnd_lst);
 	free_meta(meta);
 	meta->exit_code = err_code;

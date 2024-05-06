@@ -3,29 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 16:11:41 by evan-ite          #+#    #+#             */
-/*   Updated: 2023/12/07 12:48:35 by evan-ite         ###   ########.fr       */
+/*   Created: 2023/11/13 12:44:53 by tsurma            #+#    #+#             */
+/*   Updated: 2024/03/14 17:06:06 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
+/*Compares the first n bytes of s1 and s2.
+Returns 0 if they are the same.*/
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	c1;
-	unsigned char	c2;
+	size_t	i;
 
+	if (n == 0)
+		return (0);
+	n--;
 	i = 0;
-	while (i < n)
+	while (i < n && (*(unsigned char *)(s1 + i) && *(unsigned char *)(s2 + i)))
 	{
-		c1 = s1[i];
-		c2 = s2[i];
-		if (c1 != c2 || (!s1[i] || !s2[i]))
-			return ((int)c1 - c2);
+		if (*(unsigned char *)(s1 + i) != *(unsigned char *)(s2 + i))
+			return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
 		i++;
 	}
-	return (0);
+	return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
 }
