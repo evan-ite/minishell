@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/06 15:23:22 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/06 18:20:08 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,15 @@ static int	execute_cmnd(int i, t_node *node, t_meta *meta)
 	return (EXIT_SUCCESS);
 }
 
-static void	check_signal(t_meta *meta)
+static int	check_signal(t_meta *meta)
 {
 	if (g_sig != 0)
 	{
 		free_array((void **)meta->pipe, meta->n_cmnds + 1);
 		meta->pipe = NULL;
-		return ;
+		return (1);
 	}
+	return (0);
 }
 
 /* Creates a pipe to the next command if necessary, forks to create a child
@@ -79,7 +80,8 @@ void	child_process(int i, t_node *node, t_meta *meta)
 			exit_error(ERR_PIPE, NULL, 1, meta);
 	}
 	check_heredoc(node, meta);
-	check_signal(meta);
+	if (check_signal(meta) == 1)
+		return ;
 	meta->pid[i] = fork();
 	if (meta->pid[i] < 0)
 		exit_error(ERR_CHILD, NULL, 1, meta);
