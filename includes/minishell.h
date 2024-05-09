@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/05/06 17:47:55 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/09 18:19:13 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# define ERR_CMND ": Command not found"
+# define ERR_CMND ": command not found"
 # define ERR_PIPE "Error creating pipe"
 # define ERR_CHILD "Error creating child"
 # define ERR_MEM "Error allocating memory"
-# define ERR_FILE ": No such file in directory"
+# define ERR_FILE ": No such file or directory"
 # define ERR_FPER ": Permission denied"
 # define ERR_SYNT "Syntax error"
-# define ERR_ARGS "too many arguments"
+# define ERR_ARGS " too many arguments"
 # define ERR_NUM ": numeric argument required"
 
-extern int g_sig;
+extern int	g_sig;
 
 typedef struct s_node
 {
@@ -69,5 +69,3 @@ void	free_meta(t_meta *meta);
 void	sigint_handler(int sig);
 
 #endif
-
-

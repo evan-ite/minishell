@@ -6,7 +6,7 @@
 /*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:06:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/01 15:16:01 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/09 17:54:19 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	remove_token(t_token *tokens, int i)
 	tokens[i].value = NULL;
 }
 
-void	merge_tokens(int start, t_token *tokens, token_type end_token)
+void	merge_tokens(int start, t_token *tokens, t_token_type end_token)
 {
 	char	*temp;
 
@@ -62,7 +62,7 @@ static void	merge_words(int start, t_token *tokens)
 	}
 }
 
-int	parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta)
+int	parse_quotes(t_token_type quote, t_token *tokens, int *i, t_meta *meta)
 {
 	int	j;
 	int	start;

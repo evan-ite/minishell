@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/05/06 12:59:33 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:54:59 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include "minishell.h"
 # include <stdio.h>
 
-typedef enum {
+typedef enum s_types
+{
 	WORD,
 	SQUOTE,
 	DQUOTE,
@@ -28,11 +29,12 @@ typedef enum {
 	PIPE,
 	DOLLAR,
 	SSPACE,
-}	token_type;
+}	t_token_type;
 
-typedef struct s_token {
-	token_type	type;
-	char		*value;
+typedef struct s_token
+{
+	t_token_type	type;
+	char			*value;
 }	t_token;
 
 // tokenizing and parsing
@@ -42,7 +44,7 @@ int		check_syntax(t_token *tokens);
 // parsing
 void	check_env_vars(t_token *tokens, t_meta *meta);
 int		parse_redir(t_node *node, t_token *tokens, int i, t_meta *meta);
-int		parse_quotes(token_type quote, t_token *tokens, int *i, t_meta *meta);
+int		parse_quotes(t_token_type quote, t_token *tokens, int *i, t_meta *meta);
 int		parse(char *input, t_meta *meta);
 void	handle_var(t_token *tokens, int i, t_meta *meta);
 
@@ -50,7 +52,7 @@ void	handle_var(t_token *tokens, int i, t_meta *meta);
 void	skip_space_redirs(int *i, t_token *tokens);
 void	get_args(int *i, t_node *node, t_token *tokens);
 void	remove_token(t_token *tokens, int i);
-void	merge_tokens(int start, t_token *tokens, token_type end_token);
+void	merge_tokens(int start, t_token *tokens, t_token_type end_token);
 void	free_tokens(t_token	*tokens);
 char	*get_envar(t_meta *meta, char *tofind);
 int		check_quotes(t_token *tokens, t_meta *meta);

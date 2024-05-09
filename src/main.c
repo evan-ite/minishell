@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/03 18:11:37 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/09 17:50:44 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	main(void)
 	t_list	*cmnd_lst;
 	t_meta	meta;
 
-	g_sig = 0;
 	signal(SIGQUIT, SIG_IGN);
 	cmnd_lst = NULL;
 	meta.cmnd_lst = &cmnd_lst;
@@ -76,7 +75,7 @@ int	main(void)
 			free(input);
 		}
 		else if (!input)
-			exit_error("exit", NULL, EXIT_SUCCESS, &meta);
+			exit_error(NULL, NULL, EXIT_SUCCESS, &meta);
 	}
 	rl_clear_history();
 	return (0);
