@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:09:34 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 15:37:51 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/10 19:06:35 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../includes/parsing.h"
 
 static int	go_home(t_meta *meta);
+static int	count_args_cd(char **args);
 
 /*
 builtin function that changes the directory to the specified location.
@@ -25,9 +26,13 @@ int	ft_cd(char **args, t_meta *meta)
 	char	*path;
 
 	if (!*args || !args)
-	{
-		ft_putstr_fd("No args cd\n", STDERR_FILENO);
 		return (-1);
+	if (count_args_cd(args) > 2)
+	{
+		ft_putstr_fd(args[0], STDERR_FILENO);
+		ft_putstr_fd(": too many arguments\n", STDERR_FILENO);
+		meta->exit_code = 1;
+		return (0);
 	}
 	if (args[1])
 	{
@@ -62,4 +67,16 @@ static int	go_home(t_meta *meta)
 		return (0);
 	}
 	return (EXIT_SUCCESS);
+}
+
+static int	count_args_cd(char **args)
+{
+	int	i;
+
+	if (!args || !*args)
+		return (EXIT_FAILURE);
+	i = -1;
+	while (args[++i])
+		;
+	return (i);
 }

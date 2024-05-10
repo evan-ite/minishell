@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:38:43 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/10 16:50:05 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:46:49 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,22 @@
 
 static int	count_args(t_node *node)
 {
-	int	i;
+	int		i;
+	char	*temp;
 
 	if (!node->args)
 		return (0);
 	i = 0;
 	while (node->args[i])
 		i++;
+	if (i == 3 && (node->args[1][0] == '+' || node->args[1][0] == '-'))
+	{
+		temp = ft_strjoin(node->args[1], node->args[2]);
+		(free(node->args[1]), free(node->args[2]));
+		node->args[1] = temp;
+		node->args[2] = NULL;
+		--i;
+	}
 	return (i);
 }
 
