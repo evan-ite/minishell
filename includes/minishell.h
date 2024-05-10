@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/05/09 18:19:13 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/10 14:00:58 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,20 @@ extern int	g_sig;
 
 typedef struct s_node
 {
-	char	*command; // just the command/builtin - no path
-	char	*path; // comand inc path
-	char	**args; // array for execve
-	char	**infile; // NULL if not existing, should become a list of files
-	char	**outfile; // NULL if not existing
-	char	**heredoc; // string contains delimiter given to heredoc
-	int		*append; // 1 is true, 0 is false
+	char	*command;
+	char	*path;
+	char	**args;
+	char	**infile;
+	char	**outfile;
+	char	**heredoc;
+	int		*append;
 	int		*fd_in;
 	int		*fd_out;
 	int		**hd_pipe;
 	int		n_input;
 	int		n_output;
-	int		pipe_to_next; // as above
-	int		pipe_from_prev; // as above
+	int		pipe_to_next;
+	int		pipe_from_prev;
 }	t_node;
 
 typedef struct s_meta

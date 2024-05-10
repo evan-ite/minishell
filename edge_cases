@@ -1,62 +1,41 @@
-IMPORTANT EDGE CASES
+Test  28: ❌ export HELLO="123 A-"
+mini exit code = 1
+bash exit code = 0
+mini error = ( not a valid identifier)
+bash error = ()
 
-echo h|ello 123								works
+Test  39: ❌ cd $PWD
+mini exit code = 0
+bash exit code = 1
+mini error = ()
+bash error = ( too many arguments)
 
-echo h<ello 123								works
+Test  46: ❌ exit +"100"
+mini exit code = 1
+bash exit code = 100
+mini error = ( too many arguments)
+bash error = ()
 
-echo h>ello 123								works
+Test  55: ❌ cat minishell.h | grep ");"$
+mini exit code = 2
+bash exit code = 1
+mini error = ( No such file or directory No such file or directory)
+bash error = ( No such file or directory)
 
-echo h-ello 123|wc -l						works
+Test  68: ❌ echo <"./test_files/infile_big" | cat <"./test_files/infile"
+mini output = ()
+bash output = (hi hello world 42)
 
-echo $USER									works
+Test  79: ❌ cat <missing | cat <"./test_files/infile"
+mini output = ()
+bash output = (hi hello world 42)
 
-echo $USER$USER								odd space between expansion
-
-echo $USER $USER							works
-
-echo $ USER									works
-
-echo "'$USER"								works
-
-echo "'$USER"'								works
-
-$234hi										works
-
-$HELP										works
-
-> test echo "hello world" | wc				works
-
-> test echo "hello world"					works
-
-> test echo "hello world" | grep "hello"	works
-
-echo $'string \n'							not correct
-
-echo 'string \n'							correct
-
-echo '''									correct
-
-"ls"										works
-
-'ls'										works
-
-< test > out cat							works
-
-echo > outfile hello world how are u		works
-
-echo >out >out2 hello						works
-
-cat | cat | ls | ps							works: but ls is zombie process and idk why?
-
-export hello = CUTE 						works: creates no vars
-
-unset PATH
-env | grep PATH								works
-
-export USER=newuser							works
-
-cd nonexisting								works
-
-echo hello""world							prints a space that shouldn't be printed
-
-echo hello'world'							prints a space that shoudltn be printed
+Test  95: ❌ echo hi >./outfiles/outfile01 | echo bye >./outfiles/outfile02
+Files ./mini_outfiles/outfile01 and ./bash_outfiles/outfile01 differ
+Files ./mini_outfiles/outfile02 and ./bash_outfiles/outfile02 differ
+mini outfiles:
+bash outfiles:
+hi
+bye
+mini output = (bye)
+bash output = ()
