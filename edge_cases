@@ -24,20 +24,30 @@ bash error = ( No such file or directory)
 
 ---------------------------------------
 
-Test  68: ❌ echo <"./test_files/infile_big" | cat <"./test_files/infile"
-mini output = ()
-bash output = (hi hello world 42)
+Test  87: ❌ ls >"./outfiles/outfile""1""2""3""4""5"
+Only in ./mini_outfiles: outfile
+Only in ./bash_outfiles: outfile12345
 
-Test  79: ❌ cat <missing | cat <"./test_files/infile"
-mini output = ()
-bash output = (hi hello world 42)
 
-Test  95: ❌ echo hi >./outfiles/outfile01 | echo bye >./outfiles/outfile02
-Files ./mini_outfiles/outfile01 and ./bash_outfiles/outfile01 differ
-Files ./mini_outfiles/outfile02 and ./bash_outfiles/outfile02 differ
+
+----- THESE ALL HAVE TO DO WITH THE ORDER OF THE REDIRECTIONS --------
+
+Test 105: ❌ cat >./outfiles/outfile01 <missing
+Only in ./bash_outfiles: outfile01
 mini outfiles:
+cat: './mini_outfiles/*': No such file or directory
 bash outfiles:
-hi
-bye
-mini output = (bye)
-bash output = ()
+
+Test 107: ✅⚠️  cat >./test_files/invalid_permission <missing
+mini error = ( No such file or directory)
+bash error = ( Permission denied)
+
+Test 108: ❌ cat >./outfiles/outfile01 <missing >./test_files/invalid_permission
+Only in ./bash_outfiles: outfile01
+mini outfiles:
+cat: './mini_outfiles/*': No such file or directory
+bash outfiles:
+
+Test 120: ✅⚠️  ls >>./test_files/invalid_permission >>./outfiles/outfile02 <missing
+mini error = ( No such file or directory)
+bash error = ( Permission denied)

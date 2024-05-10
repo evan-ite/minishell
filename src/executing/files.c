@@ -6,13 +6,13 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 16:51:26 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/03 16:52:17 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:25:09 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executing.h"
 
-void	open_infiles(t_node *node, t_meta *meta)
+int	open_infiles(t_node *node, t_meta *meta)
 {
 	int	i;
 
@@ -31,9 +31,10 @@ void	open_infiles(t_node *node, t_meta *meta)
 		}
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
 
-void	open_outfiles(t_node *node, t_meta *meta)
+int	open_outfiles(t_node *node, t_meta *meta)
 {
 	int	i;
 
@@ -49,15 +50,16 @@ void	open_outfiles(t_node *node, t_meta *meta)
 			}
 			if (node->append[i])
 				node->fd_out[i] = open(node->outfile[i], \
-								O_CREAT | O_APPEND | O_RDWR, 0666);
+								O_CREAT | O_APPEND | O_RDWR, 0644);
 			else
 				node->fd_out[i] = open(node->outfile[i], \
-								O_CREAT | O_TRUNC | O_RDWR, 0666);
+								O_CREAT | O_TRUNC | O_RDWR, 0644);
 			if (node->fd_out[i] < 0)
-				exit_error(ERR_FILE, node->outfile[i], 1, meta);
+				exit_error(ERR_FPER, node->outfile[i], 1, meta);
 		}
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
 
 void	open_files(t_node *node, t_meta *meta)

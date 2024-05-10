@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:09:02 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/06 12:41:01 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:18:08 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	sigint_handler_heredoc(int sig);
 
 // files
 void	open_files(t_node *node, t_meta *meta);
-void	open_outfiles(t_node *node, t_meta *meta);
-void	open_infiles(t_node *node, t_meta *meta);
+// void	open_outfiles(t_node *node, t_meta *meta);
+// void	open_infiles(t_node *node, t_meta *meta);
 
 // builtins
 int		check_builtin(t_node *node, t_meta *meta);
