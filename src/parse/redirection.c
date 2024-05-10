@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:05:27 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/06 15:16:39 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/10 11:08:46 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,8 @@ static int	get_file(int *i, char **file, t_token *tokens, t_meta *meta)
 	}
 }
 
-static void	count_redirs(t_node *node, t_token *tokens, t_meta *meta)
+static void	calloc_redirs(t_node *node, t_meta *meta)
 {
-	int	i;
-
-	i = 0;
-	node->n_input = 0;
-	node->n_output = 0;
-	while (tokens[i].value)
-	{
-		if (tokens[i].type == INPUT || tokens[i].type == HEREDOC)
-			node->n_input++;
-		else if (tokens[i].type == OUTPUT || tokens[i].type == OUT_APPEND)
-			node->n_output++;
-		i++;
-	}
 	if (node->n_input > 0)
 	{
 		node->infile = gnl_calloc(node->n_input + 1, sizeof(char *));
@@ -65,27 +52,45 @@ static void	count_redirs(t_node *node, t_token *tokens, t_meta *meta)
 	}
 }
 
+static void	count_redirs(t_node *node, t_token *tokens, t_meta *meta)
+{
+	int	i;
+
+	i = 0;
+	node->n_input = 0;
+	node->n_output = 0;
+	while (tokens[i].value)
+	{
+		if (tokens[i].type == INPUT || tokens[i].type == HEREDOC)
+			node->n_input++;
+		else if (tokens[i].type == OUTPUT || tokens[i].type == OUT_APPEND)
+			node->n_output++;
+		i++;
+	}
+	calloc_redirs(node, meta);
+}
+
 int	parse_redir(t_node *node, t_token *tokens, int i, t_meta *meta)
 {
-	int	in_count;
-	int	out_count;
+	int	c_in;
+	int	c_out;
 	int	syntax_check;
 
 	count_redirs(node, tokens, meta);
-	in_count = 0;
-	out_count = 0;
+	c_in = 0;
+	c_out = 0;
 	while (tokens[i].value && tokens[i].type != PIPE)
 	{
 		if (tokens[i].type == INPUT)
-			syntax_check = get_file(&i, &node->infile[in_count++], tokens, meta);
+			syntax_check = get_file(&i, &node->infile[c_in++], tokens, meta);
 		else if (tokens[i].type == OUTPUT || tokens[i].type == OUT_APPEND)
 		{
 			if (tokens[i].type == OUT_APPEND)
-				node->append[out_count] = 1;
-			syntax_check = get_file(&i, &node->outfile[out_count++], tokens, meta);
+				node->append[c_out] = 1;
+			syntax_check = get_file(&i, &node->outfile[c_out++], tokens, meta);
 		}
 		else if (tokens[i].type == HEREDOC)
-			syntax_check = get_file(&i, &node->heredoc[in_count++], tokens, meta);
+			syntax_check = get_file(&i, &node->heredoc[c_in++], tokens, meta);
 		if (syntax_check == 1)
 			return (EXIT_FAILURE);
 		i++;
