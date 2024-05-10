@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:27:39 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/06 17:47:40 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/10 13:33:27 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	syntax_error(t_meta *meta, t_token *tokens)
 {
 	ft_putendl_fd(ERR_SYNT, STDERR_FILENO);
-	meta->exit_code = EXIT_FAILURE;
+	meta->exit_code = 2;
 	free_tokens(tokens);
 	return (EXIT_FAILURE);
 }

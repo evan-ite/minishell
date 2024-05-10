@@ -6,13 +6,13 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:58:11 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/06 14:58:14 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/10 13:46:47 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 
-static int	syntax_quotes(t_token *tokens, int *start_q, int *end_q)
+static int	syntax_quotes(t_token *tokens)
 {
 	int	i;
 
@@ -21,21 +21,17 @@ static int	syntax_quotes(t_token *tokens, int *start_q, int *end_q)
 	{
 		if (tokens[i].type == SQUOTE)
 		{
-			*start_q = i;
 			while (tokens[++i].value && tokens[i].type != SQUOTE)
 				;
 			if (tokens[i].value == NULL)
 				return (EXIT_FAILURE);
-			*end_q = i;
 		}
 		if (tokens[i].type == DQUOTE)
 		{
-			*start_q = i;
 			while (tokens[++i].value && tokens[i].type != DQUOTE)
 				;
 			if (tokens[i].value == NULL)
 				return (EXIT_FAILURE);
-			*end_q = i;
 		}
 	}
 	return (EXIT_SUCCESS);
@@ -77,17 +73,13 @@ redirs or unclosed quotes. */
 int	check_syntax(t_token *tokens)
 {
 	int	i;
-	int	start_q;
-	int	end_q;
 
 	i = 0;
-	start_q = 0;
-	end_q = 0;
-	if (syntax_quotes(tokens, &start_q, &end_q) == EXIT_FAILURE)
+	if (syntax_quotes(tokens) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	while (tokens[i].value)
 	{
-		if (i < start_q || i > end_q)
+		if (tokens[i].type == PIPE || is_redir(tokens[i]))
 		{
 			if (check_pipes(i, tokens) == 1)
 				return (EXIT_FAILURE);
