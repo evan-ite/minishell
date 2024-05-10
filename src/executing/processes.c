@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/06 18:20:08 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/10 15:35:53 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	child_process(int i, t_node *node, t_meta *meta)
 	{
 		if (node->infile || node->outfile)
 			open_files(node, meta);
+		// print_node(node);
 		if (execute_cmnd(i, node, meta) != 0)
 			exit_error(ERR_CMND, node->command, 127, meta);
 	}

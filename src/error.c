@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:50:21 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/06 14:39:48 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/10 14:41:51 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	ft_close(int fd)
 {
-	close(fd);
-	fd = -1;
+	if (fd >= 0)
+	{
+		close(fd);
+		fd = -1;
+	}
 }
 
 void	free_meta(t_meta *meta)

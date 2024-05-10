@@ -6,12 +6,13 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:56:26 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/06 12:49:26 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:41:42 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/parsing.h"
+#include "../includes/executing.h"
 
 void	free_tokens(t_token	*tokens)
 {
@@ -25,6 +26,26 @@ void	free_tokens(t_token	*tokens)
 	}
 	if (tokens)
 		free(tokens);
+}
+
+static void	close_files(t_node *node)
+{
+	int	i;
+
+	if (node->fd_in)
+	{
+		i = 0;
+		while (node->fd_in[i])
+			ft_close(node->fd_in[i++]);
+		free(node->fd_in);
+	}
+	if (node->fd_out)
+	{
+		i = 0;
+		while (node->fd_out[i])
+			ft_close(node->fd_out[i++]);
+		free(node->fd_out);
+	}
 }
 
 static void	free_files(t_node *node)
@@ -46,10 +67,7 @@ static void	free_files(t_node *node)
 	}
 	if (node->append)
 		free(node->append);
-	if (node->fd_in)
-		free(node->fd_in);
-	if (node->fd_out)
-		free(node->fd_out);
+	close_files(node);
 }
 
 static void	clean_node(t_node *node)

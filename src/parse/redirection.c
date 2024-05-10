@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:05:27 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/10 11:08:46 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:46:05 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	get_file(int *i, char **file, t_token *tokens, t_meta *meta)
 {
+	// char	*temp;
+
 	(*i)++;
 	while (tokens[*i].value && tokens[*i].type == SSPACE)
 		(*i)++;
@@ -22,6 +24,20 @@ static int	get_file(int *i, char **file, t_token *tokens, t_meta *meta)
 		*file = ft_strdup(tokens[*i].value);
 		if (!*file)
 			exit_error(ERR_MEM, NULL, 1, meta);
+		// (*i)++;
+		// // printf("NEXT TOKEN = %s\n", tokens[*i].value);
+		// while (tokens[*i].value && (tokens[*i].type == SQUOTE || tokens[*i].type == DQUOTE))
+		// 	(*i)++;
+		// while (tokens[*i].value && tokens[*i].type == WORD)
+		// {
+		// 	temp = ft_strjoin(*file, tokens[*i].value);
+		// 	free(*file);
+		// 	*file = ft_strdup(temp);
+		// 	free(temp);
+		// 	(*i)++;
+		// 	while (tokens[*i].value && (tokens[*i].type == SQUOTE || tokens[*i].type == DQUOTE))
+		// 		(*i)++;
+		// }
 		return (EXIT_SUCCESS);
 	}
 	else
@@ -44,27 +60,24 @@ static void	calloc_redirs(t_node *node, t_meta *meta)
 	}
 	if (node->n_output > 0)
 	{
-		node->append = gnl_calloc(node->n_output, sizeof(int));
-		node->outfile = gnl_calloc(node->n_output, sizeof(char *));
-		node->fd_out = gnl_calloc(node->n_output, sizeof(int));
+		node->append = gnl_calloc(node->n_output + 1, sizeof(int));
+		node->outfile = gnl_calloc(node->n_output + 1, sizeof(char *));
+		node->fd_out = gnl_calloc(node->n_output + 1, sizeof(int));
 		if (!node->append || !node->outfile || !node->fd_out)
 			exit_error(ERR_MEM, NULL, 1, meta);
 	}
 }
 
-static void	count_redirs(t_node *node, t_token *tokens, t_meta *meta)
+static void	count_redirs(int i, t_node *node, t_token *tokens, t_meta *meta)
 {
-	int	i;
-
-	i = 0;
-	node->n_input = 0;
-	node->n_output = 0;
 	while (tokens[i].value)
 	{
 		if (tokens[i].type == INPUT || tokens[i].type == HEREDOC)
 			node->n_input++;
 		else if (tokens[i].type == OUTPUT || tokens[i].type == OUT_APPEND)
 			node->n_output++;
+		else if (tokens[i].type == PIPE)
+			break ;
 		i++;
 	}
 	calloc_redirs(node, meta);
@@ -76,7 +89,7 @@ int	parse_redir(t_node *node, t_token *tokens, int i, t_meta *meta)
 	int	c_out;
 	int	syntax_check;
 
-	count_redirs(node, tokens, meta);
+	count_redirs(i, node, tokens, meta);
 	c_in = 0;
 	c_out = 0;
 	while (tokens[i].value && tokens[i].type != PIPE)
