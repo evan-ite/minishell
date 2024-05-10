@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:24:45 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/06 12:46:25 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/10 11:04:41 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ void	handle_var(t_token *tokens, int i, t_meta *meta)
 	char	*var;
 
 	var = NULL;
-	if (!tokens[i + 1].value)
-	{
-		tokens[i].type = WORD;
-		return ;
-	}
 	if (tokens[i + 1].type == WORD && !ft_strncmp("?", tokens[i + 1].value, 1))
 	{
 		handle_exit_codes(tokens, meta, i);
@@ -56,7 +51,14 @@ void	check_env_vars(t_token *tokens, t_meta *meta)
 	while (tokens[i].value)
 	{
 		if (tokens[i].type == DOLLAR)
+		{
+			if (!tokens[i + 1].value)
+			{
+				tokens[i].type = WORD;
+				return ;
+			}
 			handle_var(tokens, i, meta);
+		}
 		i++;
 	}
 }
