@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:06:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/10 18:27:00 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/10 19:39:53 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	parse_quotes(t_token_type quote, t_token *tokens, int *i, t_meta *meta)
 	while (tokens[j].value && tokens[j].type != quote)
 	{
 		if (tokens[j].type == DOLLAR && quote == DQUOTE)
-			handle_var(tokens, j--, meta);
+			handle_var(tokens, j, meta);
 		tokens[j].type = WORD;
 		j++;
 	}
