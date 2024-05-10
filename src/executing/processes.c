@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/10 16:37:25 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:30:53 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	execute_cmnd(int i, t_node *node, t_meta *meta)
 	{
 		get_path(meta, node);
 		if (execve(node->path, node->args, meta->envp) == -1)
-			exit_error(ERR_CMND, node->command, 127, meta);
+			permission_checker(node->path, node, meta);
 	}
 	else
 	{

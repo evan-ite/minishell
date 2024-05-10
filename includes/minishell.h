@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/05/10 16:25:37 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:20:04 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define ERR_SYNT "Syntax error"
 # define ERR_ARGS " too many arguments"
 # define ERR_NUM ": numeric argument required"
+# define ERR_DIR ": Is a directory"
+# define ERR_PERM " Permission denied"
 
 extern int	g_sig;
 

@@ -7,3 +7,10 @@
 - error messages arent always printed to stderr
 - error messages seem to all end with "exit"
 - error codes can't be found by the tester
+
+-	when executing file
+{
+	- Does it exist?
+	- Is it a directory?
+	- Do we have permission?
+}

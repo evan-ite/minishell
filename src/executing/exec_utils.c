@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/03 16:52:12 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:30:28 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,17 @@ int	check_builtin(t_node *node, t_meta *meta)
 	else if (!ft_strncmp(node->command, "unset", ft_strlen(node->command)))
 		return (ft_unset(node, meta));
 	return (-1);
+}
+
+void	permission_checker(char *path, t_node *node, t_meta *meta)
+{
+	struct stat	file;
+
+	if (stat(path, &file) == -1)
+		exit_error(ERR_FILE, node->command, 127, meta);
+	if (S_ISDIR(file.st_mode))
+		exit_error(ERR_DIR, node->command, 126, meta);
+	if (access(path, X_OK) == -1)
+		exit_error(ERR_PERM, NULL, 126, meta);
+	exit_error(ERR_CMND, node->command, 127, meta);
 }
