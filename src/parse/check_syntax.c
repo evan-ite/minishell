@@ -6,36 +6,11 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:58:11 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/10 13:46:47 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/13 18:36:18 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
-
-static int	syntax_quotes(t_token *tokens)
-{
-	int	i;
-
-	i = -1;
-	while (tokens[++i].type)
-	{
-		if (tokens[i].type == SQUOTE)
-		{
-			while (tokens[++i].value && tokens[i].type != SQUOTE)
-				;
-			if (tokens[i].value == NULL)
-				return (EXIT_FAILURE);
-		}
-		if (tokens[i].type == DQUOTE)
-		{
-			while (tokens[++i].value && tokens[i].type != DQUOTE)
-				;
-			if (tokens[i].value == NULL)
-				return (EXIT_FAILURE);
-		}
-	}
-	return (EXIT_SUCCESS);
-}
 
 static int	check_pipes(int i, t_token *tokens)
 {
@@ -65,6 +40,21 @@ static int	check_redir(int i, t_token *tokens)
 	return (EXIT_SUCCESS);
 }
 
+static int	syntax_quotes(int *i, t_token *tokens)
+{
+	t_token_type	quote;
+
+	if (tokens[*i].type != SQUOTE && tokens[*i].type != DQUOTE)
+		return (EXIT_SUCCESS);
+	quote = tokens[*i].type;
+	++*i;
+	while (tokens[*i].value && tokens[*i].type != quote)
+		++*i;
+	if (!tokens[*i].type)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
 /*
 t_token *tokens:	array of tokens
 
@@ -75,10 +65,10 @@ int	check_syntax(t_token *tokens)
 	int	i;
 
 	i = 0;
-	if (syntax_quotes(tokens) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
 	while (tokens[i].value)
 	{
+		if (syntax_quotes(&i, tokens) == 1)
+			return (EXIT_FAILURE);
 		if (tokens[i].type == PIPE || is_redir(tokens[i]))
 		{
 			if (check_pipes(i, tokens) == 1)
@@ -90,3 +80,4 @@ int	check_syntax(t_token *tokens)
 	}
 	return (EXIT_SUCCESS);
 }
+

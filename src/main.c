@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/09 17:50:44 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/13 16:52:59 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	main(void)
 	while (1)
 	{
 		signal(SIGINT, sigint_handler);
-		input = readline("\x1b[1;35mminishell :) \x1b[0m");
 		g_sig = 0;
+		input = readline("\x1b[1;35mminishell :) \x1b[0m");
 		if (input && *input)
 		{
 			add_history(input);
