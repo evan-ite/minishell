@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:58:11 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/13 18:36:18 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/14 15:52:38 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,3 @@ int	check_syntax(t_token *tokens)
 	}
 	return (EXIT_SUCCESS);
 }
-
