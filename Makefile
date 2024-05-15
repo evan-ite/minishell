@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+         #
+#    By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:07:09 by evan-ite          #+#    #+#              #
-#    Updated: 2024/05/15 16:00:51 by evan-ite         ###   ########.fr        #
+#    Updated: 2024/05/15 17:36:50 by tsurma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3
 RL_FLAGS = -lreadline -lncurses
 
 LIBFT = src/libft/libft.a
