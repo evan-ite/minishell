@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/15 15:05:24 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:01:59 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ t_meta *meta:	empty meta struct
 Initialize the meta struct. */
 void	init_meta(t_meta *meta)
 {
-	meta->envp = cpy_matrix(__environ);
-	meta->exit_code = 0;
 	meta->n_cmnds = 0;
 	meta->pid = NULL;
 	meta->pipe = NULL;
+	meta->envp = cpy_matrix(__environ);
+	meta->exit_code = 0;
+	meta->cmnd_lst = NULL;
 }
 
 /*
@@ -44,8 +45,8 @@ int	main(void)
 	t_meta	meta;
 
 	cmnd_lst = NULL;
-	meta.cmnd_lst = &cmnd_lst;
 	init_meta(&meta);
+	meta.cmnd_lst = &cmnd_lst;
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);

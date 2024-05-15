@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:05:11 by tsurma            #+#    #+#             */
-/*   Updated: 2024/05/15 15:14:16 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/15 16:44:07 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	sigint_handler_heredoc(int sig)
 	{
 		g_sig = sig;
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	}
+	if (sig == SIGQUIT)
+	{
+		return ;
 	}
 }
 

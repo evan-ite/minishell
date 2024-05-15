@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:05:27 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/10 16:50:58 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:07:14 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	parse_redir(t_node *node, t_token *tokens, int i, t_meta *meta)
 	int	c_out;
 	int	syntax_check;
 
+	syntax_check = 0;
 	count_redirs(i, node, tokens, meta);
 	c_in = 0;
 	c_out = 0;
