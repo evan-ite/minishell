@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:06:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/10 19:39:53 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/15 18:24:56 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,9 @@ static void	merge_words(int start, t_token *tokens)
 int	parse_quotes(t_token_type quote, t_token *tokens, int *i, t_meta *meta)
 {
 	int	j;
-	int	start;
 
-	start = *i;
-	remove_token(tokens, *i);
 	j = *i;
+	remove_token(tokens, *i);
 	while (tokens[j].value && tokens[j].type != quote)
 	{
 		if (tokens[j].type == DOLLAR && quote == DQUOTE)
@@ -78,14 +76,13 @@ int	parse_quotes(t_token_type quote, t_token *tokens, int *i, t_meta *meta)
 		j++;
 	}
 	if (tokens[j].type == quote)
+	{
 		remove_token(tokens, j);
-	if (tokens[j].value == NULL && j > 0)
 		j--;
-	if (start > j)
-		start = j;
+	}
 	*i = j;
-	if (start > 0 && tokens[start].type == WORD)
-		--start;
-	merge_words(start, tokens);
+	while (*i > 0 && tokens[*i - 1].type == WORD)
+		--*i;
+	merge_words(*i, tokens);
 	return (EXIT_SUCCESS);
 }
