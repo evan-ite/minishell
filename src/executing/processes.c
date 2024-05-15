@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/15 13:32:10 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:01:49 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	child_process(int i, t_node *node, t_meta *meta)
 		exit_error(ERR_CHILD, NULL, 1, meta);
 	else if (meta->pid[i] == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		if (node->infile || node->outfile)
 			open_files(node, meta);
 		if (execute_cmnd(i, node, meta) != 0)

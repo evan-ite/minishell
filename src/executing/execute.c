@@ -6,18 +6,12 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/15 14:12:20 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:00:59 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executing.h"
-
-static void	signal_handler_clean(int sig)
-{
-	g_sig = sig;
-	write(1, "\n", 1);
-	return ;
-}
+#include "../../includes/minishell.h"
 
 static void	malloc_meta(t_meta *meta)
 {
@@ -74,7 +68,7 @@ void	execute(t_meta *meta)
 		i = 0;
 		while (i < meta->n_cmnds)
 		{
-			signal(SIGINT, signal_handler_clean);
+			setsig();
 			waitpid(meta->pid[i++], &status, 0);
 			meta->exit_code = WEXITSTATUS(status);
 		}

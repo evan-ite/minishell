@@ -6,20 +6,11 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:38:41 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/15 13:19:54 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:06:54 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executing.h"
-
-void	sigint_handler_heredoc(int sig)
-{
-	if (sig == SIGINT)
-	{
-		g_sig = sig;
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-	}
-}
 
 /* Function to catch the heredoc input until the delimiter
 is entered or a signal is catched. */

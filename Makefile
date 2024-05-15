@@ -6,7 +6,7 @@
 #    By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:07:09 by evan-ite          #+#    #+#              #
-#    Updated: 2024/05/15 14:15:50 by evan-ite         ###   ########.fr        #
+#    Updated: 2024/05/15 16:00:51 by evan-ite         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = src/main.c src/error.c src/free.c src/parse/parse.c src/parse/token.c \
 	src/executing/processes.c src/executing/path.c \
 	src/builtins/cd.c src/builtins/echo.c src/builtins/env.c src/builtins/export.c \
 	src/builtins/pwd.c src/builtins/unset.c src/builtins/exit.c \
-	src/builtins/export_utils.c src/executing/files.c
+	src/builtins/export_utils.c src/executing/files.c src/signals.c
 
 OBJ := $(SRC:.c=.o)
 
