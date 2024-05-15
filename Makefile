@@ -6,14 +6,14 @@
 #    By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:07:09 by evan-ite          #+#    #+#              #
-#    Updated: 2024/05/06 12:55:59 by evan-ite         ###   ########.fr        #
+#    Updated: 2024/05/15 14:15:50 by evan-ite         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra
 RL_FLAGS = -lreadline -lncurses
 
 LIBFT = src/libft/libft.a
