@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/15 13:41:13 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:05:24 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,6 @@
 static char	**cpy_matrix(char **matrix);
 
 int	g_sig = 0;
-
-/*
-Executes when the ctrl+c signal is send.
-writes a new line and reinitialises it to display the prompt*/
-void	sigint_handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		g_sig = sig;
-		ft_printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
 
 /*
 char **envp:	An editable copy of the environment variables.
@@ -58,12 +43,12 @@ int	main(void)
 	t_list	*cmnd_lst;
 	t_meta	meta;
 
-	signal(SIGQUIT, SIG_IGN);
 	cmnd_lst = NULL;
 	meta.cmnd_lst = &cmnd_lst;
 	init_meta(&meta);
 	while (1)
 	{
+		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, sigint_handler);
 		input = readline("\x1b[1;35mminishell :) \x1b[0m");
 		g_sig = 0;

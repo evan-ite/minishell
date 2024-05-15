@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/05/10 20:20:04 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:12:31 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ typedef struct s_meta
 int		exit_error(char *err_msg, char *src, int err_code, t_meta *meta);
 void	free_list(t_list **cmnd_list);
 void	free_meta(t_meta *meta);
+
+//signals
+void	setsig(void);
+void	sigint_handler_heredoc(int sig);
 void	sigint_handler(int sig);
+void	signal_handler_clean(int sig);
 
 #endif
