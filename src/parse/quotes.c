@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:06:48 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/15 18:24:56 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/15 21:19:46 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	merge_tokens(int start, t_token *tokens, t_token_type end_token)
 	}
 }
 
-static void	merge_words(int start, t_token *tokens)
+void	merge_words(int start, t_token *tokens)
 {
 	char	*temp;
 

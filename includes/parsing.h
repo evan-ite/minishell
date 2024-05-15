@@ -6,7 +6,7 @@
 /*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:41:39 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/05/09 17:54:59 by tobias           ###   ########.fr       */
+/*   Updated: 2024/05/15 21:20:00 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	free_tokens(t_token	*tokens);
 char	*get_envar(t_meta *meta, char *tofind);
 int		check_quotes(t_token *tokens, t_meta *meta);
 int		syntax_error(t_meta *meta, t_token *tokens);
+void	merge_words(int start, t_token *tokens);
 
 // tokenize utils
 int		tokencount(char *input);

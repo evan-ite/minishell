@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tobias <tobias@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:24:19 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/06 13:00:07 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/15 21:21:48 by tobias           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,18 @@ static int	parse_pipes(t_token *tokens, int *i, t_meta *meta, int prev_pipe)
 	return (EXIT_SUCCESS);
 }
 
+void	input_word_compressor(t_token *tokens)
+{
+	int	i;
+
+	i = -1;
+	while (tokens[++i].value)
+	{
+		if (tokens[i].type == WORD)
+			merge_words(i, tokens);
+	}
+}
+
 /*
 t_token *tokens:	array of t_token structs, containing token value
 					and the corresponding string (char *)
@@ -89,6 +101,7 @@ static int	parse_input(t_token *tokens, t_meta *meta)
 
 	check_quotes(tokens, meta);
 	check_env_vars(tokens, meta);
+	input_word_compressor(tokens);
 	i = 0;
 	prev_pipe = 0;
 	while (tokens[i].value)
