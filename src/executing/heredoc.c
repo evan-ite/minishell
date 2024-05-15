@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:38:41 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/10 11:15:27 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:19:54 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	check_heredoc(t_node *node, t_meta *meta)
 
 	if (!node->heredoc)
 		return (0);
+	signal(SIGINT, sigint_handler_heredoc);
 	node->hd_pipe = gnl_calloc(node->n_input, sizeof(int *));
 	i = 0;
 	while (i < node->n_input)

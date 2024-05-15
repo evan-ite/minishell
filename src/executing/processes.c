@@ -6,7 +6,7 @@
 /*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/10 20:30:53 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/15 13:32:10 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ process, checks and opens the files, executes the command and finally closes the
  pipes in the parent.*/
 void	child_process(int i, t_node *node, t_meta *meta)
 {
-	signal(SIGINT, sigint_handler_heredoc);
 	if (node->pipe_to_next)
 	{
 		meta->pipe[i + 1] = gnl_calloc(2, sizeof(int));

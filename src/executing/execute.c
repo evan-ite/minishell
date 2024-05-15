@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/10 16:50:20 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:44:26 by tsurma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executing.h"
+
+static void	signal_handler_clean(int sig)
+{
+	g_sig = sig;
+	write(1, "\n", 1);
+	return ;
+}
 
 static void	malloc_meta(t_meta *meta)
 {
@@ -67,6 +74,7 @@ void	execute(t_meta *meta)
 		i = 0;
 		while (i < meta->n_cmnds)
 		{
+			signal(SIGINT, signal_handler_clean);
 			waitpid(meta->pid[i++], &status, 0);
 			meta->exit_code = WEXITSTATUS(status);
 		}
