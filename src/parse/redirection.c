@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:05:27 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/10 16:50:58 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:03:41 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	parse_redir(t_node *node, t_token *tokens, int i, t_meta *meta)
 	count_redirs(i, node, tokens, meta);
 	c_in = 0;
 	c_out = 0;
+	syntax_check = 0;
 	while (tokens[i].value && tokens[i].type != PIPE)
 	{
 		if (tokens[i].type == INPUT)
