@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:11:09 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/15 16:00:59 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:16:47 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	execute(t_meta *meta)
 	int		status;
 
 	malloc_meta(meta);
+	// print_list(meta->cmnd_lst);
 	temp = parent_builtins(meta);
 	i = 0;
 	while (temp)
