@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:50:21 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/15 18:34:01 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/16 12:22:53 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ void	free_meta(t_meta *meta)
 	{
 		free_array((void **)meta->pipe, meta->n_cmnds + 1);
 		meta->pipe = NULL;
-	}
-	if (meta->envp)
-	{
-		free_array((void **)meta->envp, -1);
-		meta->envp = NULL;
 	}
 }
 
