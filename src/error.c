@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:50:21 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/16 12:22:53 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:32:19 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ void	free_meta(t_meta *meta)
 	}
 }
 
+static void	free_envp(t_meta *meta)
+{
+	if (meta->envp)
+		free_array((void **)meta->envp, -1);
+	meta->envp = NULL;
+}
+
 int	exit_error(char *err_msg, char *src, int err_code, t_meta *meta)
 {
 	char	*result;
@@ -52,9 +59,13 @@ int	exit_error(char *err_msg, char *src, int err_code, t_meta *meta)
 	}
 	else if (err_msg)
 		ft_putendl_fd(err_msg, STDERR_FILENO);
-	free_list(meta->cmnd_lst);
-	free_meta(meta);
-	meta->exit_code = err_code;
+	if (meta)
+	{
+		free_list(meta->cmnd_lst);
+		free_meta(meta);
+		free_envp(meta);
+		meta->exit_code = err_code;
+	}
 	rl_clear_history();
 	exit(err_code);
 }

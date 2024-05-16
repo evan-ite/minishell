@@ -6,11 +6,24 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:38:41 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/15 16:45:41 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:01:28 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executing.h"
+
+/*removes newline from end of line */
+static char	*rm_nl(char *str)
+{
+	char	*result;
+	int		len;
+
+	len = ft_strlen(str);
+	result = ft_strdup(str);
+	if (result[len - 1] == '\n')
+		result[len - 1] = '\0';
+	return (result);
+}
 
 /* Function to catch the heredoc input until the delimiter
 is entered or a signal is catched. */
@@ -28,7 +41,7 @@ static void	loop_heredoc(int i, t_node *node)
 				"file\n", STDERR_FILENO);
 			break ;
 		}
-		if (!ft_strncmp(line, node->heredoc[i], ft_strlen(node->heredoc[i])))
+		if (!ft_strcmp(rm_nl(line), node->heredoc[i]))
 		{
 			free(line);
 			break ;

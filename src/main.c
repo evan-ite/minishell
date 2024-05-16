@@ -6,7 +6,7 @@
 /*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:22:18 by evan-ite          #+#    #+#             */
-/*   Updated: 2024/05/15 17:01:59 by evan-ite         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:33:16 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(void)
 			exit_error(NULL, NULL, EXIT_SUCCESS, &meta);
 	}
 	rl_clear_history();
-	return (0);
+	return (exit_error(NULL, NULL, EXIT_SUCCESS, &meta));
 }
 
 /*
