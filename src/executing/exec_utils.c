@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:29:17 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/10 20:30:28 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/16 12:24:54 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int	firstcheck_builtin(t_node *node, t_meta *meta)
 {
 	if (!node->command)
 		return (EXIT_FAILURE);
-	if (!ft_strncmp(node->command, "exit", ft_strlen(node->command)))
+	if (!ft_strcmp(node->command, "exit"))
 		ft_exit(node, meta);
-	else if (!ft_strncmp(node->command, "cd", ft_strlen(node->command)))
+	else if (!ft_strcmp(node->command, "cd"))
 		return (ft_cd(node->args, meta));
-	else if (!ft_strncmp(node->command, "export", ft_strlen(node->command)))
+	else if (!ft_strcmp(node->command, "export"))
 		return (ft_export(node, meta));
-	else if (!ft_strncmp(node->command, "unset", ft_strlen(node->command)))
+	else if (!ft_strcmp(node->command, "unset"))
 		return (ft_unset(node, meta));
 	return (-1);
 }
@@ -45,19 +45,19 @@ int	check_builtin(t_node *node, t_meta *meta)
 {
 	if (!node->command)
 		return (EXIT_FAILURE);
-	if (!ft_strncmp(node->command, "exit", ft_strlen(node->command)))
+	if (!ft_strcmp(node->command, "exit"))
 		ft_exit(node, meta);
-	else if (!ft_strncmp(node->command, "echo", ft_strlen(node->command)))
+	else if (!ft_strcmp(node->command, "echo"))
 		return (ft_echo(node->args));
-	else if (!ft_strncmp(node->command, "pwd", ft_strlen(node->command)))
+	else if (!ft_strcmp(node->command, "pwd"))
 		return (ft_pwd());
-	else if (!ft_strncmp(node->command, "cd", ft_strlen(node->command)))
+	else if (!ft_strcmp(node->command, "cd"))
 		return (ft_cd(node->args, meta));
-	else if (!ft_strncmp(node->command, "env", ft_strlen(node->command)))
+	else if (!ft_strcmp(node->command, "env"))
 		return (ft_env(meta));
-	else if (!ft_strncmp(node->command, "export", ft_strlen(node->command)))
+	else if (!ft_strcmp(node->command, "export"))
 		return (ft_export(node, meta));
-	else if (!ft_strncmp(node->command, "unset", ft_strlen(node->command)))
+	else if (!ft_strcmp(node->command, "unset"))
 		return (ft_unset(node, meta));
 	return (-1);
 }
