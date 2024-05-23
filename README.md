@@ -8,7 +8,7 @@ This project is aimed at creating a shell called "minishell". This shell is desi
 
 1. Clone the repository:
    ```bash
-   git@github.com:evan-ite/minishell.git
+   git clone git@github.com:evan-ite/minishell.git
    ```
 
 2. Navigate to the project directory:
