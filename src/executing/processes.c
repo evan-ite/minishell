@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsurma <tsurma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: evan-ite <evan-ite@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:45:13 by elisevanite       #+#    #+#             */
-/*   Updated: 2024/05/15 15:01:49 by tsurma           ###   ########.fr       */
+/*   Updated: 2024/05/23 17:33:46 by evan-ite         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	setup_pipes(int i, t_node *node, t_meta *meta)
 	{
 		dup2(meta->pipe[i][0], STDIN_FILENO);
 		ft_close(meta->pipe[i][1]);
+		ft_close(meta->pipe[i][0]);
 	}
 	if (node->outfile && node->outfile[node->n_output - 1])
 		dup2(node->fd_out[node->n_output - 1], STDOUT_FILENO);
@@ -30,6 +31,8 @@ static void	setup_pipes(int i, t_node *node, t_meta *meta)
 	{
 		dup2(meta->pipe[i + 1][1], STDOUT_FILENO);
 		ft_close(meta->pipe[i + 1][0]);
+		ft_close(meta->pipe[i + 1][1]);
+
 	}
 }
 
