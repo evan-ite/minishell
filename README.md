@@ -25,7 +25,7 @@ This project is aimed at creating a shell called "minishell". This shell is desi
 
 **Usage:**
 
-Run the game by executing the following command:
+Run minishell by executing the following command:
 ```bash
 ./minishell
 ```
